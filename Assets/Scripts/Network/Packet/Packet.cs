@@ -181,6 +181,20 @@ public class Packet
         }
     }
 
+    public string ReadPacketName()
+    {
+        if (buffer.Count > place)
+        {
+            PacketType packetType = (PacketType)ReadInt(false);
+            string value = packetType.ToString();
+            return value;
+        }
+        else
+        {
+            throw new Exception("Could not read PacketName");
+        }
+    }
+
     public void Reset()
     {
         buffer.Clear();
