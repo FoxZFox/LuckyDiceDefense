@@ -12,19 +12,20 @@ public class LoginController : MonoBehaviour
     [SerializeField] private TMP_InputField passInput;
     private Button button;
     private TMP_Text loginText;
-
+    private Coroutine onCorutine;
     void Start()
     {
         if (Instant == null)
         {
             Instant = this;
         }
+        onCorutine = null;
         button = loginButton.GetComponent<Button>();
         loginText = loginButton.GetComponentInChildren<TMP_Text>();
     }
     void Update()
     {
-        if (userInput.text == "" || passInput.text == "" || Client.instant.IsConnect || Client.instant.StartCon || onCorutine != null)
+        if (userInput.text == "" || passInput.text == "" || Client.instant.IsConnect || onCorutine != null)
         {
             button.interactable = false;
         }
@@ -47,17 +48,31 @@ public class LoginController : MonoBehaviour
         passInput.text = "12345";
     }
 
+    private float dotSpeed = 0.3f;
+
     private IEnumerator WaitForResponAnimation()
     {
         string[] dots = { ".", "..", "..." };
-        while (Client.instant.StartCon || Client.instant.CheckPacket())
+        while (true)
         {
             for (int i = 0; i < 3; i++)
             {
                 loginText.text = $"Wait{dots[i]}";
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(dotSpeed);
             }
         }
+    }
+
+    private IEnumerator ErrorLoginAnimation(string text)
+    {
+        loginText.text = text;
+        yield return new WaitForSeconds(1.5f);
+        loginText.text = "Login";
+        onCorutine = null;
+    }
+
+    private IEnumerator ConnectStatusAnimation()
+    {
         if (Client.instant.account.ID >= 20000)
         {
             loginText.text = $"Connect with {userInput.text}";
@@ -68,24 +83,46 @@ public class LoginController : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             loginText.text = $"Login";
         }
-        StopCoroutine(onCorutine);
         onCorutine = null;
+    }
+
+    public void PlayConnectStatus()
+    {
+        try
+        {
+            Stop();
+            onCorutine = StartCoroutine(ConnectStatusAnimation());
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
     }
 
     public void PlayErrorLoginAnimation(string s)
     {
-        if (onCorutine != null)
-            StopCoroutine(onCorutine);
-        onCorutine = StartCoroutine(ErrorLoginAnimation(s));
+        //แก้ด้วยน้ะ Error อยู่
+        try
+        {
+            Stop();
+            onCorutine = StartCoroutine(ErrorLoginAnimation(s));
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
+
     }
 
-    Coroutine onCorutine;
-    private IEnumerator ErrorLoginAnimation(string text)
+    private void Stop()
     {
-        loginText.text = text;
-        yield return new WaitForSeconds(1.5f);
-        loginText.text = "Login";
+        if (onCorutine == null)
+        {
+            return;
+        }
         StopCoroutine(onCorutine);
         onCorutine = null;
     }
+
+
 }

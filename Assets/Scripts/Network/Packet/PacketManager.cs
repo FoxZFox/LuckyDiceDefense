@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class PacketManager
 {
+    private delegate void PacketHandle(Packet packet);
+    private Dictionary<int, PacketHandle> packetHandles;
+
+    public void Initialize()
+    {
+        packetHandles = new Dictionary<int, PacketHandle>()
+        {
+            {(int)Packet.PacketType.S2CLogin,ClientLogin},
+            {(int)Packet.PacketType.S2CValidAccount,ValidAccount}
+        };
+
+    }
     public void GetPacket(Packet packet)
     {
-        Packet.PacketType packetType = (Packet.PacketType)packet.ReadInt();
-        switch (packetType)
-        {
-            case Packet.PacketType.S2CLogin:
-                ClientLogin(packet);
-                break;
-            case Packet.PacketType.S2CValidAccount:
-                ValidAccount(packet);
-                break;
-
-        }
+        int type = packet.ReadInt();
+        packetHandles[type](packet);
     }
-
     private void ClientLogin(Packet packet)
     {
         int id = packet.ReadInt();
@@ -28,6 +30,7 @@ public class PacketManager
         Client.instant.account.Gold = gold;
         Client.instant.account.Gem = gem;
         Debug.Log($"ID = {id} Gold = {gold} Gem = {gem}");
+        UnityMainThread.Instant.Enqueue(() => LoginController.Instant.PlayConnectStatus());
     }
 
     private void ValidAccount(Packet packet)
@@ -35,6 +38,9 @@ public class PacketManager
         Packet.ErrorType errorType = (Packet.ErrorType)packet.ReadInt();
         Debug.Log(errorType.ToString());
         Client.instant.Disconnect();
-        LoginController.Instant.PlayErrorLoginAnimation(errorType.ToString());
+        UnityMainThread.Instant.Enqueue(() =>
+        {
+            LoginController.Instant.PlayErrorLoginAnimation(errorType.ToString());
+        });
     }
 }

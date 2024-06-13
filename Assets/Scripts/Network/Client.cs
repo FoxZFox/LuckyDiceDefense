@@ -16,9 +16,6 @@ public class Client
     public bool IsConnect;
     private byte[] buffer;
     protected int MAX_BUFFER_SIZE = 4096;
-    private Queue<Packet> packetque = new Queue<Packet>();
-    private bool startCon = false;
-    public bool StartCon => startCon;
     public Client()
     {
         buffer = new byte[MAX_BUFFER_SIZE];
@@ -29,7 +26,6 @@ public class Client
     public void StartConnect(string ip, int port)
     {
         client = new TcpClient();
-        startCon = true;
         client.BeginConnect(ip, port, new AsyncCallback(ConnectCallback), null);
     }
 
@@ -49,12 +45,16 @@ public class Client
         }
         catch (System.Exception e)
         {
-            Debug.LogError(e.Message);
+            Debug.LogError(e.ToString());
+            UnityMainThread.Instant.Enqueue(() => LoginController.Instant.PlayConnectStatus());
             Disconnect();
         }
         finally
         {
-            startCon = false;
+            if (IsConnect)
+            {
+                Networkmanager.Instant.SentLoginPacket();
+            }
         }
         TryReadPacket();
     }
@@ -64,7 +64,9 @@ public class Client
         while (IsConnect)
         {
             if (stream.DataAvailable)
+            {
                 stream.BeginRead(buffer, 0, buffer.Length, new AsyncCallback(OnReciveCallback), null);
+            }
         }
     }
     private void OnReciveCallback(IAsyncResult result)
@@ -84,6 +86,7 @@ public class Client
         catch (System.Exception e)
         {
             Debug.LogError(e.Message);
+            Disconnect();
         }
     }
 
@@ -91,34 +94,12 @@ public class Client
     {
         if (Enum.IsDefined(typeof(PacketType), packet.ReadInt(false)))
         {
-            packetque.Enqueue(packet);
+            Networkmanager.Instant.HandlePacket(packet);
         }
         else
         {
             Debug.LogError("Packet is invalid");
         }
-    }
-
-    public async Task<Packet> GetPacket()
-    {
-        while (IsConnect)
-        {
-            if (packetque.Count > 0)
-            {
-                break;
-            }
-            await Task.Delay(1000);
-        }
-        return packetque.Dequeue();
-    }
-
-    public bool CheckPacket()
-    {
-        if (packetque.Count > 0)
-        {
-            return true;
-        }
-        return false;
     }
 
     public void TrySentPacket(Packet packet)
@@ -130,6 +111,7 @@ public class Client
         catch (System.Exception e)
         {
             Debug.LogError(e.Message);
+            Disconnect();
         }
 
     }
@@ -138,19 +120,6 @@ public class Client
         Packet packet = (Packet)result.AsyncState;
         stream.EndWrite(result);
         Debug.Log($"Sent packet {packet.ReadPacketName()}");
-    }
-
-    public async Task<bool> WaitForConnect()
-    {
-        while (!IsConnect)
-        {
-            if (!startCon)
-            {
-                return false;
-            }
-            await Task.Delay(100);
-        }
-        return IsConnect;
     }
 
     public void Disconnect()

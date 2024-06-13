@@ -15,6 +15,7 @@ public class Networkmanager : MonoBehaviour
     [SerializeField] private int port;
     [Header("UI-Link")]
     private PacketManager packetManager;
+    private string id, pass;
     void Start()
     {
         if (Instant == null)
@@ -23,30 +24,33 @@ public class Networkmanager : MonoBehaviour
             Instant = this;
             client = new Client();
             packetManager = new PacketManager();
+            packetManager.Initialize();
         }
     }
 
     public void Login(string user, string pass)
     {
-        ConnectServer(user, pass);
+        id = user;
+        this.pass = pass;
+        ConnectServer();
     }
     [ContextMenu("ConnectServer")]
-    private async void ConnectServer(string id, string pass)
+    private void ConnectServer()
     {
         if (!client.IsConnect)
             client.StartConnect(ipAddress, port);
-        if (await client.WaitForConnect())
-        {
-            Packet packet = new Packet((int)Packet.PacketType.C2SLogin);
-            packet.Write(id);
-            packet.Write(pass);
-            Packet packet1 = await PacketHandle.SentLogin(packet);
-            packetManager.GetPacket(packet1);
-        }
-        else
-        {
-            Debug.LogError("Not Connect");
-        }
 
+    }
+    public void SentLoginPacket()
+    {
+        Packet packet = new Packet((int)Packet.PacketType.C2SLogin);
+        packet.Write(id);
+        packet.Write(pass);
+        client.TrySentPacket(packet);
+    }
+
+    public void HandlePacket(Packet packet)
+    {
+        packetManager.GetPacket(packet);
     }
 }
