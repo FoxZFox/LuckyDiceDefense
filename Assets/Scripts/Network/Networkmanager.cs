@@ -1,10 +1,6 @@
-using System.Net.Sockets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using System.Runtime.Remoting.Contexts;
-using UnityEngine.UI;
 
 public class Networkmanager : MonoBehaviour
 {
@@ -26,6 +22,11 @@ public class Networkmanager : MonoBehaviour
             packetManager = new PacketManager();
             packetManager.Initialize();
         }
+    }
+
+    void OnApplicationQuit()
+    {
+        client.Disconnect();
     }
 
     public void Login(string user, string pass)

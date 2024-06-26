@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Net.Sockets;
 using static Packet;
 using UnityEngine;
-using System.Threading.Tasks;
-using UnityEngine.UIElements;
 
 public class Client
 {
@@ -61,16 +58,11 @@ public class Client
 
     private void TryReadPacket()
     {
-        while (IsConnect)
-        {
-            if (stream.DataAvailable)
-            {
-                stream.BeginRead(buffer, 0, buffer.Length, new AsyncCallback(OnReciveCallback), null);
-            }
-        }
+        stream.BeginRead(buffer, 0, buffer.Length, new AsyncCallback(OnReciveCallback), null);
     }
     private void OnReciveCallback(IAsyncResult result)
     {
+        TryReadPacket();
         try
         {
             if (IsConnect)
@@ -83,7 +75,7 @@ public class Client
                 }
             }
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Debug.LogError(e.Message);
             Disconnect();

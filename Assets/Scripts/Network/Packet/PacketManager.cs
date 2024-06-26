@@ -19,7 +19,15 @@ public class PacketManager
     public void GetPacket(Packet packet)
     {
         int type = packet.ReadInt();
-        packetHandles[type](packet);
+        if (packetHandles.ContainsKey(type))
+        {
+            packetHandles[type](packet);
+        }
+        else
+        {
+            Debug.LogError("type didnot added");
+        }
+
     }
     private void ClientLogin(Packet packet)
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Runtime.Remoting.Contexts;
 public class LoginController : MonoBehaviour
 {
     public static LoginController Instant;
@@ -13,6 +12,7 @@ public class LoginController : MonoBehaviour
     private Button button;
     private TMP_Text loginText;
     private Coroutine onCorutine;
+
     void Start()
     {
         if (Instant == null)
@@ -23,6 +23,7 @@ public class LoginController : MonoBehaviour
         button = loginButton.GetComponent<Button>();
         loginText = loginButton.GetComponentInChildren<TMP_Text>();
     }
+
     void Update()
     {
         if (userInput.text == "" || passInput.text == "" || Client.instant.IsConnect || onCorutine != null)
@@ -75,7 +76,8 @@ public class LoginController : MonoBehaviour
     {
         if (Client.instant.account.ID >= 20000)
         {
-            loginText.text = $"Connect with {userInput.text}";
+            //loginText.text = $"Connect with {userInput.text}";
+            SceneManager.Instant.LoadScene(SceneManager.sceneName.mainmenu);
         }
         else if (!Client.instant.IsConnect)
         {
