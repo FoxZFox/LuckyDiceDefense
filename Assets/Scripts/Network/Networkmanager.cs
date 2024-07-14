@@ -1,32 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Networkmanager : MonoBehaviour
 {
     public static Networkmanager Instant;
+
     private Client client;
     [Header("Network")]
+    [SerializeField] private bool stanalone = false;
     [SerializeField] private string ipAddress;
     [SerializeField] private int port;
     [Header("UI-Link")]
     private PacketManager packetManager;
     private string id, pass;
+    public bool StanAlone => stanalone;
     void Start()
     {
         if (Instant == null)
         {
             DontDestroyOnLoad(gameObject);
             Instant = this;
-            client = new Client();
-            packetManager = new PacketManager();
-            packetManager.Initialize();
+            if (!stanalone)
+            {
+                client = new Client();
+                packetManager = new PacketManager();
+                packetManager.Initialize();
+            }
+            else
+            {
+                SceneManager.Instant.LoadScene(SceneManager.sceneName.mainmenu);
+            }
         }
     }
 
     void OnApplicationQuit()
     {
-        client.Disconnect();
+        if (!stanalone)
+        {
+            client.Disconnect();
+        }
     }
 
     public void Login(string user, string pass)

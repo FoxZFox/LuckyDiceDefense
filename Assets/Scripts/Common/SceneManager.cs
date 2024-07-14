@@ -15,7 +15,7 @@ public class SceneManager : MonoBehaviour
         mainmenu
     }
 
-    [SerializeField] SceneStruct[] sceneStructs;
+    [SerializeField] private SceneStruct[] sceneStructs;
     private Dictionary<sceneName, SceneAsset> sceneDic;
     void Start()
     {
