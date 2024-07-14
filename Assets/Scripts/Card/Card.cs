@@ -22,6 +22,11 @@ public class Card : MonoBehaviour
 
     private void PickCard()
     {
-        GachaController.instant.PickupCard();
+        GachaController.instant.PickupCard(cardID);
+    }
+
+    public void SetCardID(int id)
+    {
+        cardID = id;
     }
 }

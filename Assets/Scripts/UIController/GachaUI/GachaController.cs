@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using TMPro;
 
 public class GachaController : MonoBehaviour
 {
@@ -11,7 +12,13 @@ public class GachaController : MonoBehaviour
     [SerializeField] private GameObject cardPrefabs;
     [SerializeField] private GameObject cardSpawnParent;
     [SerializeField] private Vector3[] cardSpawnPoints;
+    [SerializeField] private GameObject panel;
     [SerializeField] private int cardSpawnCount = 8;
+    [Header("Gacha For Test")]
+    [SerializeField] private GachaTableObject gachaTableObject;
+    [SerializeField] private GameObject cardStar;
+    [SerializeField] private bool debugCardId;
+    private List<GameObject> debugGameobjects = new List<GameObject>();
     private List<GameObject> cards = new List<GameObject>();
     private float tweenDuration = 2f;
 
@@ -26,6 +33,7 @@ public class GachaController : MonoBehaviour
             Destroy(gameObject);
         }
         InstantCard();
+        panel.SetActive(false);
     }
 
     private void OnDisable()
@@ -47,18 +55,60 @@ public class GachaController : MonoBehaviour
     }
     private void SetCardInteractable()
     {
+
         foreach (var item in cards)
         {
             item.GetComponent<Button>().enabled = true;
+            //need optimize 
+            if (debugCardId)
+            {
+                var instant = Instantiate(cardStar, cardSpawnParent.transform);
+                debugGameobjects.Add(instant);
+                var text = instant.GetComponent<TextMeshProUGUI>();
+                int id = item.GetComponent<Card>().CardID;
+                if (id >= 50)
+                {
+                    text.text = "5Star";
+                }
+                else if (id >= 40 && id <= 49)
+                {
+                    text.text = "4Star";
+                }
+                else if (id >= 30 && id <= 39)
+                {
+                    text.text = "3Star";
+                }
+                else if (id >= 20 && id <= 29)
+                {
+                    text.text = "2Star";
+                }
+                else if (id >= 10 && id <= 19)
+                {
+                    text.text = "1Star";
+                }
+                instant.transform.localPosition = item.transform.localPosition;
+                text.color = Color.green;
+            }
         }
     }
 
     [ContextMenu("DrawCard")]
     private void DrawCard()
     {
+        foreach (var item in debugGameobjects)
+        {
+            Destroy(item);
+        }
+        debugGameobjects.Clear();
+        var cardsid = gachaTableObject.GetDeckList();
         foreach (var item in cards)
         {
-            item.transform.localScale = Vector3.zero;
+
+        }
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].transform.localScale = Vector3.zero;
+            cards[i].GetComponent<Card>().SetCardID(cardsid[i]);
         }
         StartCoroutine(DrawAnimation());
     }
@@ -80,23 +130,44 @@ public class GachaController : MonoBehaviour
         }
     }
 
-    public void PickupCard()
+    public void PickupCard(int cardID)
     {
-        Debug.Log("CardPickup");
-    }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        if (cardSpawnPoints.Length > 0)
+        //need optimize
+        if (cardID >= 50)
         {
-            foreach (var item in cardSpawnPoints)
-            {
-                Gizmos.DrawSphere(Camera.main.transform.TransformPoint(cardSpawnParent.transform.position + item), 40f);
-            }
+            Debug.Log("5Star");
         }
-
+        else if (cardID >= 40 && cardID <= 49)
+        {
+            Debug.Log("4Star");
+        }
+        else if (cardID >= 30 && cardID <= 39)
+        {
+            Debug.Log("3Star");
+        }
+        else if (cardID >= 20 && cardID <= 29)
+        {
+            Debug.Log("2Star");
+        }
+        else if (cardID >= 10 && cardID <= 19)
+        {
+            Debug.Log("1Star");
+        }
+        // Debug.Log($"Card ID = {cardID}");
     }
-#endif
+
+    // #if UNITY_EDITOR
+    //     private void OnDrawGizmos()
+    //     {
+    //         Gizmos.color = Color.green;
+    //         if (cardSpawnPoints.Length > 0)
+    //         {
+    //             foreach (var item in cardSpawnPoints)
+    //             {
+    //                 Gizmos.DrawSphere(Camera.main.transform.TransformPoint(cardSpawnParent.transform.position + item), 40f);
+    //             }
+    //         }
+
+    //     }
+    // #endif
 }

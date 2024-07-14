@@ -12,7 +12,8 @@ public class SceneManager : MonoBehaviour
     public enum sceneName
     {
         login,
-        mainmenu
+        mainmenu,
+        gacha
     }
 
     [SerializeField] private SceneStruct[] sceneStructs;
@@ -42,6 +43,11 @@ public class SceneManager : MonoBehaviour
     public void LoadScene(sceneName name)
     {
         us.SceneManager.LoadScene(sceneDic[name].name);
+    }
+
+    public void LoaadSceneAsync(sceneName name)
+    {
+        us.SceneManager.LoadSceneAsync(sceneDic[name].name, us.LoadSceneMode.Additive);
     }
 }
 

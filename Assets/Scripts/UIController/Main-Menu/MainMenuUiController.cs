@@ -19,6 +19,7 @@ public class MainMenuUiController : MonoBehaviour
     void Start()
     {
         SetPlayerStatus();
+        SceneManager.Instant.LoaadSceneAsync(SceneManager.sceneName.gacha);
     }
 
     private void SetPlayerStatus()
