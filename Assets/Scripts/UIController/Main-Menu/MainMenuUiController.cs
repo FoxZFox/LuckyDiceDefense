@@ -38,6 +38,12 @@ public class MainMenuUiController : MonoBehaviour
         inventoryObject.SetActive(false);
     }
 
+    public void OnClickMainMenu()
+    {
+        MainUiObject.SetActive(true);
+        shopObject.SetActive(false);
+        inventoryObject.SetActive(false);
+    }
     public void OnClickShop()
     {
         MainUiObject.SetActive(false);

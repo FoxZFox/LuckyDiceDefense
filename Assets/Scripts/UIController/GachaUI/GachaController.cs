@@ -33,7 +33,7 @@ public class GachaController : MonoBehaviour
             Destroy(gameObject);
         }
         InstantCard();
-        panel.SetActive(false);
+       panel.SetActive(false);
     }
 
     private void OnDisable()
