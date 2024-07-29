@@ -9,8 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 301ddff13be02ce43bfc0bf20e8320c8, type: 3}
-  m_Name: TestGaCha
+  m_Script: {fileID: 11500000, guid: 65a9f050a50bc1447a3fc5d6d31e2c4b, type: 3}
+  m_Name: Potato7
   m_EditorClassIdentifier: 
-  fiveStarCardID: 56
-  fourStarCardID: 0
+  CharacterPrefab: {fileID: 0}
+  CharacterID: 1
+  Star: 3
+  ItemNeded: 3
+  placeHolderSpitre: {fileID: 0}
+  attackRatio: 1
+  attackRange: 3
+  skillChange: 100
+  costToBuild: 100

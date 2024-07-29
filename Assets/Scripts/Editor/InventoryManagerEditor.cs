@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[CustomEditor(typeof(InventoryController))]
+[CustomEditor(typeof(InventoryManager))]
 public class InventoryManagerEditor : Editor
 {
     static string itemDataPath = "Assets/TableObject/Item";
@@ -33,9 +33,8 @@ public class InventoryManagerEditor : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        InventoryController ic = (InventoryController)target;
+        InventoryManager ic = (InventoryManager)target;
         itemID = EditorGUILayout.IntPopup("ItemID", itemID, names.ToArray(), datas.ToArray());
-
         if (GUILayout.Button("AddItem"))
         {
             // Debug.Log($"{itemID}");

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPrefab: {fileID: 0}
   CharacterID: 100
-  Star: 1
+  Star: 4
   ItemNeded: 1
   placeHolderSpitre: {fileID: 0}
   attackRatio: 1

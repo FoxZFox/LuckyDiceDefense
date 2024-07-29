@@ -7,7 +7,7 @@ using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 
-public class InventoryController : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     [Header("Controller")]
     [SerializeField] private Transform contestParent;

@@ -15,7 +15,7 @@ public class GachaController : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private int cardSpawnCount = 8;
     [Header("Gacha For Test")]
-    [SerializeField] private GachaTableObject gachaTableObject;
+    [SerializeField] private GachaData gachaTableObject;
     [SerializeField] private GameObject cardStar;
     [SerializeField] private bool debugCardId;
     private List<GameObject> debugGameobjects = new List<GameObject>();
@@ -33,7 +33,7 @@ public class GachaController : MonoBehaviour
             Destroy(gameObject);
         }
         InstantCard();
-       panel.SetActive(false);
+        panel.SetActive(false);
     }
 
     private void OnDisable()
