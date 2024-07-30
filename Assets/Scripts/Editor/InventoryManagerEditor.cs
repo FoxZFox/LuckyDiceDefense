@@ -12,8 +12,26 @@ public class InventoryManagerEditor : Editor
     static List<ItemData> itemDatas = new List<ItemData>();
     static List<string> names = new List<string>();
     static List<int> datas = new List<int>();
-    static int itemID = 0;
+    string characterDataPath = "Assets/TableObject/Character";
+    List<CharacterData> chaDatas;
+    int itemID = 0;
 
+    private void OnEnable()
+    {
+        LoadItemData();
+        LoadChaData();
+    }
+    private void LoadChaData()
+    {
+        chaDatas = new List<CharacterData>();
+        string[] assetGuids = AssetDatabase.FindAssets("t:CharacterData", new[] { characterDataPath });
+        string assetPath;
+        foreach (var item in assetGuids)
+        {
+            assetPath = AssetDatabase.GUIDToAssetPath(item);
+            chaDatas.Add(AssetDatabase.LoadAssetAtPath<CharacterData>(assetPath));
+        }
+    }
     [MenuItem("DeBugger/LoadItemdata")]
     [RuntimeInitializeOnLoadMethod]
     private static void LoadItemData()
@@ -34,11 +52,53 @@ public class InventoryManagerEditor : Editor
     {
         DrawDefaultInspector();
         InventoryManager ic = (InventoryManager)target;
+        EditorGUILayout.BeginHorizontal();
         itemID = EditorGUILayout.IntPopup("ItemID", itemID, names.ToArray(), datas.ToArray());
         if (GUILayout.Button("AddItem"))
         {
             // Debug.Log($"{itemID}");
             ic.AddItem(itemID);
         }
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("UpdateItemData&ChaData"))
+        {
+            LoadItemDataToProperty();
+        }
+        if (GUILayout.Button("DeleteInventoryData"))
+        {
+            DeleteInventoryData();
+        }
+        EditorGUILayout.EndHorizontal();
+        serializedObject.ApplyModifiedProperties();
+    }
+
+    private void LoadItemDataToProperty()
+    {
+        SerializedProperty itemDataProperty = serializedObject.FindProperty("itemDatas");
+        SerializedProperty characterDataProperty = serializedObject.FindProperty("characterDatas");
+        itemDataProperty.ClearArray();
+        characterDataProperty.ClearArray();
+        foreach (var item in itemDatas)
+        {
+            int newSize = itemDataProperty.arraySize + 1;
+            itemDataProperty.InsertArrayElementAtIndex(newSize - 1);
+            itemDataProperty.GetArrayElementAtIndex(newSize - 1).objectReferenceValue = item;
+        }
+
+        foreach (var item in chaDatas)
+        {
+            int newSize = characterDataProperty.arraySize + 1;
+            characterDataProperty.InsertArrayElementAtIndex(newSize - 1);
+            characterDataProperty.GetArrayElementAtIndex(newSize - 1).objectReferenceValue = item;
+        }
+    }
+
+    private void DeleteInventoryData()
+    {
+        SerializedProperty invenItem = serializedObject.FindProperty("inventoryItems");
+        SerializedProperty invenCha = serializedObject.FindProperty("inventoryCharacters");
+        invenItem.ClearArray();
+        invenCha.ClearArray();
     }
 }

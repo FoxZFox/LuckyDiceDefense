@@ -9,19 +9,28 @@ using UnityEngine.Experimental.AI;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager instant;
     [Header("Controller")]
     [SerializeField] private Transform contestParent;
     [SerializeField] private GameObject cardPrefab;
     [Header("Object For Inventory")]
     [SerializeField] private List<InventoryItem> inventoryItems;
     [SerializeField] private List<InventoryCharacter> inventoryCharacters;
-    [SerializeField] private CharacterData[] characterDatas;
     private List<CharacterCard> cardInstants;
     private Dictionary<int, int> compairItemIDAndCharID;
     [Header("Debug")]
+    [SerializeField] private CharacterData[] characterDatas;
     [SerializeField] private ItemData[] itemDatas;
     void Start()
     {
+        if (instant == null)
+        {
+            instant = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         InitializeCompaire();
     }
 
@@ -39,6 +48,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+        //In the future change it to load only click on the inventory and first on gameload
         CheckCardOwned();
         CheckSpawnCard();
     }
@@ -79,7 +89,19 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            inventoryItems.Add(new InventoryItem { itemData = itemDatas.First(i => i.ItemID == id), ItemAmount = 1 });
+            inventoryItems.Add(new InventoryItem(itemDatas.First(i => i.ItemID == id)));
+        }
+    }
+    public void AddItem(ItemData itemData, int amount = 1)
+    {
+        InventoryItem item = inventoryItems.FirstOrDefault(item => item.itemData == itemData);
+        if (item != null)
+        {
+            item.ItemAmount += amount;
+        }
+        else
+        {
+            inventoryItems.Add(new InventoryItem(itemData));
         }
     }
 }
@@ -90,6 +112,12 @@ public class InventoryItem
 {
     public ItemData itemData;
     public int ItemAmount;
+
+    public InventoryItem(ItemData itemData)
+    {
+        this.itemData = itemData;
+        ItemAmount = 1;
+    }
 }
 
 [Serializable]

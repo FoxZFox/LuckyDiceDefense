@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a9f050a50bc1447a3fc5d6d31e2c4b, type: 3}
-  m_Name: Potato7
+  m_Name: Potato1
   m_EditorClassIdentifier: 
   CharacterPrefab: {fileID: 0}
-  CharacterID: 102
-  Star: 4
-  ItemNeded: 5
+  CharacterID: 103
+  Star: 1
+  ItemNeded: 3
   placeHolderSpitre: {fileID: 0}
   attackRatio: 1
   attackRange: 3

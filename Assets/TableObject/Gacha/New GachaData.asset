@@ -15,6 +15,7 @@ MonoBehaviour:
   fiveStarCard: {fileID: 11400000, guid: b5abb4f603d071e4495e242e6ca027e6, type: 2}
   fourStarCard:
   - {fileID: 11400000, guid: 8b20544966670104e830142e2774fdf2, type: 2}
-  - {fileID: 11400000, guid: 8b20544966670104e830142e2774fdf2, type: 2}
-  - {fileID: 11400000, guid: 8b20544966670104e830142e2774fdf2, type: 2}
-  belowFourStar: []
+  - {fileID: 11400000, guid: bec0246bc71c0ae4981454b476ef3de3, type: 2}
+  belowFourStar:
+  - {fileID: 11400000, guid: 68ccefb5b86e1374582a35954dbcbbdb, type: 2}
+  - {fileID: 11400000, guid: bcc7d24cf61a56b45aae965c8a0d33c7, type: 2}

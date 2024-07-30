@@ -5,22 +5,28 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using TMPro;
+using Unity.Mathematics;
 
 public class GachaController : MonoBehaviour
 {
     public static GachaController instant;
     [SerializeField] private GameObject cardPrefabs;
     [SerializeField] private GameObject cardSpawnParent;
+    [SerializeField] private TMP_Text cardRemainText;
+    [SerializeField] private Button confirmButton;
     [SerializeField] private Vector3[] cardSpawnPoints;
     [SerializeField] private GameObject panel;
     [SerializeField] private int cardSpawnCount = 8;
+    [SerializeField] private int cardCanSelect = 0;
     [Header("Gacha For Test")]
     [SerializeField] private GachaData gachaTableObject;
     [SerializeField] private GameObject cardStar;
     [SerializeField] private bool debugCardId;
     private List<GameObject> debugGameobjects = new List<GameObject>();
-    private List<GameObject> cards = new List<GameObject>();
+    private List<GameObject> cardpool = new List<GameObject>();
     private float tweenDuration = 2f;
+
+    bool onGacha = false;
 
     private void Start()
     {
@@ -34,6 +40,12 @@ public class GachaController : MonoBehaviour
         }
         InstantCard();
         panel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (onGacha)
+            SetCardRemainText();
     }
 
     private void OnDisable()
@@ -50,45 +62,7 @@ public class GachaController : MonoBehaviour
             instant.transform.localPosition = cardSpawnPoints[i];
             instant.transform.localScale = Vector3.zero;
             instant.SetActive(false);
-            cards.Add(instant);
-        }
-    }
-    private void SetCardInteractable()
-    {
-
-        foreach (var item in cards)
-        {
-            item.GetComponent<Button>().enabled = true;
-            //need optimize 
-            if (debugCardId)
-            {
-                var instant = Instantiate(cardStar, cardSpawnParent.transform);
-                debugGameobjects.Add(instant);
-                var text = instant.GetComponent<TextMeshProUGUI>();
-                int id = item.GetComponent<Card>().CardID;
-                if (id >= 50)
-                {
-                    text.text = "5Star";
-                }
-                else if (id >= 40 && id <= 49)
-                {
-                    text.text = "4Star";
-                }
-                else if (id >= 30 && id <= 39)
-                {
-                    text.text = "3Star";
-                }
-                else if (id >= 20 && id <= 29)
-                {
-                    text.text = "2Star";
-                }
-                else if (id >= 10 && id <= 19)
-                {
-                    text.text = "1Star";
-                }
-                instant.transform.localPosition = item.transform.localPosition;
-                text.color = Color.green;
-            }
+            cardpool.Add(instant);
         }
     }
 
@@ -101,59 +75,114 @@ public class GachaController : MonoBehaviour
         }
         debugGameobjects.Clear();
         var cardsid = gachaTableObject.GetDeckList();
-        foreach (var item in cards)
+        for (int i = 0; i < cardpool.Count; i++)
         {
+            cardpool[i].transform.localScale = Vector3.zero;
+            cardpool[i].GetComponent<Card>().SetCardID(cardsid[i].ItemNeded, cardsid[i].Star);
+        }
+        panel.SetActive(true);
+        StartCoroutine(DrawAnimation());
+    }
 
-        }
-        for (int i = 0; i < cards.Count; i++)
+    public void SpawnGacha(GachaData gachaData, int cardSelect)
+    {
+        foreach (var item in debugGameobjects)
         {
-            cards[i].transform.localScale = Vector3.zero;
-            cards[i].GetComponent<Card>().SetCardID(cardsid[i]);
+            Destroy(item);
         }
+        debugGameobjects.Clear();
+
+        List<CharacterData> chaData = gachaData.GetDeckList();
+        for (int i = 0; i < cardpool.Count; i++)
+        {
+            cardpool[i].transform.localScale = Vector3.zero;
+            cardpool[i].GetComponent<Card>().SetCardID(chaData[i].ItemNeded, chaData[i].Star);
+        }
+        cardCanSelect = cardSelect;
+        panel.SetActive(true);
         StartCoroutine(DrawAnimation());
     }
 
     private IEnumerator DrawAnimation()
     {
-        for (int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < cardpool.Count; i++)
         {
-            cards[i].SetActive(true);
-            if (i == cards.Count - 1)
+            cardpool[i].SetActive(true);
+            if (i == cardpool.Count - 1)
             {
-                cards[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBounce).OnComplete(SetCardInteractable);
+                cardpool[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBounce).OnComplete(SetCardInteractable);
             }
             else
             {
-                cards[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBounce);
+                cardpool[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBounce);
             }
             yield return new WaitForSeconds(0.2f);
         }
     }
-
-    public void PickupCard(int cardID)
+    private void SetCardInteractable()
     {
-        //need optimize
-        if (cardID >= 50)
+
+        foreach (var item in cardpool)
         {
-            Debug.Log("5Star");
+            item.GetComponent<Button>().enabled = true;
+            //Debug
+            if (debugCardId)
+            {
+                var instant = Instantiate(cardStar, cardSpawnParent.transform);
+                debugGameobjects.Add(instant);
+                var text = instant.GetComponent<TextMeshProUGUI>();
+                int star = item.GetComponent<Card>().CardStar;
+                text.text = $"{star}Star";
+                instant.transform.localPosition = item.transform.localPosition;
+                text.color = Color.green;
+            }
         }
-        else if (cardID >= 40 && cardID <= 49)
+        onGacha = true;
+    }
+
+
+    private void SetCardRemainText()
+    {
+        if (cardCanSelect > 0 && !cardRemainText.gameObject.activeInHierarchy)
         {
-            Debug.Log("4Star");
+            cardRemainText.gameObject.SetActive(true);
+            confirmButton.gameObject.SetActive(false);
         }
-        else if (cardID >= 30 && cardID <= 39)
+        else if (cardCanSelect < 1 && cardRemainText.gameObject.activeInHierarchy)
         {
-            Debug.Log("3Star");
+            cardRemainText.gameObject.SetActive(false);
+            confirmButton.gameObject.SetActive(true);
         }
-        else if (cardID >= 20 && cardID <= 29)
+        cardRemainText.text = $"Card Remain {cardCanSelect}";
+    }
+
+    [SerializeField] private List<GameObject> cardSelected = new List<GameObject>();
+    public bool PickupCard(GameObject cardObject, int cardStar, bool selected = false)
+    {
+        if (selected)
         {
-            Debug.Log("2Star");
+            cardCanSelect++;
+            if (cardSelected.Contains(cardObject))
+                cardSelected.Remove(cardObject);
+            return false;
         }
-        else if (cardID >= 10 && cardID <= 19)
+        if (cardCanSelect > 0)
         {
-            Debug.Log("1Star");
+            cardCanSelect--;
         }
-        // Debug.Log($"Card ID = {cardID}");
+        else
+        {
+            Debug.Log("Cant Select did card");
+            return false;
+        }
+        Debug.Log($"Select {cardStar}Star");
+        cardSelected.Add(cardObject);
+        return true;
+    }
+
+    public void ConfirmCardSelect()
+    {
+
     }
 
     // #if UNITY_EDITOR
