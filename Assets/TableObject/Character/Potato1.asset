@@ -15,7 +15,9 @@ MonoBehaviour:
   CharacterPrefab: {fileID: 0}
   CharacterID: 103
   Star: 1
+  elementType: {fileID: 0}
   ItemNeded: 3
+  cardData: {fileID: 3214591353496111482, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
   placeHolderSpitre: {fileID: 0}
   attackRatio: 1
   attackRange: 3

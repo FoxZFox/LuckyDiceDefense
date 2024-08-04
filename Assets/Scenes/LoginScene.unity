@@ -1003,11 +1003,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneStructs:
   - sceneName: 0
-    asset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+    asset: LoginScene
   - sceneName: 1
-    asset: {fileID: 102900000, guid: c73fd353555ef244cbc0fc88df057061, type: 3}
+    asset: MainMenu
   - sceneName: 2
-    asset: {fileID: 102900000, guid: a7ab47d40bc4f624c88f6f556d76091b, type: 3}
+    asset: Gacha
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

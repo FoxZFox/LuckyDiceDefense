@@ -19,7 +19,8 @@ public class MainMenuUiController : MonoBehaviour
     void Start()
     {
         SetPlayerStatus();
-        SceneManager.Instant.LoaadSceneAsync(SceneManager.sceneName.gacha);
+        SceneManager.Instant.LoadSceneAsync(SceneManager.sceneName.gacha);
+        MainUiObject.SetActive(true);
     }
 
     private void SetPlayerStatus()

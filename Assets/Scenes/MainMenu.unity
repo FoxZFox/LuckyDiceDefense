@@ -1809,7 +1809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90.65869, y: -29.998}
+  m_AnchoredPosition: {x: 90, y: -29.9975}
   m_SizeDelta: {x: 180, y: 59.995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &956106719
@@ -3684,6 +3684,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 5381771940413015198, guid: 4e740e73bdd1c0b4f996fbd1f37665c2, type: 3}
   inventoryItems: []
   inventoryCharacters: []
+  inventoryCards: []
   characterDatas:
   - {fileID: 11400000, guid: b5abb4f603d071e4495e242e6ca027e6, type: 2}
   - {fileID: 11400000, guid: 68ccefb5b86e1374582a35954dbcbbdb, type: 2}
@@ -3691,11 +3692,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bec0246bc71c0ae4981454b476ef3de3, type: 2}
   - {fileID: 11400000, guid: 8b20544966670104e830142e2774fdf2, type: 2}
   itemDatas:
-  - {fileID: 11400000, guid: 38e0e40d8ec07014e9c095f01b5c5f8d, type: 2}
-  - {fileID: 11400000, guid: 2bd4e7a61fb929144b5ff686b2144acf, type: 2}
-  - {fileID: 11400000, guid: d7fcc71578e8c7249a6d412c814b74ed, type: 2}
-  - {fileID: 11400000, guid: 4fb03705852c3dd4bb1d4b4840913186, type: 2}
-  - {fileID: 11400000, guid: 75ed2b9fac44f9b44b0a30c0ef2d41a5, type: 2}
+  - {fileID: -2671770358487809654, guid: 56941d4567df89f4abfbcac583372445, type: 2}
+  cardDatas:
+  - {fileID: 6100139880304976355, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
+  - {fileID: 3214591353496111482, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
+  - {fileID: -3970338524026001997, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
+  - {fileID: 4961657707848418232, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
+  - {fileID: 621792935339380835, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
 --- !u!1 &1927736825
 GameObject:
   m_ObjectHideFlags: 0
@@ -3786,7 +3789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1956490263
 RectTransform:
   m_ObjectHideFlags: 0

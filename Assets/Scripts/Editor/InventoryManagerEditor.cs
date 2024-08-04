@@ -8,18 +8,21 @@ using UnityEngine.UIElements;
 [CustomEditor(typeof(InventoryManager))]
 public class InventoryManagerEditor : Editor
 {
-    static string itemDataPath = "Assets/TableObject/Item";
-    static List<ItemData> itemDatas = new List<ItemData>();
-    static List<string> names = new List<string>();
-    static List<int> datas = new List<int>();
+    string itemDataPath = "Assets/TableObject/Container-Item-Data.asset";
+    List<ItemData> itemDatas = new List<ItemData>();
+    List<string> names = new List<string>();
+    List<int> datas = new List<int>();
     string characterDataPath = "Assets/TableObject/Character";
+    string cardDataPath = "Assets/TableObject/Container-Card-Data.asset";
     List<CharacterData> chaDatas;
+    List<CardData> cardDatas;
     int itemID = 0;
 
     private void OnEnable()
     {
         LoadItemData();
         LoadChaData();
+        LoadCardData();
     }
     private void LoadChaData()
     {
@@ -32,22 +35,31 @@ public class InventoryManagerEditor : Editor
             chaDatas.Add(AssetDatabase.LoadAssetAtPath<CharacterData>(assetPath));
         }
     }
-    [MenuItem("DeBugger/LoadItemdata")]
     [RuntimeInitializeOnLoadMethod]
-    private static void LoadItemData()
+    private void LoadItemData()
     {
-        string[] assetguids = AssetDatabase.FindAssets("t:ItemData", new[] { itemDataPath });
+        ItemDataContainer container = AssetDatabase.LoadAssetAtPath<ItemDataContainer>(itemDataPath);
         itemDatas.Clear();
         names.Clear();
         datas.Clear();
-        for (int i = 0; i < assetguids.Length; i++)
+        for (int i = 0; i < container.ItemDatas.Count; i++)
         {
-            string assetpath = AssetDatabase.GUIDToAssetPath(assetguids[i]);
-            itemDatas.Add(AssetDatabase.LoadAssetAtPath<ItemData>(assetpath));
+            itemDatas.Add(container.ItemDatas[i]);
             datas.Add(itemDatas[i].ItemID);
             names.Add(itemDatas[i].ItemName);
         }
     }
+
+    private void LoadCardData()
+    {
+        cardDatas = new List<CardData>();
+        var container = AssetDatabase.LoadAssetAtPath<CardDataContainer>(cardDataPath);
+        foreach (var item in container.CardDatas)
+        {
+            cardDatas.Add(item);
+        }
+    }
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -61,9 +73,9 @@ public class InventoryManagerEditor : Editor
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("UpdateItemData&ChaData"))
+        if (GUILayout.Button("UpdateData"))
         {
-            LoadItemDataToProperty();
+            UpdateData();
         }
         if (GUILayout.Button("DeleteInventoryData"))
         {
@@ -73,24 +85,31 @@ public class InventoryManagerEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
-    private void LoadItemDataToProperty()
+    private void UpdateData()
     {
         SerializedProperty itemDataProperty = serializedObject.FindProperty("itemDatas");
         SerializedProperty characterDataProperty = serializedObject.FindProperty("characterDatas");
+        SerializedProperty cardDataProperty = serializedObject.FindProperty("cardDatas");
         itemDataProperty.ClearArray();
         characterDataProperty.ClearArray();
+        cardDataProperty.ClearArray();
         foreach (var item in itemDatas)
         {
             int newSize = itemDataProperty.arraySize + 1;
             itemDataProperty.InsertArrayElementAtIndex(newSize - 1);
             itemDataProperty.GetArrayElementAtIndex(newSize - 1).objectReferenceValue = item;
         }
-
         foreach (var item in chaDatas)
         {
             int newSize = characterDataProperty.arraySize + 1;
             characterDataProperty.InsertArrayElementAtIndex(newSize - 1);
             characterDataProperty.GetArrayElementAtIndex(newSize - 1).objectReferenceValue = item;
+        }
+        foreach (var item in cardDatas)
+        {
+            int newSize = cardDataProperty.arraySize + 1;
+            cardDataProperty.InsertArrayElementAtIndex(newSize - 1);
+            cardDataProperty.GetArrayElementAtIndex(newSize - 1).objectReferenceValue = item;
         }
     }
 

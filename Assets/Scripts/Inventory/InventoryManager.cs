@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -16,11 +12,13 @@ public class InventoryManager : MonoBehaviour
     [Header("Object For Inventory")]
     [SerializeField] private List<InventoryItem> inventoryItems;
     [SerializeField] private List<InventoryCharacter> inventoryCharacters;
-    private List<CharacterCard> cardInstants;
-    private Dictionary<int, int> compairItemIDAndCharID;
+    [SerializeField] private List<InventoryCard> inventoryCards;
+    private Dictionary<CardData, CharacterData> compairItemIDAndCharID;
     [Header("Debug")]
+    private List<CharacterCard> cardInstants;
     [SerializeField] private CharacterData[] characterDatas;
     [SerializeField] private ItemData[] itemDatas;
+    [SerializeField] private CardData[] cardDatas;
     void Start()
     {
         if (instant == null)
@@ -36,7 +34,7 @@ public class InventoryManager : MonoBehaviour
 
     private void InitializeCompaire()
     {
-        compairItemIDAndCharID = new Dictionary<int, int>();
+        compairItemIDAndCharID = new Dictionary<CardData, CharacterData>();
         cardInstants = new List<CharacterCard>();
         foreach (var item in characterDatas)
         {
@@ -56,6 +54,14 @@ public class InventoryManager : MonoBehaviour
     [ContextMenu("SpawnCard")]
     private void CheckSpawnCard()
     {
+        if (inventoryCharacters.Count < 1)
+        {
+            foreach (var item in cardInstants)
+            {
+                Destroy(item.gameObject);
+            }
+            cardInstants.Clear();
+        }
         foreach (var item in inventoryCharacters)
         {
             var card = cardInstants.FirstOrDefault(i => i.CharacterCardID == item.CharacterID);
@@ -63,7 +69,7 @@ public class InventoryManager : MonoBehaviour
             {
                 var instant = Instantiate(cardPrefab);
                 card = instant.GetComponent<CharacterCard>();
-                card.CharacterCardID = item.CharacterID;
+                card.SetUpCard(item.characterData);
                 instant.transform.SetParent(contestParent);
                 cardInstants.Add(card);
             }
@@ -72,12 +78,12 @@ public class InventoryManager : MonoBehaviour
 
     private void CheckCardOwned()
     {
-        foreach (var item in inventoryItems)
+        foreach (var item in inventoryCards)
         {
-            bool characterOwned = inventoryCharacters.Any(i => i.CharacterID == compairItemIDAndCharID[item.itemData.ItemID]);
+            bool characterOwned = inventoryCharacters.Any(i => i.characterData == compairItemIDAndCharID[item.cardData]);
             if (characterOwned)
                 continue;
-            inventoryCharacters.Add(new InventoryCharacter() { CharacterID = compairItemIDAndCharID[item.itemData.ItemID], Level = 0 });
+            inventoryCharacters.Add(new InventoryCharacter(compairItemIDAndCharID[item.cardData]));
         }
     }
     public void AddItem(int id)
@@ -104,6 +110,24 @@ public class InventoryManager : MonoBehaviour
             inventoryItems.Add(new InventoryItem(itemData));
         }
     }
+
+    public void AddCard(CardData cardData, int amount = 1)
+    {
+        InventoryCard item = inventoryCards.FirstOrDefault(item => item.cardData == cardData);
+        if (item != null)
+        {
+            item.CardAmount += amount;
+        }
+        else
+        {
+            inventoryCards.Add(new InventoryCard(cardData));
+        }
+    }
+
+    public CardData GetCardData(CharacterData characterData)
+    {
+        return cardDatas.First(i => i == characterData.cardData);
+    }
 }
 
 
@@ -121,8 +145,28 @@ public class InventoryItem
 }
 
 [Serializable]
+public class InventoryCard
+{
+    public CardData cardData;
+    public int CardAmount;
+    public InventoryCard(CardData cardData)
+    {
+        this.cardData = cardData;
+        CardAmount = 1;
+    }
+}
+
+[Serializable]
 public class InventoryCharacter
 {
     public int CharacterID;
+    public CharacterData characterData;
     public int Level;
+
+    public InventoryCharacter(CharacterData data)
+    {
+        characterData = data;
+        CharacterID = characterData.CharacterID;
+        Level = 0;
+    }
 }

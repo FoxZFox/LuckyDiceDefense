@@ -13,6 +13,11 @@ public class Card : MonoBehaviour
     [SerializeField] private GameObject cardOutline;
     private bool selected = false;
     public bool Selected => selected;
+    public CharacterData characterData { get; private set; }
+
+    private int amount = 0;
+    public int Amount => amount;
+
     void Start()
     {
         button = GetComponent<Button>();
@@ -40,10 +45,17 @@ public class Card : MonoBehaviour
         }
     }
 
-    public void SetCardID(int id, int star)
+    public void SetCardID(CharacterData data, int a)
     {
-        cardID = id;
-        cardStar = star;
+        cardID = data.CharacterID;
+        cardStar = data.Star;
+        characterData = data;
+        amount = a;
         cardOutline.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        selected = false;
     }
 }

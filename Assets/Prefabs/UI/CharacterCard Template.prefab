@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8427360501398327065}
   - component: {fileID: 7243735541605376469}
   m_Layer: 5
-  m_Name: Image
+  m_Name: star1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 1489793235705907516}
   - component: {fileID: 2795482598006974165}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: star5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 3709572744818142427}
   - component: {fileID: 8882678531904851285}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: star4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,9 +645,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 82.17965, y: -110.68859}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 135, y: 168.8263}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &8281125143326839494
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -754,6 +754,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982fcf2f6cb0bab4d8ddcf4ee8eecba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starShow:
+  - {fileID: 149150861843445710}
+  - {fileID: 8585984953589459881}
+  - {fileID: 8821721552981046150}
+  - {fileID: 3678332038130794851}
+  - {fileID: 2259481094751817937}
 --- !u!1 &7737939372071546038
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +1003,7 @@ GameObject:
   - component: {fileID: 597655758005299689}
   - component: {fileID: 5767133106210445827}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: star2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,7 +1099,7 @@ GameObject:
   - component: {fileID: 6905339028147825694}
   - component: {fileID: 8433553605627803990}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: star3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

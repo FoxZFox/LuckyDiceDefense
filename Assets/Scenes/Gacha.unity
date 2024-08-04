@@ -263,7 +263,7 @@ MonoBehaviour:
   cardCanSelect: 0
   gachaTableObject: {fileID: 11400000, guid: ef65714884415d448a2e1771498d5ccc, type: 2}
   cardStar: {fileID: 4486669468843756025, guid: 8cc21558939c77e49890068896fa52a6, type: 3}
-  debugCardId: 1
+  debugCardId: 0
   cardSelected: []
 --- !u!1 &1918501226
 GameObject:
@@ -583,7 +583,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2033597416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 891873783}
+        m_TargetAssemblyTypeName: GachaController, Assembly-CSharp
+        m_MethodName: ConfirmCardSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2033597416
 MonoBehaviour:
   m_ObjectHideFlags: 0

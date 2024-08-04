@@ -78,7 +78,8 @@ public class GachaController : MonoBehaviour
         for (int i = 0; i < cardpool.Count; i++)
         {
             cardpool[i].transform.localScale = Vector3.zero;
-            cardpool[i].GetComponent<Card>().SetCardID(cardsid[i].ItemNeded, cardsid[i].Star);
+            int cardAmount = UnityEngine.Random.Range(1, 17);
+            cardpool[i].GetComponent<Card>().SetCardID(cardsid[i], cardAmount);
         }
         panel.SetActive(true);
         StartCoroutine(DrawAnimation());
@@ -96,7 +97,8 @@ public class GachaController : MonoBehaviour
         for (int i = 0; i < cardpool.Count; i++)
         {
             cardpool[i].transform.localScale = Vector3.zero;
-            cardpool[i].GetComponent<Card>().SetCardID(chaData[i].ItemNeded, chaData[i].Star);
+            int cardAmount = UnityEngine.Random.Range(1, 17);
+            cardpool[i].GetComponent<Card>().SetCardID(chaData[i], cardAmount);
         }
         cardCanSelect = cardSelect;
         panel.SetActive(true);
@@ -182,7 +184,15 @@ public class GachaController : MonoBehaviour
 
     public void ConfirmCardSelect()
     {
-
+        foreach (var item in cardSelected)
+        {
+            if (item.TryGetComponent<Card>(out Card card))
+            {
+                InventoryManager.instant.AddCard(InventoryManager.instant.GetCardData(card.characterData), card.Amount);
+            }
+        }
+        cardSelected.Clear();
+        panel.SetActive(false);
     }
 
     // #if UNITY_EDITOR
