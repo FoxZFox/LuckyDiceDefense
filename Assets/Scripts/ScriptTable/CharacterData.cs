@@ -12,6 +12,7 @@ public class CharacterData : ScriptableObject
     public CardData cardData;
     public Sprite placeHolderSpitre;
     [Header("Units and Build")]
+    public float attackDamage = 1f;
     public float attackRatio = 1f;
     public float attackRange = 3f;
     [Range(1f, 100f)] public float skillChange = 100f;

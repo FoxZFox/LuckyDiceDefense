@@ -24,6 +24,7 @@ public class InventoryManager : MonoBehaviour
         if (instant == null)
         {
             instant = this;
+            DontDestroyOnLoad(instant);
         }
         else
         {

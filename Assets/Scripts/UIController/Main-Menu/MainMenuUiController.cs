@@ -15,12 +15,14 @@ public class MainMenuUiController : MonoBehaviour
     [SerializeField] private TMP_Text gemText;
     [SerializeField] private TMP_Text goldText;
     [SerializeField] private TMP_Text playerIdText;
+    private InventoryUiController inventoryUiController;
 
     void Start()
     {
         SetPlayerStatus();
         SceneManager.Instant.LoadSceneAsync(SceneManager.sceneName.gacha);
         MainUiObject.SetActive(true);
+        inventoryUiController = GetComponent<InventoryUiController>();
     }
 
     private void SetPlayerStatus()
@@ -43,6 +45,7 @@ public class MainMenuUiController : MonoBehaviour
     {
         MainUiObject.SetActive(true);
         shopObject.SetActive(false);
+        inventoryUiController.SetActivePanel(false);
         inventoryObject.SetActive(false);
     }
     public void OnClickShop()

@@ -24,6 +24,9 @@ public class CharacterCard : MonoBehaviour
     }
     public void OnCardClick()
     {
+        InventoryUiController ic = FindFirstObjectByType<InventoryUiController>();
+        ic.SetActivePanel(true);
+        ic.SetCharacterDetailText(characterData);
         Debug.Log($"ID: {characterCardID}");
     }
 

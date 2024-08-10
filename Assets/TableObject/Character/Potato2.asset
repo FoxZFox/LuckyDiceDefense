@@ -15,10 +15,11 @@ MonoBehaviour:
   CharacterPrefab: {fileID: 0}
   CharacterID: 104
   Star: 2
-  elementType: {fileID: 0}
+  elementType: {fileID: 6234558022768649565, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
   ItemNeded: 4
   cardData: {fileID: -3970338524026001997, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
   placeHolderSpitre: {fileID: 0}
+  attackDamage: 1
   attackRatio: 1
   attackRange: 3
   skillChange: 100

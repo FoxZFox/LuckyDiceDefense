@@ -19,6 +19,7 @@ MonoBehaviour:
   ItemNeded: 2
   cardData: {fileID: 6100139880304976355, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
   placeHolderSpitre: {fileID: 0}
+  attackDamage: 1
   attackRatio: 1
   attackRange: 3
   skillChange: 100

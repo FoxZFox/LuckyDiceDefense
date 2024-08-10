@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 using TMPro;
-using Unity.Mathematics;
 
 public class GachaController : MonoBehaviour
 {
@@ -193,6 +191,11 @@ public class GachaController : MonoBehaviour
         }
         cardSelected.Clear();
         panel.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        instant = null;
     }
 
     // #if UNITY_EDITOR

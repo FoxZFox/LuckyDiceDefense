@@ -16,7 +16,9 @@ public class InventoryManagerEditor : Editor
     string cardDataPath = "Assets/TableObject/Container-Card-Data.asset";
     List<CharacterData> chaDatas;
     List<CardData> cardDatas;
-    int itemID = 0;
+    int itemID = -1;
+    int cardSelect = -1;
+    string[] cardName;
 
     private void OnEnable()
     {
@@ -54,9 +56,11 @@ public class InventoryManagerEditor : Editor
     {
         cardDatas = new List<CardData>();
         var container = AssetDatabase.LoadAssetAtPath<CardDataContainer>(cardDataPath);
-        foreach (var item in container.CardDatas)
+        cardName = new string[container.CardDatas.Count];
+        for (int i = 0; i < container.CardDatas.Count; i++)
         {
-            cardDatas.Add(item);
+            cardDatas.Add(container.CardDatas[i]);
+            cardName[i] = container.CardDatas[i].name;
         }
     }
 
@@ -70,6 +74,13 @@ public class InventoryManagerEditor : Editor
         {
             // Debug.Log($"{itemID}");
             ic.AddItem(itemID);
+        }
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        cardSelect = EditorGUILayout.Popup("CardData", cardSelect, cardName);
+        if (GUILayout.Button("AddCard"))
+        {
+            ic.AddCard(cardDatas[cardSelect]);
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
@@ -117,7 +128,9 @@ public class InventoryManagerEditor : Editor
     {
         SerializedProperty invenItem = serializedObject.FindProperty("inventoryItems");
         SerializedProperty invenCha = serializedObject.FindProperty("inventoryCharacters");
+        SerializedProperty invenCard = serializedObject.FindProperty("inventoryCards");
         invenItem.ClearArray();
         invenCha.ClearArray();
+        invenCard.ClearArray();
     }
 }
