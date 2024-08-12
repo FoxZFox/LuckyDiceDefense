@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6234025680982737726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac5b8bd3adae064bba489b7df70dff6, type: 3}
+  m_Name: Blizard
+  m_EditorClassIdentifier: 
+  abilityName: Blizard
+  abilityDetial: Strom Blizard Deal 10 dmg. persec
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9adf1a2b6f44ee43853138e67e4179b, type: 3}
+  m_Name: Container-Ability-Data
+  m_EditorClassIdentifier: 
+  abilityDatas:
+  - {fileID: 3950099707583567183}
+  - {fileID: -6234025680982737726}
+  deleteAbility: {fileID: 0}
+--- !u!114 &3950099707583567183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac5b8bd3adae064bba489b7df70dff6, type: 3}
+  m_Name: FrozeTy
+  m_EditorClassIdentifier: 
+  abilityName: FrozeTy
+  abilityDetial: Freeze enemy 2 second

@@ -15,6 +15,7 @@ public class CharacterData : ScriptableObject
     public float attackDamage = 1f;
     public float attackRatio = 1f;
     public float attackRange = 3f;
+    public AbilityData ability = null;
     [Range(1f, 100f)] public float skillChange = 100f;
     [Min(1)] public int costToBuild = 100;
     public (CardData, CharacterData) MapData()

@@ -22,5 +22,6 @@ MonoBehaviour:
   attackDamage: 1
   attackRatio: 1
   attackRange: 3
+  ability: {fileID: -6234025680982737726, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
   skillChange: 100
   costToBuild: 100

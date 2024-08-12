@@ -20,10 +20,10 @@ public class Networkmanager : MonoBehaviour
     {
         if (Instant == null)
         {
-            DontDestroyOnLoad(gameObject);
             Instant = this;
             if (!stanalone)
             {
+                DontDestroyOnLoad(gameObject);
                 client = new Client();
                 packetManager = new PacketManager();
                 packetManager.Initialize();

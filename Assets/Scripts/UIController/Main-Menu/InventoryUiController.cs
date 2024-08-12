@@ -24,14 +24,15 @@ public class InventoryUiController : MonoBehaviour
     }
     public void SetCharacterDetailText(CharacterData characterData)
     {
+        var map = characterData.ability.GetAbilityData();
         characterName.text = $"Name: {characterData.name}";
         elemnetType.text = $"Element: {characterData.elementType.name}";
         atkText.text = $"Atk: {characterData.attackDamage}";
         atkRatrioText.text = $"AtkRatio: {characterData.attackRatio}";
         atkRangeText.text = $"AtkRge: {characterData.attackRange}";
-        skillName.text = $"Skill: ";
+        skillName.text = $"Skill: {map.Item1}";
         skillChangeText.text = $"SkillChg: {characterData.skillChange}%";
-        skillDetail.text = $"Detail: ";
+        skillDetail.text = $"Detail: {map.Item2}";
         buildCost.text = $"Cost: {characterData.costToBuild}";
     }
 }
