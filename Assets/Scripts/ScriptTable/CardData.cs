@@ -12,6 +12,7 @@ public class CardData : ScriptableObject
     public string CardName { get => cardName; }
     public int CardID { get => cardID; }
     public Sprite CardImage { get => cardImage; }
+    public CardDataContainer Container { get => container; }
 
 #if UNITY_EDITOR
     public void Initialise(string n, int i, CardDataContainer cardDataContainer)

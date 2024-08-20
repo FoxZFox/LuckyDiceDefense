@@ -6,7 +6,12 @@ public class SlowAbility : AbilityData
 {
     [SerializeField] private string abilityName;
     [SerializeField, TextArea] private string abilityDetial;
-    public override void ActiveAbility()
+    public override void ActiveAbilityToSelf(Character character)
+    {
+        Debug.Log($"Use {name}: {abilityDetial}");
+    }
+
+    public override void ActiveAbilityToOther(Character character)
     {
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[InitializeOnLoad]
+// [InitializeOnLoad]
 public class GameRunner : Editor
 {
     static GameRunner()

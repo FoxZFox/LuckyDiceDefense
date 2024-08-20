@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
+    public enum PriceType { Gem, Gold }
     [SerializeField] private ItemDataContainer container;
     [SerializeField] private int itemID;
     [SerializeField] private string itemName;
     [SerializeField] private Sprite itemImage;
+    [SerializeField] private PriceType priceType;
+    [SerializeField] private int itemPrice;
     public int ItemID { get => itemID; }
     public string ItemName { get => itemName; }
+    public int ItemPrice { get => itemPrice; }
+    public PriceType Type { get => priceType; }
     public Sprite ItemImage { get => itemImage; }
     public ItemDataContainer Container { get => container; }
 #if UNITY_EDITOR

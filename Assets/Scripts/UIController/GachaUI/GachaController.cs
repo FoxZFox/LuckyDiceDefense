@@ -32,12 +32,13 @@ public class GachaController : MonoBehaviour
         {
             instant = this;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
         InstantCard();
         panel.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        instant = null;
     }
 
     private void Update()
@@ -191,11 +192,6 @@ public class GachaController : MonoBehaviour
         }
         cardSelected.Clear();
         panel.SetActive(false);
-    }
-
-    private void OnDestroy()
-    {
-        instant = null;
     }
 
     // #if UNITY_EDITOR

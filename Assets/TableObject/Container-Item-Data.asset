@@ -16,6 +16,8 @@ MonoBehaviour:
   itemID: 70
   itemName: Iron
   itemImage: {fileID: 0}
+  priceType: 0
+  itemPrice: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,6 +22,8 @@ public class MainMenuUiController : MonoBehaviour
         SetPlayerStatus();
         SceneManager.Instant.LoadSceneAsync(SceneManager.sceneName.gacha);
         MainUiObject.SetActive(true);
+        shopObject.SetActive(false);
+        inventoryObject.SetActive(false);
         inventoryUiController = GetComponent<InventoryUiController>();
     }
 
@@ -45,7 +47,6 @@ public class MainMenuUiController : MonoBehaviour
     {
         MainUiObject.SetActive(true);
         shopObject.SetActive(false);
-        inventoryUiController.SetActivePanel(false);
         inventoryObject.SetActive(false);
     }
     public void OnClickShop()
@@ -56,8 +57,14 @@ public class MainMenuUiController : MonoBehaviour
     }
     public void OnClickInventory()
     {
+        inventoryUiController.LoadCharacterCard();
         MainUiObject.SetActive(false);
         shopObject.SetActive(false);
         inventoryObject.SetActive(true);
+    }
+
+    public void OnClickPlay()
+    {
+
     }
 }

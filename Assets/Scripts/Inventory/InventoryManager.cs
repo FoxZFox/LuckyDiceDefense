@@ -6,16 +6,13 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instant;
-    [Header("Controller")]
-    [SerializeField] private Transform contestParent;
-    [SerializeField] private GameObject cardPrefab;
     [Header("Object For Inventory")]
     [SerializeField] private List<InventoryItem> inventoryItems;
     [SerializeField] private List<InventoryCharacter> inventoryCharacters;
     [SerializeField] private List<InventoryCard> inventoryCards;
+    public List<InventoryCharacter> InventoryCharacters => inventoryCharacters;
     private Dictionary<CardData, CharacterData> compairItemIDAndCharID;
     [Header("Debug")]
-    private List<CharacterCard> cardInstants;
     [SerializeField] private CharacterData[] characterDatas;
     [SerializeField] private ItemData[] itemDatas;
     [SerializeField] private CardData[] cardDatas;
@@ -36,7 +33,6 @@ public class InventoryManager : MonoBehaviour
     private void InitializeCompaire()
     {
         compairItemIDAndCharID = new Dictionary<CardData, CharacterData>();
-        cardInstants = new List<CharacterCard>();
         foreach (var item in characterDatas)
         {
             var map = item.MapData();
@@ -49,34 +45,8 @@ public class InventoryManager : MonoBehaviour
     {
         //In the future change it to load only click on the inventory and first on gameload
         CheckCardOwned();
-        CheckSpawnCard();
+        // CheckSpawnCard();
     }
-
-    [ContextMenu("SpawnCard")]
-    private void CheckSpawnCard()
-    {
-        if (inventoryCharacters.Count < 1)
-        {
-            foreach (var item in cardInstants)
-            {
-                Destroy(item.gameObject);
-            }
-            cardInstants.Clear();
-        }
-        foreach (var item in inventoryCharacters)
-        {
-            var card = cardInstants.FirstOrDefault(i => i.CharacterCardID == item.CharacterID);
-            if (card == null)
-            {
-                var instant = Instantiate(cardPrefab);
-                card = instant.GetComponent<CharacterCard>();
-                card.SetUpCard(item.characterData);
-                instant.transform.SetParent(contestParent);
-                cardInstants.Add(card);
-            }
-        }
-    }
-
     private void CheckCardOwned()
     {
         foreach (var item in inventoryCards)

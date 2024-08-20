@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class AbilityData : ScriptableObject
 {
-    public abstract void ActiveAbility();
+    public abstract void ActiveAbilityToSelf(Character character);
+    public abstract void ActiveAbilityToOther(Character character);
     public abstract (string, string) GetAbilityData();
 }
