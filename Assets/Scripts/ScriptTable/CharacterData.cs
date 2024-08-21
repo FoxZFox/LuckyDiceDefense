@@ -11,10 +11,12 @@ public class CharacterData : ScriptableObject
     public int ItemNeded = 1;
     public CardData cardData;
     public Sprite placeHolderSpitre;
+    public RuntimeAnimatorController animatorController;
     [Header("Units and Build")]
     public float attackDamage = 1f;
     public float attackRatio = 1f;
     public float attackRange = 3f;
+    public bool longRange = false;
     public AbilityData ability = null;
     [Range(1f, 100f)] public float skillChange = 100f;
     [Min(1)] public int costToBuild = 100;

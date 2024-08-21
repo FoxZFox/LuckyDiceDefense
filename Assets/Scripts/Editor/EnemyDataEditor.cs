@@ -1,23 +1,21 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(ItemData))]
-public class ItemDataEditor : Editor
+[CustomEditor(typeof(EnemyData))]
+public class EnemyDataEditor : Editor
 {
     bool deleteSidel = false;
-    ItemData itemData;
-    string newItemName = "";
-    int newItemID = 0;
+    EnemyData enemyData;
+    string newEnemyName = "";
     public override void OnInspectorGUI()
     {
-        itemData = target as ItemData;
+        enemyData = target as EnemyData;
         base.OnInspectorGUI();
         EditorGUILayout.BeginHorizontal("box");
         if (GUILayout.Button("Edit", EditorStyles.toolbarButton))
         {
             deleteSidel = false;
-            newItemName = itemData.ItemName;
-            newItemID = itemData.ItemID;
+            newEnemyName = enemyData.enemyName;
         }
         if (GUILayout.Button("Delete", EditorStyles.toolbarButton))
         {
@@ -44,17 +42,14 @@ public class ItemDataEditor : Editor
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Invoke"))
         {
-            itemData.EditData(newItemName, newItemID);
-            newItemName = "";
-            newItemID = 0;
+            enemyData.EditName(newEnemyName);
+            newEnemyName = "";
             AssetDatabase.SaveAssets();
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Name", GUILayout.Width(40));
-        newItemName = EditorGUILayout.TextField(newItemName);
-        EditorGUILayout.LabelField("ID", GUILayout.Width(20));
-        newItemID = EditorGUILayout.IntField(newItemID);
+        newEnemyName = EditorGUILayout.TextField(newEnemyName);
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndVertical();
@@ -66,11 +61,10 @@ public class ItemDataEditor : Editor
         EditorGUILayout.BeginVertical("box");
         if (GUILayout.Button("Delete"))
         {
-            itemData.Container.ItemDatas.Remove(itemData);
-            Undo.DestroyObjectImmediate(itemData);
+            enemyData.container.EnemyDatas.Remove(enemyData);
+            Undo.DestroyObjectImmediate(enemyData);
             AssetDatabase.SaveAssets();
         }
         EditorGUILayout.EndVertical();
     }
-
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6234025680982737726
+--- !u!114 &-7645294968593119152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac5b8bd3adae064bba489b7df70dff6, type: 3}
-  m_Name: Blizard
+  m_Script: {fileID: 11500000, guid: 0d721b877e28a694d947b06e6db715e3, type: 3}
+  m_Name: IronSkin
   m_EditorClassIdentifier: 
-  abilityName: Blizard
-  abilityDetial: Strom Blizard Deal 10 dmg. persec
+  abilityType: 0
+  abilityName: IronSkin
+  abilityDetial: 
+  reducePercen: 90
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,7 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityDatas:
   - {fileID: 3950099707583567183}
-  - {fileID: -6234025680982737726}
+  - {fileID: -7645294968593119152}
   deleteAbility: {fileID: 0}
 --- !u!114 &3950099707583567183
 MonoBehaviour:
@@ -42,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac5b8bd3adae064bba489b7df70dff6, type: 3}
   m_Name: FrozeTy
   m_EditorClassIdentifier: 
+  abilityType: 2
   abilityName: FrozeTy
   abilityDetial: Freeze enemy 2 second
+  slowDuration: 5
+  slowPercen: 50
+  isForst: 0

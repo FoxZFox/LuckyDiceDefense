@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8699914703357221387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281b4950958ad254dacd54b4b8710e22, type: 3}
+  m_Name: Orc
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  enemyName: Orc
+  walkSpeed: 4
+  health: 10
+  elementType: {fileID: 0}
+  sprite: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: a5d0398fa019ddc44a69d55b42bbea83, type: 2}
+  abilityData: {fileID: -7645294968593119152, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
+  skillChange: 50
+  enemyDetail: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf9277028ea3a046ba56c6fde89c6be, type: 3}
+  m_Name: Container Enemy Data
+  m_EditorClassIdentifier: 
+  enemyDatas:
+  - {fileID: -8699914703357221387}

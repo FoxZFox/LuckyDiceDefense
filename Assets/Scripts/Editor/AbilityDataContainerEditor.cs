@@ -1,14 +1,32 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Playables;
+using System;
+using System.Linq;
 
 [CustomEditor(typeof(AbilityDataContainer))]
 public class AbilityDataContainerEditor : Editor
 {
-    private enum AbilityType { Slow, Buff }
-    private AbilityType at;
     private string abilityName = "";
     bool deleteSide = false;
+    AbilityData.AbilityType at;
+    private Type[] abilityClass;
+    private string[] abilityClassName;
+    int abilitySelect = -1;
+    private void OnEnable()
+    {
+        LoadAbilityData();
+    }
+
+    private void LoadAbilityData()
+    {
+        abilityClass = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(type => type.IsSubclassOf(typeof(AbilityData))).ToArray();
+        abilityClassName = new string[abilityClass.Length];
+        for (int i = 0; i < abilityClass.Length; i++)
+        {
+            abilityClassName[i] = abilityClass[i].Name;
+        }
+    }
     public override void OnInspectorGUI()
     {
         AbilityDataContainer abilityDataContainer = target as AbilityDataContainer;
@@ -55,7 +73,9 @@ public class AbilityDataContainerEditor : Editor
         EditorGUILayout.LabelField("Name", GUILayout.Width(40));
         abilityName = EditorGUILayout.TextField(abilityName);
         EditorGUILayout.LabelField("Type", GUILayout.Width(40));
-        at = (AbilityType)EditorGUILayout.EnumPopup(at);
+        at = (AbilityData.AbilityType)EditorGUILayout.EnumPopup(at);
+        EditorGUILayout.LabelField("Class", GUILayout.Width(40));
+        abilitySelect = EditorGUILayout.Popup(abilitySelect, abilityClassName);
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
     }
@@ -78,15 +98,8 @@ public class AbilityDataContainerEditor : Editor
 
     private void CreateAbility(AbilityDataContainer container)
     {
-        AbilityData itemData = null;
-        switch (at)
-        {
-            case AbilityType.Slow:
-                SlowAbility slowAbility = CreateInstance<SlowAbility>();
-                slowAbility.Initialise(abilityName);
-                itemData = slowAbility;
-                break;
-        }
+        AbilityData itemData = (AbilityData)CreateInstance(abilityClass[abilitySelect]);
+        itemData.Initialise(abilityName, at);
         container.AbilityDatas.Add(itemData);
         AssetDatabase.AddObjectToAsset(itemData, container);
         AssetDatabase.SaveAssets();

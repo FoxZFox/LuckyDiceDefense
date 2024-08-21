@@ -4,7 +4,7 @@ using UnityEditor;
 [CustomEditor(typeof(CardData))]
 public class CardDataEditor : Editor
 {
-    bool deleteSide = true;
+    bool deleteSide = false;
     CardData cardData;
     SerializedProperty container;
     private void OnEnable()

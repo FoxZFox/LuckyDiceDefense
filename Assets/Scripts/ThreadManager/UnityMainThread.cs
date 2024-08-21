@@ -37,4 +37,9 @@ public class UnityMainThread : MonoBehaviour
     {
         excutionQueue.Enqueue(action);
     }
+
+    public void EnqueCorutine(IEnumerator enumerator)
+    {
+        excutionQueue.Enqueue(() => StartCoroutine(enumerator));
+    }
 }
