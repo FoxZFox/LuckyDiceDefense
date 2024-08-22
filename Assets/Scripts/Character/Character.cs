@@ -1,8 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -13,8 +12,7 @@ public class Character : MonoBehaviour
         Last,
         Close
     }
-    public int Level { get; private set; }
-    public int Cost { get; private set; }
+    public Action OnAttack;
     [Header("CharacterData")]
     [SerializeField] private CharacterData characterData;
     [SerializeField] private ElementType elementType;
@@ -24,15 +22,18 @@ public class Character : MonoBehaviour
     [SerializeField] private float skillChange = 0;
     [SerializeField] private AbilityData ability;
     [SerializeField] private TargetPriority priority;
+    [Header("TarGet Debug")]
     [SerializeField] private List<GameObject> enemys;
+    [SerializeField] private GameObject target;
     private CircleCollider2D circleCollider;
     private bool longRange;
     private float nextAttack = 0;
-    [SerializeField] private GameObject target;
+    private CharacterAnimation characterAnimation;
     private void Start()
     {
         Debug.Log("Base class");
         circleCollider = GetComponent<CircleCollider2D>();
+        characterAnimation = GetComponentInChildren<CharacterAnimation>();
         SetUpData();
     }
     public void SetUpData()
@@ -45,6 +46,8 @@ public class Character : MonoBehaviour
         ability = characterData.ability;
         nextAttack = attackRatio;
         circleCollider.radius = attackRange;
+        characterAnimation.SetUpAnimator(characterData.animatorController, characterData.AttackDuretionAnimation);
+
     }
     private void Update()
     {
@@ -63,6 +66,7 @@ public class Character : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         enemys.Remove(other.gameObject);
+        target = null;
     }
     private void Attack()
     {
@@ -70,6 +74,7 @@ public class Character : MonoBehaviour
         if (nextAttack <= 0 && target != null)
         {
             nextAttack = attackRatio;
+            OnAttack?.Invoke();
             if (CheckUseAbility())
             {
                 UseAbility();
@@ -112,7 +117,7 @@ public class Character : MonoBehaviour
     }
     private bool CheckUseAbility()
     {
-        float skillRng = Random.Range(0f, 100f);
+        float skillRng = UnityEngine.Random.Range(0f, 100f);
         if (skillRng <= skillChange)
         {
             return true;

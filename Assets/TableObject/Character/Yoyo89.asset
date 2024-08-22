@@ -19,9 +19,12 @@ MonoBehaviour:
   ItemNeded: 1
   cardData: {fileID: 621792935339380835, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
   placeHolderSpitre: {fileID: 0}
+  animatorController: {fileID: 0}
+  AttackDuretionAnimation: 0.267
   attackDamage: 1
   attackRatio: 1
   attackRange: 3
+  longRange: 0
   ability: {fileID: 3950099707583567183, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
   skillChange: 100
   costToBuild: 100

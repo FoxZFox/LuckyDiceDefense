@@ -12,6 +12,7 @@ public class CharacterData : ScriptableObject
     public CardData cardData;
     public Sprite placeHolderSpitre;
     public RuntimeAnimatorController animatorController;
+    public float AttackDuretionAnimation = 0.267f;
     [Header("Units and Build")]
     public float attackDamage = 1f;
     public float attackRatio = 1f;

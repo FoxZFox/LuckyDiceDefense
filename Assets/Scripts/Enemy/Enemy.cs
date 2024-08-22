@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : SerializedMonoBehaviour, IStatModifier
 {
     public Action OnHit;
-    GameWaypoints gameWaypoints;
+    private GameWaypoints gameWaypoints;
     [Header("Stat")]
-    [SerializeField] private int speed = 1;
+    [SerializeField] private float speed = 1;
     [SerializeField] private float maxHealth = 10f;
     [SerializeField] private float health = 10f;
     [SerializeField] private AbilityData ability;
@@ -23,9 +26,10 @@ public class Enemy : MonoBehaviour
     public float Health { get => health; }
     public float MaxHealth { get => maxHealth; }
     public float InComingDamage = 0;
-    public int Speed => speed;
+    public float Speed => speed;
+    [SerializeField] private Dictionary<Stat, float> modifyStats = new Dictionary<Stat, float>();
+    private List<Dictionary<Stat, float>> statModifyCOntainer = new List<Dictionary<Stat, float>>();
     //Stat Modifier
-    private float speedModifier = 0;
     void Start()
     {
         gameWaypoints = FindFirstObjectByType<GameWaypoints>();
@@ -109,9 +113,10 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        float totalspeed = speed + speedModifier;
-        if (totalspeed < 0) totalspeed = 0;
-        Vector3 nextMove = Vector3.MoveTowards(transform.position, currentPath, totalspeed * Time.deltaTime);
+        float minspeed = speed * 0.1f;
+        float total = Mathf.Clamp(speed + modifyStats[Stat.WalkSpeed], minspeed, speed);
+        // float totalspeed = speed + modifyStats[Stat.WalkSpeed];
+        Vector3 nextMove = Vector3.MoveTowards(transform.position, currentPath, total * Time.deltaTime);
         transform.position = nextMove;
 
     }
@@ -146,8 +151,32 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void ModifySpeed(float modify)
+    public void AddModifyStat(Dictionary<Stat, float> keyValuePairs, bool remove = false)
     {
-        speedModifier += modify;
+        Debug.Log("Modify");
+        foreach (var item in keyValuePairs)
+        {
+            if (!modifyStats.TryGetValue(item.Key, out float modifyvalue))
+            {
+                continue;
+            }
+            if (!remove)
+                modifyvalue += item.Value;
+            else
+                modifyvalue -= item.Value;
+            modifyStats[item.Key] = modifyvalue;
+        }
+    }
+
+    public IEnumerator ModifyDuration(Dictionary<Stat, float> keyValuePairs, bool percen, float duration)
+    {
+        if (!statModifyCOntainer.Contains(keyValuePairs))
+        {
+            statModifyCOntainer.Add(keyValuePairs);
+            AddModifyStat(keyValuePairs);
+            yield return new WaitForSeconds(duration);
+            AddModifyStat(keyValuePairs, true);
+            statModifyCOntainer.Remove(keyValuePairs);
+        }
     }
 }

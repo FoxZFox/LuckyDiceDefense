@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public abstract class AbilityData : ScriptableObject
+public abstract class AbilityData : SerializedScriptableObject
 {
     public enum AbilityType
     {
@@ -11,6 +12,8 @@ public abstract class AbilityData : ScriptableObject
         Debuff
     }
     public AbilityType abilityType;
+    public Dictionary<Stat, float> ModifyStat = new Dictionary<Stat, float>();
+    public bool Ispercen;
     [SerializeField] protected string abilityName;
     [SerializeField, TextArea] protected string abilityDetial;
     public abstract void ActiveAbilityToSelf(GameObject gameObject);

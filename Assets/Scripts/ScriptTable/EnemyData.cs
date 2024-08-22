@@ -7,7 +7,7 @@ public class EnemyData : ScriptableObject
 {
     public EnemyDataContainer container;
     public string enemyName;
-    public int walkSpeed;
+    public float walkSpeed;
     [Min(1f)] public float health;
     public ElementType elementType;
     public Sprite sprite;
