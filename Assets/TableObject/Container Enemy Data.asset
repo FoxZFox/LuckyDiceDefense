@@ -20,7 +20,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   animatorController: {fileID: 9100000, guid: a5d0398fa019ddc44a69d55b42bbea83, type: 2}
   abilityData: {fileID: -7645294968593119152, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
-  skillChange: 50
+  skillChange: 1
   enemyDetail: 
 --- !u!114 &11400000
 MonoBehaviour:

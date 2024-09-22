@@ -14,13 +14,14 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private Color halfHealth;
     [SerializeField] private Color minHealth;
 
-    private void Start()
+    private void Awake()
     {
         enemy.OnHit += UpdateHealthBar;
         healthBar.color = maxHealth;
     }
-    private void UpdateHealthBar()
+    public void UpdateHealthBar()
     {
+        Debug.Log("UpdateHealth");
         healthBar.fillAmount = enemy.Health / enemy.MaxHealth;
         if (healthBar.fillAmount > 0.7f)
         {

@@ -13,10 +13,13 @@ public class EnemyAnimation : MonoBehaviour
     public readonly int hurtState = Animator.StringToHash("Hurt");
     private float hurtDuration = 0.375f;
     private bool hurtTrigger;
-    private void Start()
+
+    private void Awake()
     {
+        Debug.Log("GetData");
         animator = GetComponent<Animator>();
         enemy.OnHit += () => { hurtTrigger = true; };
+        enemy.OnDie += (go) => { hurtTrigger = false; };
     }
     public void SetAnimationRuntimeController(RuntimeAnimatorController runtime)
     {

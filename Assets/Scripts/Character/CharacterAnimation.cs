@@ -17,7 +17,6 @@ public class CharacterAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
         character = GetComponentInParent<Character>();
         character.OnAttack += () => { attackTrigger = true; };
-
     }
 
     private void Update()

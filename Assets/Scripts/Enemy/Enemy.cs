@@ -7,8 +7,9 @@ using UnityEngine;
 
 public class Enemy : SerializedMonoBehaviour, IStatModifier
 {
-    public Action OnHit;
-    private GameWaypoints gameWaypoints;
+    [HideInInspector] public Action OnHit;
+    public Action<GameObject> OnDie;
+    public Action<GameObject> OnEndPath;
     [Header("Stat")]
     [SerializeField] private float speed = 1;
     [SerializeField] private float maxHealth = 10f;
@@ -18,7 +19,6 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
     [SerializeField] private Vector3[] paths;
     [SerializeField] private int currentPathIndex = 0;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [Header("Debug Only")]
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private EnemyAnimation enemyAnimation;
     private Vector3 currentPath;
@@ -30,14 +30,10 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
     [SerializeField] private Dictionary<Stat, float> modifyStats = new Dictionary<Stat, float>();
     private List<Dictionary<Stat, float>> statModifyCOntainer = new List<Dictionary<Stat, float>>();
     //Stat Modifier
-    void Start()
+    void Awake()
     {
-        gameWaypoints = FindFirstObjectByType<GameWaypoints>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         enemyAnimation = GetComponentInChildren<EnemyAnimation>();
-        paths = gameWaypoints.Waypoints;
-        currentPath = paths[currentPathIndex];
-        SetupData();
     }
 
     void Update()
@@ -45,18 +41,26 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
         Move();
         CheckFlipSprtie();
         CheckEndPath();
+        //Debug Zone
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(null, 1f);
         }
+#endif
     }
-    private void SetupData()
+    public void SetupData(EnemyData data, Vector3[] path)
     {
+        paths = path;
+        enemyData = data;
+        currentPathIndex = 0;
+        enemyAnimation.SetAnimationRuntimeController(enemyData.animatorController);
+        currentPath = paths[currentPathIndex];
         speed = enemyData.walkSpeed;
         maxHealth = enemyData.health;
         health = maxHealth;
-        enemyAnimation.SetAnimationRuntimeController(enemyData.animatorController);
         ability = enemyData.abilityData;
+        GetComponent<EnemyHealth>().UpdateHealthBar();
         skillChange = enemyData.skillChange;
     }
     public void TakeDamage(GameObject owner, float damage)
@@ -67,9 +71,10 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
             UseSkill(owner);
         }
         health -= InComingDamage;
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
+            OnDie?.Invoke(gameObject);
         }
         else if (health > 0)
         {
@@ -77,8 +82,8 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
             {
                 StartCoroutine(ChangeSpeed());
             }
+            OnHit?.Invoke();
         }
-        OnHit?.Invoke();
     }
 
     private void UseSkill(GameObject owner)
@@ -140,7 +145,7 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
             transform.position = currentPath;
             if (currentPathIndex == paths.Length - 1)
             {
-                currentPathIndex = 0;
+                OnEndPath?.Invoke(gameObject);
             }
             else
             {

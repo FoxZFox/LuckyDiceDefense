@@ -101,7 +101,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!1 &2438903971985731746
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -313,6 +313,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: OnHit
+      Entry: 6
+      Data: 
+    - Name: OnDie
       Entry: 6
       Data: 
     - Name: modifyStats
@@ -551,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e7a4eff980f274ba695a4c41153abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 3910969045014256960}
   enemy: {fileID: 5047935636705105633}
   currentState: 0
 --- !u!95 &3910969045014256960

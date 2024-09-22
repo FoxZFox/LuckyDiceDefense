@@ -1,35 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class GameSpawn : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefabs;
-    [SerializeField] private int spawnCount = 0;
+    [SerializeField] private EnemyPool enemyPool;
+    [SerializeField] private int enemyRemain = 0;
     [SerializeField] private int spawnMax = 0;
-    private int spawnRemain = 0;
     [SerializeField] private float cooldown = 0;
-
+    [SerializeField] private int spawnRemain = 0;
+    [SerializeField] private List<GameObject> enemyList;
+#if UNITY_EDITOR
+    [Header("Debug Only")]
+    [SerializeField] private EnemyData testData;
+#endif
+    private Coroutine onSpawn = null;
+    private GameWaypoints gameWaypoints;
+    private Vector3 spawnLocation;
     private void Start()
     {
+        gameWaypoints = GetComponent<GameWaypoints>();
+        enemyPool = GetComponent<EnemyPool>();
         spawnRemain = spawnMax;
-        currentCooldown = cooldown;
+        spawnLocation = gameWaypoints.Waypoints[0];
     }
 
-    private float currentCooldown;
+    [Button]
+    public void Spawn()
+    {
+        if (onSpawn == null)
+        {
+            spawnRemain = spawnMax;
+            onSpawn = StartCoroutine(SpawnEnemy());
+        }
+    }
+
     private void Update()
     {
-        currentCooldown -= Time.deltaTime;
-        if (currentCooldown <= 0)
-        {
-            currentCooldown = cooldown;
-            if (spawnCount < spawnMax)
-            {
-                Instantiate(enemyPrefabs);
-                spawnRemain--;
-                spawnCount++;
-            }
-        }
+        //Debug Zone
+#if UNITY_EDITOR
+#endif
+    }
 
+    private IEnumerator SpawnEnemy()
+    {
+        while (spawnRemain > 0)
+        {
+            GetEnemyFormPool();
+            spawnRemain--;
+            enemyRemain++;
+            yield return new WaitForSeconds(cooldown);
+        }
+        onSpawn = null;
+    }
+
+    private void GetEnemyFormPool()
+    {
+        var init = enemyPool.GetObject();
+        var enemy = init.GetComponent<Enemy>();
+        enemy.OnDie += ReturnObjectToPool;
+        enemy.OnEndPath += ReturnObjectToPool;
+        enemy.SetupData(testData, gameWaypoints.Waypoints);
+        init.transform.position = spawnLocation;
+        enemyList.Add(init);
+        init.SetActive(true);
+    }
+
+    private void ReturnObjectToPool(GameObject gameObject)
+    {
+        enemyList.Remove(gameObject);
+        enemyPool.ReturnPool(gameObject);
+        enemyRemain--;
+        gameObject.GetComponent<Enemy>().OnDie -= ReturnObjectToPool;
     }
 }

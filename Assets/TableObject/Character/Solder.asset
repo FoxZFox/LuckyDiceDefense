@@ -21,7 +21,7 @@ MonoBehaviour:
   placeHolderSpitre: {fileID: -2066536159, guid: 01acfc393dec52b44b16e203bbc520ad, type: 3}
   animatorController: {fileID: 9100000, guid: ad9f55d178db0f84e9f2b80997daa5ba, type: 2}
   AttackDuretionAnimation: 0.375
-  attackDamage: 1
+  attackDamage: 5
   attackRatio: 1
   attackRange: 4
   longRange: 0

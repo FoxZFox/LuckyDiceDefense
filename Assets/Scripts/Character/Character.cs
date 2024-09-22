@@ -47,7 +47,6 @@ public class Character : MonoBehaviour
         nextAttack = attackRatio;
         circleCollider.radius = attackRange;
         characterAnimation.SetUpAnimator(characterData.animatorController, characterData.AttackDuretionAnimation);
-
     }
     private void Update()
     {
