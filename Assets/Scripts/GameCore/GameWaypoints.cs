@@ -22,5 +22,4 @@ public class GameWaypoints : MonoBehaviour
             }
     }
 #endif
-
 }
