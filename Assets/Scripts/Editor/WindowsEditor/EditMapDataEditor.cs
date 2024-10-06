@@ -25,13 +25,14 @@ public class EditMapDataEditor : OdinMenuEditorWindow
 
     public class EditMapData
     {
-        [InlineEditor(objectFieldMode: InlineEditorObjectFieldModes.Boxed)]
+        [InlineEditor(objectFieldMode: InlineEditorObjectFieldModes.Boxed), AssetsOnly]
         public MapData mapData;
-
+        [ShowIf("@mapData != null")]
+        public Grid grid;
         [ShowIf("@mapData != null"), ButtonGroup()]
         private void LoadDataToMap()
         {
-            var gridObject = FindFirstObjectByType<Grid>().gameObject;
+            var gridObject = grid.gameObject;
             var i = gridObject.GetComponentsInChildren<Tilemap>();
             Debug.Log(i.Count());
             foreach (var item in i)
@@ -45,14 +46,16 @@ public class EditMapDataEditor : OdinMenuEditorWindow
                 GetTileData(item, data);
                 mapData.tileDataContainers.Add(data);
             }
+            AssetDatabase.SaveAssets();
         }
         [ShowIf("@mapData != null"), ButtonGroup()]
         private void ClearData()
         {
             mapData.tileDataContainers.Clear();
+            AssetDatabase.SaveAssets();
         }
 
-        [Button()]
+        [ShowIf("@mapData != null"), Button()]
         private void LogData()
         {
             foreach (var item in mapData.tileDataContainers)
@@ -70,6 +73,7 @@ public class EditMapDataEditor : OdinMenuEditorWindow
                 {
                     Vector3Int position = new Vector3Int(x + boundsInt.x, y + boundsInt.y, 0);
                     TileBase tileBase = tilemap.GetTile(position);
+                    Debug.Log(tileBase);
                     if (tileBase != null)
                     {
                         data.tileData.Add(tileBase);

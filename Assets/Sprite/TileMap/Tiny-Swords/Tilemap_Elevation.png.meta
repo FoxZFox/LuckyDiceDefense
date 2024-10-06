@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a420e428a4c727b44941e6905b52c87c
+guid: 6db518118b03853479bcda7b338a8740
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Orc_0
+      name: Tilemap_Elevation_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 500
-        width: 100
-        height: 100
+        y: 448
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd5b9b84656756442ad5c936227bf91c
-      internalID: 1562966130
+      spriteID: 103415ba411ca2546b6c7277912e238d
+      internalID: -220918066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_1
+      name: Tilemap_Elevation_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 500
-        width: 100
-        height: 100
+        x: 64
+        y: 448
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f65e688cf0c0c374b85e88056db5a986
-      internalID: -1401248739
+      spriteID: 003a0fc5f2f25334e90af49ee9f453be
+      internalID: -2093023673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_2
+      name: Tilemap_Elevation_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 500
-        width: 100
-        height: 100
+        x: 128
+        y: 448
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91d1c90b7261aa849b92ac3166e5ea78
-      internalID: 2073312769
+      spriteID: 2eba4a52a08a0504f986a658496613ed
+      internalID: -2126442377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_3
+      name: Tilemap_Elevation_3
       rect:
         serializedVersion: 2
-        x: 300
-        y: 500
-        width: 100
-        height: 100
+        x: 192
+        y: 448
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,62 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e23d7d0e4ccaa34c8f40e349ebb2611
-      internalID: 426138291
+      spriteID: 6fe5657062e1d8b449a77bc04a0d51e3
+      internalID: 268942424
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_4
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 500
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b09d3437fb255b42b84304b616f33a4
-      internalID: -947779133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_5
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 500
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6fd6050fb987c294b98ccb0c92ead4e1
-      internalID: -1466465445
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_6
+      name: Tilemap_Elevation_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
-        width: 100
-        height: 100
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc07fef80acd1e547991c71d10e86f7d
-      internalID: -1897847279
+      spriteID: 8eb77bd88df37dd4bb8ba25f3d35e572
+      internalID: -1888807620
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_7
+      name: Tilemap_Elevation_5
       rect:
         serializedVersion: 2
-        x: 100
-        y: 400
-        width: 100
-        height: 100
+        x: 64
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4053f9bfdb9faef46a5a9d97c7f87f8c
-      internalID: 1827824971
+      spriteID: d90b367ea2b9cea45bc22bddec1985d0
+      internalID: 436975316
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_8
+      name: Tilemap_Elevation_6
       rect:
         serializedVersion: 2
-        x: 200
-        y: 400
-        width: 100
-        height: 100
+        x: 128
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4b6523e55460324699458c1e5ab7ac5
-      internalID: -83014742
+      spriteID: 6aa93dbcc27919942a6d6d659b35e1ce
+      internalID: 1854951201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_9
+      name: Tilemap_Elevation_7
       rect:
         serializedVersion: 2
-        x: 300
-        y: 400
-        width: 100
-        height: 100
+        x: 192
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,104 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec4932cae32e21f478b310f822177221
-      internalID: 1931031233
+      spriteID: f258df081903fe54294ac166cc5de1dd
+      internalID: 594890932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_10
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 400
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5f56d769addfaff4cbd0c889e6129f08
-      internalID: -774900199
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_11
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 400
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b2e4f7e6c6ee4a4bb6434701ca40dd9
-      internalID: -1467309899
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_12
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 400
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 61cddebcf877a514592a8f356f4afc01
-      internalID: 1301810782
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_13
-      rect:
-        serializedVersion: 2
-        x: 700
-        y: 400
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc687e6bf58b52b45b8f86ed3758883c
-      internalID: -465294510
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_14
+      name: Tilemap_Elevation_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 300
-        width: 100
-        height: 100
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 491071151ffb0224e85b000726065df9
-      internalID: -1196795375
+      spriteID: 1a65f731ece75304299afde70d57ba7b
+      internalID: 210964033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_15
+      name: Tilemap_Elevation_9
       rect:
         serializedVersion: 2
-        x: 100
-        y: 300
-        width: 100
-        height: 100
+        x: 64
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 059454c19eb13394d88bce7cd80701f0
-      internalID: 435453957
+      spriteID: 5fc386027ca285a48af5951ffbb2b73b
+      internalID: -517561695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_16
+      name: Tilemap_Elevation_10
       rect:
         serializedVersion: 2
-        x: 200
-        y: 300
-        width: 100
-        height: 100
+        x: 128
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f10aac6f27783c648aa00a34412dfb0d
-      internalID: -1175022955
+      spriteID: 5ea3b194658af2641b37b4810ad517fd
+      internalID: 776212050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_17
+      name: Tilemap_Elevation_11
       rect:
         serializedVersion: 2
-        x: 300
-        y: 300
-        width: 100
-        height: 100
+        x: 192
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,62 +368,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41e3defbcaff7ca4a9b1ec301c21f7f3
-      internalID: -1443809749
+      spriteID: 7364e0cb2e9f2db4d83644bc525c66a2
+      internalID: 1832103837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_18
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 300
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e82ecba89041a4a4299ac14281c0ac77
-      internalID: 915738933
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_19
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 300
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac40a3c85e7e8444a864a1f00ed068e6
-      internalID: -488962851
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_20
+      name: Tilemap_Elevation_12
       rect:
         serializedVersion: 2
         x: 0
-        y: 200
-        width: 100
-        height: 100
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -557,20 +389,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d63867a87d96deb4a8462df085651a99
-      internalID: 2111313668
+      spriteID: eaaad55c655f28e4784f33a59681811d
+      internalID: 2077417138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_21
+      name: Tilemap_Elevation_13
       rect:
         serializedVersion: 2
-        x: 100
-        y: 200
-        width: 100
-        height: 100
+        x: 64
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -578,20 +410,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b3c51eb51052f746be057d3f1d22ec6
-      internalID: 879316217
+      spriteID: e501a5240e939fc46b50ad9817252b95
+      internalID: -1026162423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_22
+      name: Tilemap_Elevation_14
       rect:
         serializedVersion: 2
-        x: 200
-        y: 200
-        width: 100
-        height: 100
+        x: 128
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -599,20 +431,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b19e862ba53fdf4abbb46d7667ff081
-      internalID: -1170051340
+      spriteID: 8b37ab2ff35883042a86b8bcd45c1cff
+      internalID: -2145054840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_23
+      name: Tilemap_Elevation_15
       rect:
         serializedVersion: 2
-        x: 300
-        y: 200
-        width: 100
-        height: 100
+        x: 192
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -620,62 +452,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08cda0e1ac32eae4e921fb4e7004bc0f
-      internalID: 1721321387
+      spriteID: a2a32a9422aec97478186058a6aa892c
+      internalID: -583684303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_24
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 200
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8730a80a4c677c429e0c554e8c8d5ff
-      internalID: -354039137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_25
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 200
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e30996c78c302f54da8998bfedb5ef8d
-      internalID: 1910647329
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_26
+      name: Tilemap_Elevation_16
       rect:
         serializedVersion: 2
         x: 0
-        y: 100
-        width: 100
-        height: 100
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -683,20 +473,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36bfba684da18aa4c9c5946f0c84daa1
-      internalID: 942987375
+      spriteID: 19cad480fe6f9e14f98c87633cf2b556
+      internalID: -1390676910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_27
+      name: Tilemap_Elevation_17
       rect:
         serializedVersion: 2
-        x: 100
-        y: 100
-        width: 100
-        height: 100
+        x: 64
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -704,20 +494,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b00292afaf98734495aef3885a363d5
-      internalID: 890445677
+      spriteID: c9524ef39ad1ef74b9b7a4fea73d6c14
+      internalID: 1321282728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_28
+      name: Tilemap_Elevation_18
       rect:
         serializedVersion: 2
-        x: 200
-        y: 100
-        width: 100
-        height: 100
+        x: 128
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -725,20 +515,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44f2f048ca278da4493ed90211faa817
-      internalID: -884441747
+      spriteID: 49cfbc4bb78cd0147a25ab5fd8d4d802
+      internalID: 21630793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_29
+      name: Tilemap_Elevation_19
       rect:
         serializedVersion: 2
-        x: 300
-        y: 100
-        width: 100
-        height: 100
+        x: 192
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -746,20 +536,104 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0edbbe337631d01488cc299e7a65fc35
-      internalID: -1237310704
+      spriteID: 97ce4c20523284b43a78e1c5d9070768
+      internalID: 791441370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_30
+      name: Tilemap_Elevation_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e34cd4951020d114a9480e6871232233
+      internalID: -1869164294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tilemap_Elevation_21
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3b4556e164699a4384d1dce57c4cae7
+      internalID: -520244000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tilemap_Elevation_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c7355408ad1fd942b8c45054862ec46
+      internalID: 1427319397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tilemap_Elevation_23
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b8593592c1ce9c40a2e550076f4be17
+      internalID: -2037223867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tilemap_Elevation_24
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 100
-        height: 100
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -767,20 +641,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac403a30cef85be438b300aefca86e9c
-      internalID: 1061979422
+      spriteID: f2317da5b983b034c93fef96ec136f4e
+      internalID: -1229567110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_31
+      name: Tilemap_Elevation_25
       rect:
         serializedVersion: 2
-        x: 100
+        x: 64
         y: 0
-        width: 100
-        height: 100
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -788,20 +662,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a7d03903fc6cc743a9432bb08ebe5a0
-      internalID: -298012747
+      spriteID: 72cde143836f2b0489cdc216219ac035
+      internalID: -137500447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_32
+      name: Tilemap_Elevation_26
       rect:
         serializedVersion: 2
-        x: 200
+        x: 128
         y: 0
-        width: 100
-        height: 100
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -809,20 +683,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61d5da6b9db2b8a4790efc405eb9726b
-      internalID: 1419173241
+      spriteID: 449cb5c8240c51e4990f1be36bdc75b1
+      internalID: -1658987315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc_33
+      name: Tilemap_Elevation_27
       rect:
         serializedVersion: 2
-        x: 300
+        x: 192
         y: 0
-        width: 100
-        height: 100
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -830,8 +704,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13a47e4b86c06234bbdfd33e2bc02b7f
-      internalID: -1779273712
+      spriteID: 94d6b7e66eb9feb4ab01e3510cb69d8e
+      internalID: -766851735
       vertices: []
       indices: 
       edges: []
@@ -847,40 +721,34 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Orc_0: 1562966130
-      Orc_1: -1401248739
-      Orc_10: -774900199
-      Orc_11: -1467309899
-      Orc_12: 1301810782
-      Orc_13: -465294510
-      Orc_14: -1196795375
-      Orc_15: 435453957
-      Orc_16: -1175022955
-      Orc_17: -1443809749
-      Orc_18: 915738933
-      Orc_19: -488962851
-      Orc_2: 2073312769
-      Orc_20: 2111313668
-      Orc_21: 879316217
-      Orc_22: -1170051340
-      Orc_23: 1721321387
-      Orc_24: -354039137
-      Orc_25: 1910647329
-      Orc_26: 942987375
-      Orc_27: 890445677
-      Orc_28: -884441747
-      Orc_29: -1237310704
-      Orc_3: 426138291
-      Orc_30: 1061979422
-      Orc_31: -298012747
-      Orc_32: 1419173241
-      Orc_33: -1779273712
-      Orc_4: -947779133
-      Orc_5: -1466465445
-      Orc_6: -1897847279
-      Orc_7: 1827824971
-      Orc_8: -83014742
-      Orc_9: 1931031233
+      Tilemap_Elevation_0: -220918066
+      Tilemap_Elevation_1: -2093023673
+      Tilemap_Elevation_10: 776212050
+      Tilemap_Elevation_11: 1832103837
+      Tilemap_Elevation_12: 2077417138
+      Tilemap_Elevation_13: -1026162423
+      Tilemap_Elevation_14: -2145054840
+      Tilemap_Elevation_15: -583684303
+      Tilemap_Elevation_16: -1390676910
+      Tilemap_Elevation_17: 1321282728
+      Tilemap_Elevation_18: 21630793
+      Tilemap_Elevation_19: 791441370
+      Tilemap_Elevation_2: -2126442377
+      Tilemap_Elevation_20: -1869164294
+      Tilemap_Elevation_21: -520244000
+      Tilemap_Elevation_22: 1427319397
+      Tilemap_Elevation_23: -2037223867
+      Tilemap_Elevation_24: -1229567110
+      Tilemap_Elevation_25: -137500447
+      Tilemap_Elevation_26: -1658987315
+      Tilemap_Elevation_27: -766851735
+      Tilemap_Elevation_3: 268942424
+      Tilemap_Elevation_4: -1888807620
+      Tilemap_Elevation_5: 436975316
+      Tilemap_Elevation_6: 1854951201
+      Tilemap_Elevation_7: 594890932
+      Tilemap_Elevation_8: 210964033
+      Tilemap_Elevation_9: -517561695
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

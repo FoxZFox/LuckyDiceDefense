@@ -14,9 +14,11 @@ public class GameWaypointsEditor : Editor
             EditorGUI.BeginChangeCheck();
             Vector3 currentWaypoint = gameWaypoints.Waypoints[i];
             Vector3 newWayPoint = Handles.FreeMoveHandle(currentWaypoint, 0.7f, snap, Handles.SphereHandleCap);
-
-            newWayPoint.x = Mathf.Round(newWayPoint.x * 10f) / 10f;
-            newWayPoint.y = Mathf.Round(newWayPoint.y * 10f) / 10f;
+            // Debug.Log(newWayPoint);
+            newWayPoint.x = Mathf.Round(newWayPoint.x * 2f) / 2f;
+            newWayPoint.y = Mathf.Round(newWayPoint.y * 2f) / 2f;
+            // newWayPoint.x = Mathf.Round(newWayPoint.x);
+            // newWayPoint.y = Mathf.Round(newWayPoint.y);
             GUIStyle wayPoinIndex = new GUIStyle { fontStyle = FontStyle.Bold, fontSize = 14 };
             wayPoinIndex.normal.textColor = Color.green;
             Vector3 textPosition = (Vector3.up * 0.8f) + (Vector3.right * 0.45f);
