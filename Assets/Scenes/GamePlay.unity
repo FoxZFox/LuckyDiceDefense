@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridParent: {fileID: 621980754}
-  data: {fileID: 11400000, guid: c638fc4fdb358ac4596c9fed04c1eb5e, type: 2}
+  data: {fileID: 0}
   buildSpeed: 0.01
 --- !u!1 &621980754
 GameObject:
@@ -4575,7 +4575,7 @@ Tilemap:
       - {fileID: 1256582374, guid: 26a378d54fcf26e43b9639134176b539, type: 3}
       - {fileID: 824796038, guid: 26a378d54fcf26e43b9639134176b539, type: 3}
       - {fileID: 1904473667, guid: 26a378d54fcf26e43b9639134176b539, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 3, y: 1, z: 0}
