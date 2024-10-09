@@ -127,12 +127,12 @@ public class Character : MonoBehaviour
     {
 
         if (ability != null)
-            switch (ability.abilityType)
+            switch (ability.targetType)
             {
-                case AbilityData.AbilityType.Buff:
+                case AbilityTargetType.Self:
                     ability.ActiveAbilityToSelf(gameObject);
                     break;
-                case AbilityData.AbilityType.Debuff:
+                case AbilityTargetType.Target:
                     ability.ActiveAbilityToOther(target);
                     break;
             }

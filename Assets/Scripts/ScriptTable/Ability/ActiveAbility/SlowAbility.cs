@@ -16,11 +16,9 @@ public class SlowAbility : AbilityData
     {
         if (gameObject.TryGetComponent(out Enemy enemy))
         {
-            UnityMainThread.Instant.EnqueCorutine(enemy.ModifyDuration(ModifyStat, Ispercen, slowDuration));
+            StatModifier statModifier = new StatModifier(abilityName, ModifyStat, slowDuration, (v, r) => v + ModifyStat[r]);
+            enemy.Stats.Mediator.AddModifier(statModifier);
+            enemy.UpdateData();
         }
-    }
-    public override (string, string) GetAbilityData()
-    {
-        return (abilityName, abilityDetial);
     }
 }

@@ -5,11 +5,12 @@ using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : SerializedMonoBehaviour, IStatModifier
+public class Enemy : SerializedMonoBehaviour
 {
     [HideInInspector] public Action OnHit;
     public Action<GameObject> OnDie;
     public Action<GameObject> OnEndPath;
+    public Stats Stats { get; set; }
     [Header("Stat")]
     [SerializeField] private float speed = 1;
     [SerializeField] private float maxHealth = 10f;
@@ -27,13 +28,15 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
     public float MaxHealth { get => maxHealth; }
     public float InComingDamage = 0;
     public float Speed => speed;
-    [SerializeField] private Dictionary<Stat, float> modifyStats = new Dictionary<Stat, float>();
-    private List<Dictionary<Stat, float>> statModifyCOntainer = new List<Dictionary<Stat, float>>();
+    [Header("Debug")]
+    [SerializeField] bool loopLocation;
+    [SerializeField] AbilityData testAbility;
     //Stat Modifier
     void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         enemyAnimation = GetComponentInChildren<EnemyAnimation>();
+        Stats = new Stats(new StatMediator(), walkSpeed: speed, health: health);
     }
 
     void Update()
@@ -41,7 +44,8 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
         Move();
         CheckFlipSprtie();
         CheckEndPath();
-        //Debug Zone
+        Stats.Mediator.Update(Time.deltaTime);
+        //Update Debug Zone
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -49,6 +53,35 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
         }
 #endif
     }
+
+    private void OnEnable()
+    {
+        Stats.Mediator.OnUpdateData += UpdateData;
+    }
+
+    private void OnDisable()
+    {
+        Stats.Mediator.OnUpdateData -= UpdateData;
+    }
+
+    public void UpdateData()
+    {
+        speed = Stats.WalkSpeed;
+    }
+
+    private void Handle(StatModifier statModifier)
+    {
+
+    }
+
+#if UNITY_EDITOR
+    //Method Debug Zone
+    [Button]
+    private void TestAbility()
+    {
+        testAbility.ActiveAbilityToSelf(gameObject);
+    }
+#endif
     public void SetupData(EnemyData data, Vector3[] path)
     {
         paths = path;
@@ -62,6 +95,7 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
         ability = enemyData.abilityData;
         GetComponent<EnemyHealth>().UpdateHealthBar();
         skillChange = enemyData.skillChange;
+        Stats.UpdateData(walkSpeed: speed, health: health);
     }
     public void TakeDamage(GameObject owner, float damage)
     {
@@ -90,10 +124,10 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
     {
         switch (ability.abilityType)
         {
-            case AbilityData.AbilityType.Buff:
+            case AbilityType.Buff:
                 ability.ActiveAbilityToSelf(gameObject);
                 break;
-            case AbilityData.AbilityType.Debuff:
+            case AbilityType.Debuff:
                 ability.ActiveAbilityToOther(owner);
                 break;
         }
@@ -119,7 +153,7 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
     private void Move()
     {
         float minspeed = speed * 0.1f;
-        float total = Mathf.Clamp(speed + modifyStats[Stat.WalkSpeed], minspeed, speed);
+        float total = Mathf.Clamp(speed, minspeed, speed);
         // float totalspeed = speed + modifyStats[Stat.WalkSpeed];
         Vector3 nextMove = Vector3.MoveTowards(transform.position, currentPath, total * Time.deltaTime);
         transform.position = nextMove;
@@ -143,9 +177,16 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
         if (magnitude < 0.01f)
         {
             transform.position = currentPath;
-            if (currentPathIndex == paths.Length - 1)
+            if (currentPathIndex >= paths.Length - 1)
             {
-                OnEndPath?.Invoke(gameObject);
+                if (!loopLocation)
+                {
+                    OnEndPath?.Invoke(gameObject);
+                }
+                else
+                {
+                    currentPathIndex = 0;
+                }
             }
             else
             {
@@ -153,35 +194,6 @@ public class Enemy : SerializedMonoBehaviour, IStatModifier
             }
             lastPath = currentPath;
             currentPath = paths[currentPathIndex];
-        }
-    }
-
-    public void AddModifyStat(Dictionary<Stat, float> keyValuePairs, bool remove = false)
-    {
-        Debug.Log("Modify");
-        foreach (var item in keyValuePairs)
-        {
-            if (!modifyStats.TryGetValue(item.Key, out float modifyvalue))
-            {
-                continue;
-            }
-            if (!remove)
-                modifyvalue += item.Value;
-            else
-                modifyvalue -= item.Value;
-            modifyStats[item.Key] = modifyvalue;
-        }
-    }
-
-    public IEnumerator ModifyDuration(Dictionary<Stat, float> keyValuePairs, bool percen, float duration)
-    {
-        if (!statModifyCOntainer.Contains(keyValuePairs))
-        {
-            statModifyCOntainer.Add(keyValuePairs);
-            AddModifyStat(keyValuePairs);
-            yield return new WaitForSeconds(duration);
-            AddModifyStat(keyValuePairs, true);
-            statModifyCOntainer.Remove(keyValuePairs);
         }
     }
 }

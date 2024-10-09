@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
-public class ReduceDamageAbility : AbilityData
+public class TestAbilityEnemy : AbilityData
 {
-    [SerializeField, Range(0f, 100f)] private float reducePercen;
+    [SerializeField] private float duration;
     public override void ActiveAbilityToOther(GameObject gameObject)
     {
         throw new System.NotImplementedException();
     }
+
     public override void ActiveAbilityToSelf(GameObject gameObject)
     {
         if (gameObject.TryGetComponent(out Enemy enemy))
         {
-            float incomdamage = enemy.InComingDamage;
-            incomdamage -= Mathf.Round(incomdamage * reducePercen / 100f);
-            enemy.InComingDamage = incomdamage;
-            Debug.Log("ReduceDamage");
+            StatModifier statModifier = new StatModifier(abilityName, ModifyStat, duration, (v, r) => v + ModifyStat[r]);
+            enemy.Stats.Mediator.AddModifier(statModifier);
+            enemy.UpdateData();
         }
     }
+
 }

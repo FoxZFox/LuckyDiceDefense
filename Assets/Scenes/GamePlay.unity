@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &260073602
 Grid:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   - {x: 8.5, y: 7.5, z: 0}
   - {x: 8.5, y: -2.5, z: 0}
   - {x: -8.5, y: -2.5, z: 0}
-  - {x: -8.5, y: -8, z: 0}
+  - {x: -8.5, y: -8.5, z: 0}
 --- !u!114 &580637499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPool: {fileID: 0}
   enemyRemain: 0
-  spawnMax: 10
+  spawnMax: 1
   cooldown: 1
   spawnRemain: 0
   enemyList: []
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridParent: {fileID: 621980754}
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: e3a55973a367f304da3bd61f557689b3, type: 2}
   buildSpeed: 0.01
 --- !u!1 &621980754
 GameObject:
@@ -378,7 +378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &621980755
 Grid:
   m_ObjectHideFlags: 0
@@ -495,11 +495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101424404706551147, guid: 7e6144ca64cb877498a5c5793e00269f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.16
+      value: 6.53
       objectReference: {fileID: 0}
     - target: {fileID: 3101424404706551147, guid: 7e6144ca64cb877498a5c5793e00269f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.72
+      value: -4.3
       objectReference: {fileID: 0}
     - target: {fileID: 3101424404706551147, guid: 7e6144ca64cb877498a5c5793e00269f, type: 3}
       propertyPath: m_LocalPosition.z

@@ -9,7 +9,7 @@ public class AbilityDataContainerEditor : Editor
 {
     private string abilityName = "";
     bool deleteSide = false;
-    AbilityData.AbilityType at;
+    AbilityType at;
     private Type[] abilityClass;
     private string[] abilityClassName;
     int abilitySelect = -1;
@@ -73,7 +73,7 @@ public class AbilityDataContainerEditor : Editor
         EditorGUILayout.LabelField("Name", GUILayout.Width(40));
         abilityName = EditorGUILayout.TextField(abilityName);
         EditorGUILayout.LabelField("Type", GUILayout.Width(40));
-        at = (AbilityData.AbilityType)EditorGUILayout.EnumPopup(at);
+        at = (AbilityType)EditorGUILayout.EnumPopup(at);
         EditorGUILayout.LabelField("Class", GUILayout.Width(40));
         abilitySelect = EditorGUILayout.Popup(abilitySelect, abilityClassName);
         EditorGUILayout.EndHorizontal();

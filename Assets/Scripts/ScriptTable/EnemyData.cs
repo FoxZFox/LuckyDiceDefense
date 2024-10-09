@@ -31,7 +31,6 @@ public class EnemyData : ScriptableObject
             enemyName = n;
             name = n;
         }
-
     }
 
 #endif
