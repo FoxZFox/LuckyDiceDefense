@@ -47,12 +47,14 @@ public class EditMapDataEditor : OdinMenuEditorWindow
                 mapData.tileDataContainers.Add(data);
             }
             AssetDatabase.SaveAssets();
+            EditorUtility.SetDirty(mapData);
         }
         [ShowIf("@mapData != null"), ButtonGroup()]
         private void ClearData()
         {
             mapData.tileDataContainers.Clear();
             AssetDatabase.SaveAssets();
+            EditorUtility.SetDirty(mapData);
         }
 
         [ShowIf("@mapData != null"), Button()]

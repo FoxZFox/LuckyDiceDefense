@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 
-// [InitializeOnLoad]
-public class GameRunner : Editor
+[InitializeOnLoad]
+public class GameRunner : MonoBehaviour
 {
     static GameRunner()
     {

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPool : ObjectPool
+public class CharacterPool : ObjectPool
 {
     public override void SetUp()
     {
-        container = new GameObject("$Enemy - Pool");
+        container = new GameObject("$Character - Pool");
         InitialisePool();
     }
 }

@@ -18,11 +18,18 @@ public enum AbilityTargetType
     TeamAoe,
     Self
 }
+
+public enum ModifyType
+{
+    Add,
+    Multi
+}
 public abstract class AbilityData : SerializedScriptableObject
 {
 
     public AbilityType abilityType;
     public AbilityTargetType targetType;
+    public ModifyType modifyType;
     public Dictionary<StatType, float> ModifyStat = new Dictionary<StatType, float>();
     public bool Ispercen;
     [SerializeField] protected string abilityName;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,17 +12,30 @@ public class Enemy : SerializedMonoBehaviour
     public Action<GameObject> OnDie;
     public Action<GameObject> OnEndPath;
     public Stats Stats { get; set; }
-    [Header("Stat")]
+    [TabGroup("Stats")]
     [SerializeField] private float speed = 1;
+    [TabGroup("Stats")]
     [SerializeField] private float maxHealth = 10f;
+    [TabGroup("Stats")]
     [SerializeField] private float health = 10f;
+    [TabGroup("Stats")]
     [SerializeField] private AbilityData ability;
+    [TabGroup("Stats")]
     [SerializeField] private float skillChange;
+    [TabGroup("Stats")]
     [SerializeField] private Vector3[] paths;
+    [TabGroup("Stats")]
     [SerializeField] private int currentPathIndex = 0;
+    [TabGroup("Stats")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [TabGroup("Stats")]
     [SerializeField] private EnemyData enemyData;
+    [TabGroup("Stats")]
     [SerializeField] private EnemyAnimation enemyAnimation;
+    [TabGroup("Min-Max Stats")]
+    [SerializeField] private float minSpeed;
+    [TabGroup("Min-Max Stats")]
+    [SerializeField] private float maxSpeed;
     private Vector3 currentPath;
     private Vector3 lastPath;
     public float Health { get => health; }
@@ -31,7 +45,7 @@ public class Enemy : SerializedMonoBehaviour
     [Header("Debug")]
     [SerializeField] bool loopLocation;
     [SerializeField] AbilityData testAbility;
-    //Stat Modifier
+
     void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -66,7 +80,7 @@ public class Enemy : SerializedMonoBehaviour
 
     public void UpdateData()
     {
-        speed = Stats.WalkSpeed;
+        speed = Mathf.Clamp(Stats.WalkSpeed, minSpeed, maxSpeed);
     }
 
     private void Handle(StatModifier statModifier)
@@ -96,6 +110,8 @@ public class Enemy : SerializedMonoBehaviour
         GetComponent<EnemyHealth>().UpdateHealthBar();
         skillChange = enemyData.skillChange;
         Stats.UpdateData(walkSpeed: speed, health: health);
+        minSpeed = speed * 0.1f;
+        maxSpeed = speed * 2.5f;
     }
     public void TakeDamage(GameObject owner, float damage)
     {
@@ -152,10 +168,8 @@ public class Enemy : SerializedMonoBehaviour
 
     private void Move()
     {
-        float minspeed = speed * 0.1f;
-        float total = Mathf.Clamp(speed, minspeed, speed);
         // float totalspeed = speed + modifyStats[Stat.WalkSpeed];
-        Vector3 nextMove = Vector3.MoveTowards(transform.position, currentPath, total * Time.deltaTime);
+        Vector3 nextMove = Vector3.MoveTowards(transform.position, currentPath, speed * Time.deltaTime);
         transform.position = nextMove;
 
     }

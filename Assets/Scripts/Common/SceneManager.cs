@@ -10,7 +10,8 @@ public class SceneManager : MonoBehaviour
     {
         login,
         mainmenu,
-        gacha
+        gacha,
+        gameplay
     }
     [SerializeField] private SceneStruct[] sceneStructs;
     private Dictionary<sceneName, string> sceneDic;

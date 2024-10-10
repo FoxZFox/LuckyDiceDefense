@@ -18,10 +18,10 @@ public class GameSpawn : MonoBehaviour
     private Coroutine onSpawn = null;
     private GameWaypoints gameWaypoints;
     private Vector3 spawnLocation;
-    private void Start()
+    public void SetUp(EnemyPool enemyPool, GameWaypoints gameWaypoints)
     {
-        gameWaypoints = GetComponent<GameWaypoints>();
-        enemyPool = GetComponent<EnemyPool>();
+        this.enemyPool = enemyPool;
+        this.gameWaypoints = gameWaypoints;
         spawnRemain = spawnMax;
         spawnLocation = gameWaypoints.Waypoints[0];
     }

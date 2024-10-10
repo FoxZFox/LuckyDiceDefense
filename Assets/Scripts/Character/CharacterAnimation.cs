@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
     private Character character;
-    private Animator animator;
+    [SerializeField] private Animator animator;
     private float lockedTill;
     public readonly int idleState = Animator.StringToHash("Idle");
     public readonly int attckState = Animator.StringToHash("Attack");
@@ -25,8 +25,16 @@ public class CharacterAnimation : MonoBehaviour
     }
     public void SetUpAnimator(RuntimeAnimatorController runtimeAnimatorController, float duration)
     {
-        animator.runtimeAnimatorController = runtimeAnimatorController;
-        attackDuration = duration;
+        try
+        {
+            animator.runtimeAnimatorController = runtimeAnimatorController;
+            attackDuration = duration;
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log($"SetUpAnimator Error: {e.Message}");
+        }
+
     }
 
     private void PlayAnimation()

@@ -48,6 +48,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   abilityType: 0
+  targetType: 0
+  modifyType: 0
   Ispercen: 0
   abilityName: IronSkin
   abilityDetial: 
@@ -101,7 +103,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 4
-      Data: 6
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -112,6 +114,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   abilityType: 2
+  targetType: 0
+  modifyType: 0
   Ispercen: 0
   abilityName: Test
   abilityDetial: 
@@ -182,7 +186,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 4
-      Data: -2
+      Data: -5
     - Name: 
       Entry: 8
       Data: 
@@ -193,8 +197,10 @@ MonoBehaviour:
       Entry: 8
       Data: 
   abilityType: 2
+  targetType: 1
+  modifyType: 0
   Ispercen: 0
   abilityName: FrozeTy
-  abilityDetial: Freeze enemy 2 second
-  slowDuration: 5
+  abilityDetial: SlowEnemy enemy 2 second
+  slowDuration: 2
   isForst: 0

@@ -9,19 +9,49 @@ public class DrawMap : MonoBehaviour
     [SerializeField] private GameObject gridParent;
     [SerializeField] private MapData data;
     [SerializeField] private float buildSpeed = 0.2f;
+    [SerializeField] private TileBase emptyBase;
+    [SerializeField] private Tilemap emptyTile;
 
+    private void Start()
+    {
+        GameManager.GetInstant().BuildManager.OnBuild += DrawEmptyTile;
+    }
+    public void SetUp(MapData mapData)
+    {
+        data = mapData;
+    }
 
     [ButtonGroup()]
-    void CreateTileInstant()
+    public void CreateTileInstant()
     {
         StartCoroutine(DrawTile());
     }
     [ButtonGroup()]
-    void ResetTile()
+    public void ResetTile()
     {
         for (int i = 0; i < gridParent.transform.childCount; i++)
         {
             Destroy(gridParent.transform.GetChild(i).gameObject);
+        }
+    }
+
+    public void DrawEmptyTile(Vector3 position, CharacterData _)
+    {
+        var pos = emptyTile.WorldToCell(position);
+        var tile = emptyTile.GetTile(pos);
+        if (tile == null)
+        {
+            emptyTile.SetTile(pos, emptyBase);
+        }
+    }
+
+    public void RemoveEmptyTile(Character data)
+    {
+        var pos = emptyTile.WorldToCell(data.transform.position);
+        var tile = emptyTile.GetTile(pos);
+        if (tile == emptyBase)
+        {
+            emptyTile.SetTile(pos, null);
         }
     }
 
@@ -44,19 +74,9 @@ public class DrawMap : MonoBehaviour
                 tile.SetTile(data.positionData[i], data.tileData[i]);
                 yield return new WaitForSeconds(buildSpeed);
             }
-            if (data.haveGameobjet)
-            {
-                foreach (var i in data.objectDatas)
-                {
-                    foreach (var j in i.positions)
-                    {
-                        yield return new WaitForSeconds(buildSpeed);
-                        var objectSpawn = Instantiate(i.gameObject, j, Quaternion.identity);
-                        objectSpawn.transform.parent = instant.transform;
-                    }
-                }
-            }
+            if (data.name == "CantBuildArea") emptyTile = tile;
         }
-
+        GameManager gameManager = GameManager.GetInstant();
+        gameManager.SetStage(StageType.Prepare);
     }
 }

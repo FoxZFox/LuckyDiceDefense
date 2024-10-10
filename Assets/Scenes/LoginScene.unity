@@ -1008,6 +1008,8 @@ MonoBehaviour:
     asset: MainMenu
   - sceneName: 2
     asset: Gacha
+  - sceneName: 3
+    asset: GamePlay
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

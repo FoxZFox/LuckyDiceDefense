@@ -7,6 +7,7 @@ public class PlayerData : MonoBehaviour
     public static PlayerData Instant;
     [SerializeField] private int gold = 0;
     [SerializeField] private int gem = 0;
+    [SerializeField] private List<CharacterData> loadOut;
     public int Gold => gold;
     public int Gem => gem;
 
@@ -31,5 +32,14 @@ public class PlayerData : MonoBehaviour
     public void SetGem(int data)
     {
         gem = (gem - data) <= 0 ? 0 : gem - data;
+    }
+
+    public CharacterData GetLoadOutData(int index)
+    {
+        if (index + 1 > loadOut.Count)
+        {
+            return null;
+        }
+        return loadOut[index];
     }
 }

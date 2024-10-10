@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,12 @@ public class TestAbilityEnemy : AbilityData
     {
         if (gameObject.TryGetComponent(out Enemy enemy))
         {
-            StatModifier statModifier = new StatModifier(abilityName, ModifyStat, duration, (v, r) => v + ModifyStat[r]);
+            StatModifier statModifier = modifyType switch
+            {
+                ModifyType.Add => new StatModifier(abilityName, ModifyStat, duration, (v, r) => v + ModifyStat[r]),
+                ModifyType.Multi => new StatModifier(abilityName, ModifyStat, duration, (v, r) => v * ModifyStat[r]),
+                _ => throw new ArgumentOutOfRangeException()
+            };
             enemy.Stats.Mediator.AddModifier(statModifier);
             enemy.UpdateData();
         }
