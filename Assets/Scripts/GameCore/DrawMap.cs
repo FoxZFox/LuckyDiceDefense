@@ -16,7 +16,7 @@ public class DrawMap : MonoBehaviour
 
     private void Start()
     {
-        GameManager.GetInstant().BuildManager.OnBuild += DrawEmptyTile;
+        GameManager.GetInstant().BuildManager.OnBuildCharacter += DrawEmptyTile;
     }
     public void SetUp(MapData mapData)
     {

@@ -5,9 +5,11 @@ using UnityEngine;
 public class BuildCharacter : MonoBehaviour
 {
     [SerializeField] private CharacterPool characterPool;
+    private GameManager gameManager;
     private void Start()
     {
-        GameManager.GetInstant().BuildManager.OnBuild += CreateCharacterOnCell;
+        gameManager = GameManager.GetInstant();
+        gameManager.BuildManager.OnBuildCharacter += CreateCharacterOnCell;
     }
 
     private void CreateCharacterOnCell(Vector3 position, CharacterData characterData)
@@ -15,7 +17,7 @@ public class BuildCharacter : MonoBehaviour
         var init = characterPool.GetObject();
         var character = init.GetComponent<Character>();
         character.OnSell += ReturnObjectToPool;
-        character.OnSell += GameManager.GetInstant().Drawmap.RemoveEmptyTile;
+        character.OnSell += gameManager.DrawMap.RemoveEmptyTile;
         character.SetUpData(characterData);
         init.transform.position = position;
         init.SetActive(true);
@@ -25,6 +27,6 @@ public class BuildCharacter : MonoBehaviour
     {
         characterPool.ReturnPool(character.gameObject);
         character.OnSell -= ReturnObjectToPool;
-        character.OnSell -= GameManager.GetInstant().Drawmap.RemoveEmptyTile;
+        character.OnSell -= gameManager.DrawMap.RemoveEmptyTile;
     }
 }

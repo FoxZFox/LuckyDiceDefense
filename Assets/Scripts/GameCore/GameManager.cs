@@ -9,19 +9,21 @@ public class GameManager : MonoBehaviour
     private static GameManager instant;
 
     [BoxGroup("Utility")]
-    [SerializeField] private DrawMap drawMap;
+    [SerializeField] public DrawMap DrawMap { get; private set; }
     [BoxGroup("Utility")]
-    [SerializeField] private EnemyPool enemyPool;
+    [SerializeField] public EnemyPool EnemyPool { get; private set; }
     [BoxGroup("Utility")]
-    [SerializeField] private CharacterPool characterPool;
+    [SerializeField] public CharacterPool CharacterPool { get; private set; }
     [BoxGroup("Utility")]
-    [SerializeField] private GameSpawn gameSpawn;
+    [SerializeField] public GameSpawn GameSpawn { get; private set; }
     [BoxGroup("Utility")]
-    [SerializeField] private GameWaypoints gameWaypoints;
+    [SerializeField] public GameWaypoints GameWaypoints { get; private set; }
     [BoxGroup("Utility")]
-    [SerializeField] private BuildManager buildManager;
+    [SerializeField] public BuildManager BuildManager { get; private set; }
     [BoxGroup("Utility")]
-    [SerializeField] private UIGamePlaySystem uiSystem;
+    [SerializeField] public UIGamePlaySystem UiSystem { get; private set; }
+    [BoxGroup("Utility")]
+    [SerializeField] public DiceManager DiceManager { get; private set; }
     [BoxGroup("Data")]
     [ShowInInspector] public StageType StageType { get; private set; }
     [BoxGroup("Data")]
@@ -30,10 +32,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject draftile;
     [SerializeField] private GameObject maptile;
 #endif
-    public BuildManager BuildManager => buildManager;
-    public DrawMap Drawmap => drawMap;
-    public int DiceRollCount { get; private set; }
-    public int DicePoint { get; private set; }
+    [ShowInInspector, ReadOnly] public int DiceRollCount { get; private set; }
+    [ShowInInspector, ReadOnly] public int DicePoint { get; private set; }
     private void Awake()
     {
         if (instant == null)
@@ -42,7 +42,8 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
             draftile.SetActive(false);
             maptile.SetActive(true);
-            uiSystem.SetUIPosition();
+            UiSystem.SetUIPosition();
+            DiceRollCount += 3;
 #endif
         }
         else
@@ -54,13 +55,19 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.Instant.OnSceneLoaded += OnSceneLoaded;
-        drawMap.OnDrawMap += OnDrawMapComplete;
+        DrawMap.OnDrawMap += OnDrawMapComplete;
+        DiceManager.OnRiceRollStart += OnDiceRollStart;
+        DiceManager.OnDiceRollEnd += OnDiceRollComplete;
+        BuildManager.OnBuildCharacter += OnBuildCharacterComplete;
     }
 
     private void OnDisable()
     {
         SceneManager.Instant.OnSceneLoaded -= OnSceneLoaded;
-        drawMap.OnDrawMap -= OnDrawMapComplete;
+        DrawMap.OnDrawMap -= OnDrawMapComplete;
+        DiceManager.OnRiceRollStart -= OnDiceRollStart;
+        DiceManager.OnDiceRollEnd -= OnDiceRollComplete;
+        BuildManager.OnBuildCharacter -= OnBuildCharacterComplete;
     }
 
     private void OnSceneLoaded(SceneManager.sceneName name)
@@ -74,25 +81,26 @@ public class GameManager : MonoBehaviour
     public void LoadGamePlayData()
     {
         instant = this;
-        drawMap = GetComponent<DrawMap>();
-        enemyPool = GetComponent<EnemyPool>();
-        gameSpawn = GetComponent<GameSpawn>();
-        gameWaypoints = GetComponent<GameWaypoints>();
-        buildManager = GetComponent<BuildManager>();
-        characterPool = GetComponent<CharacterPool>();
-        uiSystem = GetComponent<UIGamePlaySystem>();
+        DrawMap = GetComponent<DrawMap>();
+        EnemyPool = GetComponent<EnemyPool>();
+        GameSpawn = GetComponent<GameSpawn>();
+        GameWaypoints = GetComponent<GameWaypoints>();
+        BuildManager = GetComponent<BuildManager>();
+        CharacterPool = GetComponent<CharacterPool>();
+        UiSystem = GetComponent<UIGamePlaySystem>();
+        DiceManager = GetComponent<DiceManager>();
     }
 
     private void SetUp()
     {
-        gameSpawn.SetUp(enemyPool, gameWaypoints);
-        enemyPool.SetUp();
-        characterPool.SetUp();
-        drawMap.SetUp(map);
+        GameSpawn.SetUp(EnemyPool, GameWaypoints);
+        EnemyPool.SetUp();
+        CharacterPool.SetUp();
+        DrawMap.SetUp(map);
         DicePoint = 0;
         DiceRollCount = 3;
         StageType = StageType.BuildMap;
-        drawMap.CreateTileInstant();
+        DrawMap.CreateTileInstant();
     }
 
     public static GameManager GetInstant()
@@ -107,7 +115,20 @@ public class GameManager : MonoBehaviour
 
     private void OnDrawMapComplete()
     {
-        uiSystem.FadeInUI();
+        UiSystem.FadeInUI();
+    }
+    private void OnDiceRollStart()
+    {
+        DiceRollCount -= 1;
+    }
+    private void OnDiceRollComplete(int value)
+    {
+        DicePoint += value;
+    }
+
+    private void OnBuildCharacterComplete(Vector3 _, CharacterData data)
+    {
+        DicePoint -= data.costToBuild;
     }
 }
 

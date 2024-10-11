@@ -34,6 +34,10 @@ public class InputManager : MonoBehaviour
         {
             return;
         }
+        if (data.costToBuild > GameManager.GetInstant().DicePoint)
+        {
+            return;
+        }
         buildManager.StartDrawBuildShadow(data);
         if (buildManager.InBuild)
         {

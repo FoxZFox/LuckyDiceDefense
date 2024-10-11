@@ -19,7 +19,7 @@ public class BuildManager : MonoBehaviour
     private bool inBuild = false;
     private bool canBuild = false;
     public bool InBuild => inBuild;
-    public Action<Vector3, CharacterData> OnBuild;
+    public Action<Vector3, CharacterData> OnBuildCharacter;
     [SerializeField] private CharacterData data;
     public void StartDrawBuildShadow(CharacterData characterData)
     {
@@ -39,12 +39,12 @@ public class BuildManager : MonoBehaviour
             MovePosition();
             if (Input.GetMouseButtonDown(0) && canBuild)
             {
+                Vector3 position = targetTransform.position;
+                OnBuildCharacter?.Invoke(position, data);
                 inBuild = false;
                 canBuild = false;
                 target.SetActive(false);
-                Vector3 position = targetTransform.position;
                 targetTransform.position = new Vector3(0, 10f, 0);
-                OnBuild?.Invoke(position, data);
                 GetComponent<InputManager>().ActiveButton();
             }
         }

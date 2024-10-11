@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class DiceManager : MonoBehaviour
 {
@@ -13,7 +15,9 @@ public class DiceManager : MonoBehaviour
     [TabGroup("Dice-Info")]
     [SerializeField] private Image dice2obj;
     [TabGroup("Dice-Info")]
-    [SerializeField] private bool isRollDice = false;
+    [SerializeField, ReadOnly] private bool isRollDice = false;
+    [TabGroup("Dice-Info")]
+    [SerializeField, Required] private Button rollButton;
     private Dictionary<Sprite, int> dicesValue = new Dictionary<Sprite, int>();
     [ShowInInspector] private CountDownTimer timer;
 
@@ -24,12 +28,16 @@ public class DiceManager : MonoBehaviour
     [TabGroup("Dice-Setting")]
     [SerializeField, Range(0f, 1f)] private float changeSpeed;
     int d1index, d2index;
-
+    public Action OnRiceRollStart;
+    public Action<int> OnDiceRollEnd;
+    private GameManager gameManager;
 
     private void Start()
     {
+        gameManager = GameManager.GetInstant();
         MapData();
         timer = new CountDownTimer(10);
+        rollButton.onClick.AddListener(OnClickRoll);
     }
 
     private void Update()
@@ -38,6 +46,17 @@ public class DiceManager : MonoBehaviour
         {
             timer.Tick(Time.deltaTime);
         }
+    }
+
+    private void OnClickRoll()
+    {
+        if (gameManager.DiceRollCount < 1)
+        {
+            return;
+        }
+        rollButton.interactable = false;
+        OnRiceRollStart?.Invoke();
+        RollDice();
     }
 
     private void MapData()
@@ -84,5 +103,21 @@ public class DiceManager : MonoBehaviour
         dice1obj.sprite = diceImage[d1index];
         dice2obj.sprite = diceImage[d2index];
         Debug.Log($"Dice1 : {dicesValue[dice1obj.sprite]} Dice2 : {dicesValue[dice2obj.sprite]}");
+        UpdateRollButton();
+        OnDiceRollEnd?.Invoke(dicesValue[dice1obj.sprite] + dicesValue[dice2obj.sprite]);
+    }
+
+    private void UpdateRollButton()
+    {
+        if (gameManager.DiceRollCount > 0)
+        {
+            rollButton.interactable = true;
+        }
+        else
+        {
+            rollButton.interactable = false;
+            gameManager.UiSystem.FadeOutRollDiceUI();
+        }
+
     }
 }
