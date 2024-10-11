@@ -15,19 +15,30 @@ public class Character : MonoBehaviour
     }
     public Action<Character> OnSell;
     public Action OnAttack;
-    [Header("CharacterData")]
+    [BoxGroup("CharacterData")]
     [SerializeField] private CharacterData characterData;
+    [BoxGroup("CharacterData")]
     [SerializeField] private ElementType elementType;
+    [BoxGroup("CharacterData")]
     [SerializeField] private float attackDamage = 0;
+    [BoxGroup("CharacterData")]
     [SerializeField] private float attackRatio = 0;
+    [BoxGroup("CharacterData")]
     [SerializeField] private float attackRange = 0;
+    [BoxGroup("CharacterData")]
     [SerializeField] private float skillChange = 0;
+    [BoxGroup("CharacterData")]
     [SerializeField] private AbilityData ability;
+    [BoxGroup("CharacterData")]
     [SerializeField] private TargetPriority priority;
-    [Header("TarGet Debug")]
+    [BoxGroup("TarGet Debug")]
     [SerializeField] private List<Enemy> enemys;
+    [BoxGroup("TarGet Debug")]
     [SerializeField] private Enemy target;
-    private CircleCollider2D circleCollider;
+    [BoxGroup("Component")]
+    [SerializeField] private CircleCollider2D circleCollider;
+    [BoxGroup("Component")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private bool longRange;
     private float nextAttack = 0;
     private CharacterAnimation characterAnimation;
@@ -70,6 +81,7 @@ public class Character : MonoBehaviour
     {
         FindEnemy();
         Attack();
+        LookAtTarget();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -101,6 +113,21 @@ public class Character : MonoBehaviour
                 return;
             }
             target.TakeDamage(gameObject, attackDamage);
+        }
+    }
+
+    private void LookAtTarget()
+    {
+        if (target != null)
+        {
+            if (target.transform.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
     }
     private void FindEnemy()

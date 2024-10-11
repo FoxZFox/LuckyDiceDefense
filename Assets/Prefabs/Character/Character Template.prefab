@@ -56,6 +56,8 @@ MonoBehaviour:
   priority: 2
   enemys: []
   target: {fileID: 0}
+  circleCollider: {fileID: 0}
+  spriteRenderer: {fileID: 6117309456794747246}
 --- !u!58 &8862031326011436487
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -29,6 +29,8 @@ public class EditMapDataEditor : OdinMenuEditorWindow
         public MapData mapData;
         [ShowIf("@mapData != null")]
         public Grid grid;
+        [ShowIf("@mapData != null")]
+        public GameWaypoints gameWaypoints;
         [ShowIf("@mapData != null"), ButtonGroup()]
         private void LoadDataToMap()
         {
@@ -46,6 +48,7 @@ public class EditMapDataEditor : OdinMenuEditorWindow
                 GetTileData(item, data);
                 mapData.tileDataContainers.Add(data);
             }
+            GetPathData(gameWaypoints.Waypoints);
             AssetDatabase.SaveAssets();
             EditorUtility.SetDirty(mapData);
         }
@@ -53,6 +56,7 @@ public class EditMapDataEditor : OdinMenuEditorWindow
         private void ClearData()
         {
             mapData.tileDataContainers.Clear();
+            mapData.Path.Clear();
             AssetDatabase.SaveAssets();
             EditorUtility.SetDirty(mapData);
         }
@@ -63,6 +67,14 @@ public class EditMapDataEditor : OdinMenuEditorWindow
             foreach (var item in mapData.tileDataContainers)
             {
                 Debug.Log(item.objectDatas.Count);
+            }
+        }
+
+        private void GetPathData(Vector3[] paths)
+        {
+            foreach (var item in paths)
+            {
+                mapData.Path.Add(item);
             }
         }
 

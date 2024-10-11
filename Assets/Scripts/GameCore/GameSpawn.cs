@@ -61,7 +61,9 @@ public class GameSpawn : MonoBehaviour
         var enemy = init.GetComponent<Enemy>();
         enemy.OnDie += ReturnObjectToPool;
         enemy.OnEndPath += ReturnObjectToPool;
+#if UNITY_EDITOR
         enemy.SetupData(testData, gameWaypoints.Waypoints);
+#endif
         init.transform.position = spawnLocation;
         enemyList.Add(init);
         init.SetActive(true);

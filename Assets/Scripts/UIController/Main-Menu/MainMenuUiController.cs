@@ -65,6 +65,6 @@ public class MainMenuUiController : MonoBehaviour
 
     public void OnClickPlay()
     {
-        SceneManager.Instant.LoadScene(SceneManager.sceneName.gameplay);
+        SceneManager.Instant.LoadSceneWithTransition(SceneManager.sceneName.gameplay, TransitionType.Circle);
     }
 }

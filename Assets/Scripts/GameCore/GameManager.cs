@@ -20,22 +20,54 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameWaypoints gameWaypoints;
     [BoxGroup("Utility")]
     [SerializeField] private BuildManager buildManager;
+    [BoxGroup("Utility")]
+    [SerializeField] private UIGamePlaySystem uiSystem;
     [BoxGroup("Data")]
     [ShowInInspector] public StageType StageType { get; private set; }
     [BoxGroup("Data")]
     [SerializeField] private MapData map;
+#if UNITY_EDITOR
+    [SerializeField] private GameObject draftile;
+    [SerializeField] private GameObject maptile;
+#endif
     public BuildManager BuildManager => buildManager;
     public DrawMap Drawmap => drawMap;
+    public int DiceRollCount { get; private set; }
+    public int DicePoint { get; private set; }
     private void Awake()
     {
         if (instant == null)
         {
-            //Delete This After Finish GamePlay Setup
             LoadGamePlayData();
+#if UNITY_EDITOR
+            draftile.SetActive(false);
+            maptile.SetActive(true);
+            uiSystem.SetUIPosition();
+#endif
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.Instant.OnSceneLoaded += OnSceneLoaded;
+        drawMap.OnDrawMap += OnDrawMapComplete;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.Instant.OnSceneLoaded -= OnSceneLoaded;
+        drawMap.OnDrawMap -= OnDrawMapComplete;
+    }
+
+    private void OnSceneLoaded(SceneManager.sceneName name)
+    {
+        if (name == SceneManager.sceneName.gameplay)
+        {
+            SetUp();
         }
     }
     [Button()]
@@ -48,8 +80,7 @@ public class GameManager : MonoBehaviour
         gameWaypoints = GetComponent<GameWaypoints>();
         buildManager = GetComponent<BuildManager>();
         characterPool = GetComponent<CharacterPool>();
-        SetUp();
-
+        uiSystem = GetComponent<UIGamePlaySystem>();
     }
 
     private void SetUp()
@@ -58,8 +89,10 @@ public class GameManager : MonoBehaviour
         enemyPool.SetUp();
         characterPool.SetUp();
         drawMap.SetUp(map);
+        DicePoint = 0;
+        DiceRollCount = 3;
         StageType = StageType.BuildMap;
-        // drawMap.CreateTileInstant();
+        drawMap.CreateTileInstant();
     }
 
     public static GameManager GetInstant()
@@ -70,6 +103,11 @@ public class GameManager : MonoBehaviour
     public void SetStage(StageType type)
     {
         StageType = type;
+    }
+
+    private void OnDrawMapComplete()
+    {
+        uiSystem.FadeInUI();
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Sirenix.OdinInspector;
+using System;
 
 public class DrawMap : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DrawMap : MonoBehaviour
     [SerializeField] private float buildSpeed = 0.2f;
     [SerializeField] private TileBase emptyBase;
     [SerializeField] private Tilemap emptyTile;
+    public Action OnDrawMap;
 
     private void Start()
     {
@@ -72,11 +74,14 @@ public class DrawMap : MonoBehaviour
             for (int i = 0; i < data.tileData.Count; i++)
             {
                 tile.SetTile(data.positionData[i], data.tileData[i]);
+                if (data.name == "CantBuildArea")
+                {
+                    continue;
+                }
                 yield return new WaitForSeconds(buildSpeed);
             }
             if (data.name == "CantBuildArea") emptyTile = tile;
         }
-        GameManager gameManager = GameManager.GetInstant();
-        gameManager.SetStage(StageType.Prepare);
+        OnDrawMap?.Invoke();
     }
 }

@@ -59,7 +59,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 989367469
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1712479925325935172
@@ -335,6 +335,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   enemyData: {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
   enemyAnimation: {fileID: 7307119556021946010}
+  minSpeed: 0
+  maxSpeed: 0
   InComingDamage: 0
   loopLocation: 1
   testAbility: {fileID: -7092152123671121581, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}

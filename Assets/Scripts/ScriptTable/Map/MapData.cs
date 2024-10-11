@@ -8,6 +8,7 @@ public class MapData : SerializedScriptableObject
 {
     public string mapName;
     public List<TileDataContainer> tileDataContainers = new List<TileDataContainer>();
+    public List<Vector3> Path = new List<Vector3>();
 #if UNITY_EDITOR
     public void Initialise(string n)
     {
