@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private CharacterData[] characterDatas;
     [SerializeField] private ItemData[] itemDatas;
     [SerializeField] private CardData[] cardDatas;
-    void Start()
+    void Awake()
     {
         if (instant == null)
         {
@@ -30,6 +30,30 @@ public class InventoryManager : MonoBehaviour
         InitializeCompaire();
     }
 
+    private void Start()
+    {
+        SaveManager.Instant.OnApplicationExit += UpdateData;
+    }
+
+    private void OnDisable()
+    {
+        SaveManager.Instant.OnApplicationExit -= UpdateData;
+    }
+
+    public void SetUpData(SaveData saveData)
+    {
+        inventoryItems = saveData.inventoryItemsData;
+        inventoryCharacters = saveData.inventoryCharactersData;
+        inventoryCards = saveData.inventoryCardsData;
+    }
+
+    private void UpdateData(SaveData saveData)
+    {
+        saveData.inventoryItemsData = inventoryItems;
+        saveData.inventoryCharactersData = inventoryCharacters;
+        saveData.inventoryCardsData = inventoryCards;
+    }
+
     private void InitializeCompaire()
     {
         compairItemIDAndCharID = new Dictionary<CardData, CharacterData>();
@@ -41,11 +65,34 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("MapDataSuccess");
     }
 
+    public bool CheckCardUpGrade(InventoryCharacter value, bool checkData = true)
+    {
+        var data = inventoryCharacters.FirstOrDefault(i => i == value);
+        var cardData = inventoryCards.FirstOrDefault(i => i.cardData == data.characterData.cardData);
+        int cardneed = data.Level * data.characterData.CardNeed;
+        if (checkData)
+        {
+            if (cardData.CardAmount >= cardneed) return true;
+        }
+        else
+        {
+            cardData.CardAmount -= cardneed;
+            data.Level += 1;
+            return true;
+        }
+        return false;
+    }
+
+    public int GetCardAmount(InventoryCharacter value)
+    {
+        var data = inventoryCharacters.FirstOrDefault(i => i == value);
+        var cardData = inventoryCards.FirstOrDefault(i => i.cardData == data.characterData.cardData);
+        return cardData.CardAmount;
+    }
     private void Update()
     {
         //In the future change it to load only click on the inventory and first on gameload
         CheckCardOwned();
-        // CheckSpawnCard();
     }
     private void CheckCardOwned()
     {
@@ -131,6 +178,7 @@ public class InventoryCard
 public class InventoryCharacter
 {
     public int CharacterID;
+    public int Star;
     public CharacterData characterData;
     public int Level;
 
@@ -138,6 +186,7 @@ public class InventoryCharacter
     {
         characterData = data;
         CharacterID = characterData.CharacterID;
-        Level = 0;
+        Star = data.Star;
+        Level = 1;
     }
 }

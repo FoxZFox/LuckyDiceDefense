@@ -15,6 +15,8 @@ public class DiceManager : MonoBehaviour
     [TabGroup("Dice-Info")]
     [SerializeField] private Image dice2obj;
     [TabGroup("Dice-Info")]
+    [SerializeField] private Image diceCountObj;
+    [TabGroup("Dice-Info")]
     [SerializeField, ReadOnly] private bool isRollDice = false;
     [TabGroup("Dice-Info")]
     [SerializeField, Required] private Button rollButton;
@@ -30,14 +32,25 @@ public class DiceManager : MonoBehaviour
     int d1index, d2index;
     public Action OnRiceRollStart;
     public Action<int> OnDiceRollEnd;
+
+    public Action<int> OnDiceCountEnd;
     private GameManager gameManager;
 
-    private void Start()
+    private void Awake()
     {
         gameManager = GameManager.GetInstant();
         MapData();
-        timer = new CountDownTimer(10);
         rollButton.onClick.AddListener(OnClickRoll);
+    }
+
+    private void OnEnable()
+    {
+        gameManager.UiSystem.OnFadeInDiceCount += OnFadeDiceCountComeplete;
+    }
+
+    private void OnDisable()
+    {
+        gameManager.UiSystem.OnFadeInDiceCount -= OnFadeDiceCountComeplete;
     }
 
     private void Update()
@@ -69,21 +82,49 @@ public class DiceManager : MonoBehaviour
     [Button()]
     public void RollDice()
     {
-        if (isRollDice)
+        if (isRollDice || gameManager.StageType != StageType.Prepare)
         {
             return;
         }
+        timer = new CountDownTimer(Random.Range(minDiceTime, maxDiceTime));
         isRollDice = true;
         timer.OnTimeStop += () =>
         {
             isRollDice = false;
         };
         timer.Start();
-        timer.Reset(Random.Range(minDiceTime, maxDiceTime));
         d1index = Random.Range(0, 6);
         d2index = Random.Range(0, 6);
         Debug.Log($"Lock Dice1 : {d1index} Dice2: {d2index}");
         StartCoroutine(RollDiceAnimation());
+    }
+
+    private void OnFadeDiceCountComeplete()
+    {
+        if (isRollDice)
+        {
+            return;
+        }
+        timer = new CountDownTimer(Random.Range(minDiceTime, maxDiceTime));
+        isRollDice = true;
+        timer.OnTimeStop += () =>
+        {
+            isRollDice = false;
+        };
+        timer.Start();
+        StartCoroutine(RollDiceCountAnimation());
+    }
+
+    private IEnumerator RollDiceCountAnimation()
+    {
+        while (isRollDice)
+        {
+            int diceIndex = Random.Range(0, 6);
+            diceCountObj.sprite = diceImage[diceIndex];
+            yield return new WaitForSeconds(changeSpeed);
+        }
+        yield return new WaitForSeconds(0.5f);
+        OnDiceCountEnd?.Invoke(dicesValue[diceCountObj.sprite]);
     }
 
     private IEnumerator RollDiceAnimation()

@@ -1,38 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class CharacterCard : MonoBehaviour
 {
     [SerializeField] private GameObject[] starShow;
+    [SerializeField] private InventoryCharacter characterData;
+    [SerializeField] private TMP_Text levelTxt;
     private int characterCardID = 0;
     public int CharacterCardID => characterCardID;
-    private CharacterData characterData;
 
     private void Start()
     {
-        MatchStar();
-    }
 
+    }
     private void MatchStar()
     {
-        for (int i = starShow.Count(); i > characterData.Star; i--)
+        foreach (var item in starShow)
         {
-            starShow[i - 1].SetActive(false);
+            item.SetActive(false);
+        }
+        for (int i = 0; i < characterData.Star; i++)
+        {
+            starShow[i].SetActive(true);
         }
     }
     public void OnCardClick()
     {
         InventoryUiController ic = FindFirstObjectByType<InventoryUiController>();
         ic.SetActivePanel(true);
-        ic.SetCharacterDetailText(characterData);
+        ic.SetCharacterDetailText(this, characterData);
         Debug.Log($"ID: {characterCardID}");
     }
 
-    public void SetUpCard(CharacterData _data)
+    public void UpdateLevelTxt()
+    {
+        levelTxt.text = $"Lv.{characterData.Level}";
+    }
+
+    public void SetUpCard(InventoryCharacter _data)
     {
         characterData = _data;
         characterCardID = characterData.CharacterID;
+        MatchStar();
+        UpdateLevelTxt();
     }
 }

@@ -760,6 +760,12 @@ MonoBehaviour:
   - {fileID: 8821721552981046150}
   - {fileID: 3678332038130794851}
   - {fileID: 2259481094751817937}
+  characterData:
+    CharacterID: 0
+    Star: 0
+    characterData: {fileID: 0}
+    Level: 0
+  levelTxt: {fileID: 4996243513114228841}
 --- !u!1 &7737939372071546038
 GameObject:
   m_ObjectHideFlags: 0

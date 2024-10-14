@@ -12,7 +12,7 @@ public class DrawMap : MonoBehaviour
     [SerializeField] private float buildSpeed = 0.2f;
     [SerializeField] private TileBase emptyBase;
     [SerializeField] private Tilemap emptyTile;
-    public Action OnDrawMap;
+    public Action<Tilemap> OnDrawMap;
 
     private void Start()
     {
@@ -82,6 +82,6 @@ public class DrawMap : MonoBehaviour
             }
             if (data.name == "CantBuildArea") emptyTile = tile;
         }
-        OnDrawMap?.Invoke();
+        OnDrawMap?.Invoke(emptyTile);
     }
 }

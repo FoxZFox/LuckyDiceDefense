@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
         DrawMap.OnDrawMap += OnDrawMapComplete;
         DiceManager.OnRiceRollStart += OnDiceRollStart;
         DiceManager.OnDiceRollEnd += OnDiceRollComplete;
+        DiceManager.OnDiceCountEnd += OnDiceCountComplete;
         BuildManager.OnBuildCharacter += OnBuildCharacterComplete;
     }
 
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
         DrawMap.OnDrawMap -= OnDrawMapComplete;
         DiceManager.OnRiceRollStart -= OnDiceRollStart;
         DiceManager.OnDiceRollEnd -= OnDiceRollComplete;
+        DiceManager.OnDiceCountEnd -= OnDiceCountComplete;
         BuildManager.OnBuildCharacter -= OnBuildCharacterComplete;
     }
 
@@ -113,9 +116,10 @@ public class GameManager : MonoBehaviour
         StageType = type;
     }
 
-    private void OnDrawMapComplete()
+    private void OnDrawMapComplete(Tilemap _)
     {
-        UiSystem.FadeInUI();
+        UiSystem.FadeInDiceRollCount();
+        StageType = StageType.RollDiceRemain;
     }
     private void OnDiceRollStart()
     {
@@ -124,6 +128,13 @@ public class GameManager : MonoBehaviour
     private void OnDiceRollComplete(int value)
     {
         DicePoint += value;
+    }
+
+    private void OnDiceCountComplete(int value)
+    {
+        DiceRollCount = value;
+        UiSystem.FadeOutDiceRollCount();
+        StageType = StageType.Prepare;
     }
 
     private void OnBuildCharacterComplete(Vector3 _, CharacterData data)
@@ -138,5 +149,6 @@ public enum StageType
     Start,
     SpeedUp,
     End,
-    BuildMap
+    BuildMap,
+    RollDiceRemain
 }

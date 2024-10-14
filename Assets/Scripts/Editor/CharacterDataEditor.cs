@@ -32,11 +32,11 @@ public class CharacterDataEditor : Editor
     {
         CharacterData characterData = target as CharacterData;
         base.OnInspectorGUI();
-        selectCardData = EditorGUILayout.Popup("Card", selectCardData, cardName);
-        if (selectCardData >= 0)
-            cardData.objectReferenceValue = cardDatas[selectCardData];
-        serializedObject.ApplyModifiedProperties();
-        EditorUtility.SetDirty(characterData);
+        // selectCardData = EditorGUILayout.Popup("Card", selectCardData, cardName);
+        // if (selectCardData >= 0)
+        //     cardData.objectReferenceValue = cardDatas[selectCardData];
+        // serializedObject.ApplyModifiedProperties();
+        // EditorUtility.SetDirty(characterData);
     }
 
     private void MatchCardDataAndIndex()

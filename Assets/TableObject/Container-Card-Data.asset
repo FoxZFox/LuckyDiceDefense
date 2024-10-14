@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
   cardName: Solider
-  cardID: 6
+  cardID: 1
   cardImage: {fileID: -2066536159, guid: 01acfc393dec52b44b16e203bbc520ad, type: 3}
---- !u!114 &-3970338524026001997
+--- !u!114 &-2688074102199046590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26,11 +26,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c28da2db9530540923143664d3087f, type: 3}
-  m_Name: Potato2
+  m_Name: Archer
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
-  cardName: Potato2
-  cardID: 3
+  cardName: Archer
+  cardID: 4
   cardImage: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -45,13 +45,11 @@ MonoBehaviour:
   m_Name: Container-Card-Data
   m_EditorClassIdentifier: 
   cardDatas:
-  - {fileID: 6100139880304976355}
-  - {fileID: 3214591353496111482}
-  - {fileID: -3970338524026001997}
-  - {fileID: 4961657707848418232}
-  - {fileID: 621792935339380835}
   - {fileID: -7812388228520387288}
---- !u!114 &621792935339380835
+  - {fileID: 602751747512806605}
+  - {fileID: 3475517752724883655}
+  - {fileID: -2688074102199046590}
+--- !u!114 &602751747512806605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,29 +59,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c28da2db9530540923143664d3087f, type: 3}
-  m_Name: Yoyo89
+  m_Name: Warrior
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
-  cardName: Yoyo89
-  cardID: 5
-  cardImage: {fileID: 0}
---- !u!114 &3214591353496111482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c28da2db9530540923143664d3087f, type: 3}
-  m_Name: Potato1
-  m_EditorClassIdentifier: 
-  container: {fileID: 11400000}
-  cardName: Potato1
+  cardName: Warrior
   cardID: 2
-  cardImage: {fileID: 0}
---- !u!114 &4961657707848418232
+  cardImage: {fileID: -66501255, guid: 130ac7b2c9261d246aab1dd5e0a4e558, type: 3}
+--- !u!114 &3475517752724883655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,25 +75,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c28da2db9530540923143664d3087f, type: 3}
-  m_Name: Potato7
+  m_Name: Pawn
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
-  cardName: Potato7
-  cardID: 4
-  cardImage: {fileID: 0}
---- !u!114 &6100139880304976355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c28da2db9530540923143664d3087f, type: 3}
-  m_Name: Lolipop
-  m_EditorClassIdentifier: 
-  container: {fileID: 11400000}
-  cardName: Lolipop
-  cardID: 1
-  cardImage: {fileID: 0}
+  cardName: Pawn
+  cardID: 3
+  cardImage: {fileID: 728167773, guid: d587072b6d40ed443bfa31734c7abb62, type: 3}

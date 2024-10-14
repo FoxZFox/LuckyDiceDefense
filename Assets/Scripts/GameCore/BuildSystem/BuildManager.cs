@@ -10,8 +10,11 @@ public class BuildManager : MonoBehaviour
 {
     [BoxGroup("Data")]
     [SerializeField] private TileBase cantBuildTile;
-    [BoxGroup("DataForTest")]
+    [BoxGroup("Data")]
     [SerializeField] private GameObject target;
+    [BoxGroup("Data")]
+    [SerializeField] private Tilemap cantBuildMap;
+
     [BoxGroup("DataForTest")]
     [SerializeField] private Grid gridmap;
     [SerializeField] private Transform targetTransform;
@@ -21,6 +24,29 @@ public class BuildManager : MonoBehaviour
     public bool InBuild => inBuild;
     public Action<Vector3, CharacterData> OnBuildCharacter;
     [SerializeField] private CharacterData data;
+    private GameManager gameManager;
+
+    private void Awake()
+    {
+        gameManager = GameManager.GetInstant();
+    }
+
+
+    private void OnEnable()
+    {
+        gameManager.DrawMap.OnDrawMap += OnDrawMapComPlete;
+    }
+
+    private void OnDisable()
+    {
+        gameManager.DrawMap.OnDrawMap -= OnDrawMapComPlete;
+    }
+
+    private void OnDrawMapComPlete(Tilemap tilemap)
+    {
+        cantBuildMap = tilemap;
+    }
+
     public void StartDrawBuildShadow(CharacterData characterData)
     {
         data = characterData;
@@ -32,22 +58,33 @@ public class BuildManager : MonoBehaviour
     {
         if (inBuild)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ResetBuild();
+                return;
+            }
             if (!CheckBoundAndEvent())
             {
                 return;
             }
+
             MovePosition();
             if (Input.GetMouseButtonDown(0) && canBuild)
             {
                 Vector3 position = targetTransform.position;
                 OnBuildCharacter?.Invoke(position, data);
-                inBuild = false;
-                canBuild = false;
-                target.SetActive(false);
-                targetTransform.position = new Vector3(0, 10f, 0);
-                GetComponent<InputManager>().ActiveButton();
+                ResetBuild();
             }
         }
+    }
+
+    private void ResetBuild()
+    {
+        inBuild = false;
+        canBuild = false;
+        target.SetActive(false);
+        targetTransform.position = new Vector3(0, 10f, 0);
+        GetComponent<InputManager>().ActiveButton();
     }
 
     private bool CheckBoundAndEvent()
@@ -57,7 +94,6 @@ public class BuildManager : MonoBehaviour
             return false;
         }
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         Vector3 minBounds = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
         Vector3 maxBounds = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
 
@@ -82,23 +118,17 @@ public class BuildManager : MonoBehaviour
 
     private void CheckTileCanBuild(Vector3Int cell)
     {
-        var tiles = gridmap.GetComponentsInChildren<Tilemap>();
-        foreach (var tile in tiles)
+        var tilebase = cantBuildMap.GetTile(cell);
+        if (tilebase != cantBuildTile)
         {
-            var tilebase = tile.GetTile(cell);
-            if (tilebase != cantBuildTile)
-            {
-                target.GetComponent<SpriteRenderer>().color = Color.green;
-                canBuild = true;
-                continue;
-            }
-            Debug.Log(tilebase);
-            if (tilebase == cantBuildTile)
-            {
-                target.GetComponent<SpriteRenderer>().color = Color.red;
-                canBuild = false;
-                return;
-            }
+            target.GetComponent<SpriteRenderer>().color = Color.green;
+            canBuild = true;
+        }
+        Debug.Log(tilebase);
+        if (tilebase == cantBuildTile)
+        {
+            target.GetComponent<SpriteRenderer>().color = Color.red;
+            canBuild = false;
         }
     }
 }

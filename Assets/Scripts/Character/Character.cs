@@ -40,7 +40,7 @@ public class Character : MonoBehaviour
     [BoxGroup("Component")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     private bool longRange;
-    private float nextAttack = 0;
+    private float nextAttack = 1f;
     private CharacterAnimation characterAnimation;
     private void Start()
     {
@@ -58,7 +58,6 @@ public class Character : MonoBehaviour
         attackRange = characterData.attackRange;
         skillChange = characterData.skillChange;
         ability = characterData.ability;
-        nextAttack = attackRatio;
         circleCollider.radius = attackRange;
         characterAnimation.SetUpAnimator(characterData.animatorController, characterData.AttackDuretionAnimation);
     }
@@ -72,7 +71,6 @@ public class Character : MonoBehaviour
         attackRange = characterData.attackRange;
         skillChange = characterData.skillChange;
         ability = characterData.ability;
-        nextAttack = attackRatio;
         circleCollider.radius = attackRange;
         characterAnimation.SetUpAnimator(characterData.animatorController, characterData.AttackDuretionAnimation);
         this.characterData = characterData;
@@ -102,10 +100,10 @@ public class Character : MonoBehaviour
     }
     private void Attack()
     {
-        nextAttack -= Time.deltaTime;
+        nextAttack -= Time.deltaTime * attackRatio;
         if (nextAttack <= 0 && target != null)
         {
-            nextAttack = attackRatio;
+            nextAttack = 1f;
             OnAttack?.Invoke();
             if (CheckUseAbility())
             {
@@ -165,7 +163,7 @@ public class Character : MonoBehaviour
     private bool CheckUseAbility()
     {
         float skillRng = UnityEngine.Random.Range(0f, 100f);
-        if (skillRng <= skillChange)
+        if (skillRng <= characterData.skillChange)
         {
             return true;
         }

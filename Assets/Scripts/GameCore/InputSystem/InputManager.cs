@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
 
     private void OnCardInput(int index)
     {
+        if (GameManager.GetInstant().StageType != StageType.Prepare) return;
         CharacterData data = PlayerData.Instant.GetLoadOutData(index);
         if (data == null)
         {

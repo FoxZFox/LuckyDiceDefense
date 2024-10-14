@@ -3,12 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New CharacterData", menuName = "CreateTableObject/CharacterData")]
 public class CharacterData : ScriptableObject
 {
+    [Header("Stat Growth Curves")]
+    public AnimationCurve DamageGrowthCurve;
+    public AnimationCurve RatioGrowthCurve;
     [Header("Common")]
-    public GameObject CharacterPrefab;
     public int CharacterID = 1;
     [Range(1, 5)] public int Star = 1;
     public ElementType elementType;
-    public int ItemNeded = 1;
+    public int CardNeed = 1;
     public CardData cardData;
     public Sprite placeHolderSpitre;
     public RuntimeAnimatorController animatorController;
@@ -24,5 +26,17 @@ public class CharacterData : ScriptableObject
     public (CardData, CharacterData) MapData()
     {
         return (cardData, this);
+    }
+
+    public float GetAttackDamageWithGrowth(int level)
+    {
+        float damage = attackDamage * DamageGrowthCurve.Evaluate(level / 100f);
+        return Mathf.Round(damage * 100f) / 100f;
+    }
+
+    public float GetAttackRaioWithGrowth(int level)
+    {
+        float ratio = attackRatio * RatioGrowthCurve.Evaluate(level / 100f);
+        return Mathf.Round(ratio * 100f) / 100f;
     }
 }
