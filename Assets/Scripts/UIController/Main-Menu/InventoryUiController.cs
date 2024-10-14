@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class InventoryUiController : MonoBehaviour
 {
     [SerializeField] private GameObject panelDetialObjcet;
+    [SerializeField] private Image placeHolder;
     [SerializeField] private TMP_Text characterName;
     [SerializeField] private TMP_Text elemnetType;
     [SerializeField] private TMP_Text atkText;
@@ -100,6 +101,7 @@ public class InventoryUiController : MonoBehaviour
     {
         var map = data.characterData.ability.GetAbilityData();
         var characterData = data.characterData;
+        placeHolder.sprite = characterData.placeHolderSpitre;
         characterName.text = $"Name: {characterData.name}";
         elemnetType.text = $"Element: {characterData.elementType.name}";
         atkText.text = $"Atk: {characterData.attackDamage + characterData.GetAttackDamageWithGrowth(data.Level)}";

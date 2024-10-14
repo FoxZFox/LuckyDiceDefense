@@ -766,6 +766,7 @@ MonoBehaviour:
     characterData: {fileID: 0}
     Level: 0
   levelTxt: {fileID: 4996243513114228841}
+  placeHolder: {fileID: 3487731385072391761}
 --- !u!1 &7737939372071546038
 GameObject:
   m_ObjectHideFlags: 0

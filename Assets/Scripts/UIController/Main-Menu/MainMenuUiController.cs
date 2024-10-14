@@ -10,6 +10,7 @@ public class MainMenuUiController : MonoBehaviour
     [SerializeField] private GameObject MainUiObject;
     [SerializeField] private GameObject shopObject;
     [SerializeField] private GameObject inventoryObject;
+    [SerializeField] private GameObject loadOutObject;
 
     [Header("Text")]
     [SerializeField] private TMP_Text gemText;
@@ -24,6 +25,7 @@ public class MainMenuUiController : MonoBehaviour
         MainUiObject.SetActive(true);
         shopObject.SetActive(false);
         inventoryObject.SetActive(false);
+        loadOutObject.SetActive(false);
         inventoryUiController = GetComponent<InventoryUiController>();
     }
 
@@ -48,12 +50,14 @@ public class MainMenuUiController : MonoBehaviour
         MainUiObject.SetActive(true);
         shopObject.SetActive(false);
         inventoryObject.SetActive(false);
+        loadOutObject.SetActive(false);
     }
     public void OnClickShop()
     {
         MainUiObject.SetActive(false);
         shopObject.SetActive(true);
         inventoryObject.SetActive(false);
+        loadOutObject.SetActive(false);
     }
     public void OnClickInventory()
     {
@@ -61,6 +65,15 @@ public class MainMenuUiController : MonoBehaviour
         MainUiObject.SetActive(false);
         shopObject.SetActive(false);
         inventoryObject.SetActive(true);
+        loadOutObject.SetActive(false);
+    }
+
+    public void OnClickLoadOutButton()
+    {
+        MainUiObject.SetActive(false);
+        shopObject.SetActive(false);
+        inventoryObject.SetActive(false);
+        loadOutObject.SetActive(true);
     }
 
     public void OnClickPlay()

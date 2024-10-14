@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class CharacterCard : MonoBehaviour
 {
     [SerializeField] private GameObject[] starShow;
     [SerializeField] private InventoryCharacter characterData;
     [SerializeField] private TMP_Text levelTxt;
+    [SerializeField] private Image placeHolder;
     private int characterCardID = 0;
     public int CharacterCardID => characterCardID;
 
@@ -35,6 +36,11 @@ public class CharacterCard : MonoBehaviour
         Debug.Log($"ID: {characterCardID}");
     }
 
+    public InventoryCharacter GetInventory()
+    {
+        return characterData;
+    }
+
     public void UpdateLevelTxt()
     {
         levelTxt.text = $"Lv.{characterData.Level}";
@@ -44,6 +50,7 @@ public class CharacterCard : MonoBehaviour
     {
         characterData = _data;
         characterCardID = characterData.CharacterID;
+        placeHolder.sprite = characterData.characterData.placeHolderSpitre;
         MatchStar();
         UpdateLevelTxt();
     }

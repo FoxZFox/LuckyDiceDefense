@@ -18,12 +18,18 @@ public class SaveManager : MonoBehaviour
             Instant = this;
             saveSystem = new();
             LoadSave();
+            InventoryManager.instant.SetUpData(saveData);
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        PlayerData.Instant.SetUpData(saveData);
     }
 #if UNITY_EDITOR
     [SerializeField] private CharacterData testchadata;
@@ -39,13 +45,6 @@ public class SaveManager : MonoBehaviour
     }
 
 #endif
-
-    private void Start()
-    {
-        PlayerData.Instant.SetUpData(saveData);
-        InventoryManager.instant.SetUpData(saveData);
-    }
-
     [ButtonGroup()]
     public void Save()
     {

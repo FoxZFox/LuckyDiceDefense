@@ -97,7 +97,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   CharacterID: 101
-  Star: 5
+  Star: 4
   elementType: {fileID: -7689100252413238294, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
   CardNeed: 2
   cardData: {fileID: -7812388228520387288, guid: 9ba8c05d5e4d2b54c903b8349bf3e055, type: 2}
