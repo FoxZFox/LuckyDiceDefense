@@ -19,8 +19,9 @@ MonoBehaviour:
   elementType: {fileID: -5817326994359866339, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
   sprite: {fileID: 1562966130, guid: a420e428a4c727b44941e6905b52c87c, type: 3}
   animatorController: {fileID: 9100000, guid: a5d0398fa019ddc44a69d55b42bbea83, type: 2}
-  abilityData: {fileID: -7092152123671121581, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
-  skillChange: 1
+  abilityData: {fileID: -8014726920306131885, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
+  AbilityRange: 0
+  skillChange: 100
   enemyDetail: 
 --- !u!114 &11400000
 MonoBehaviour:

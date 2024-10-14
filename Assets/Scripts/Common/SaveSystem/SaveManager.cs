@@ -27,7 +27,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         PlayerData.Instant.SetUpData(saveData);
     }

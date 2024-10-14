@@ -53,6 +53,7 @@ public class BuyItemManager : MonoBehaviour
             return;
         }
         PlayerData.Instant.SetGem(price);
+        FindFirstObjectByType<MainMenuUiController>().UpdateData();
         GachaController.instant.SpawnGacha(gachaData, buy1card ? 1 : 3);
     }
 }

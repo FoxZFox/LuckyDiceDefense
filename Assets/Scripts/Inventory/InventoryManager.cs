@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : SerializedMonoBehaviour
 {
     public static InventoryManager instant;
     [Header("Object For Inventory")]
@@ -22,12 +24,12 @@ public class InventoryManager : MonoBehaviour
         {
             instant = this;
             DontDestroyOnLoad(instant);
+            InitializeCompaire();
         }
         else
         {
             Destroy(gameObject);
         }
-        InitializeCompaire();
     }
 
     private void Start()
@@ -45,6 +47,24 @@ public class InventoryManager : MonoBehaviour
         inventoryItems = saveData.inventoryItemsData;
         inventoryCharacters = saveData.inventoryCharactersData;
         inventoryCards = saveData.inventoryCardsData;
+        ValiDateData();
+    }
+
+    private void ValiDateData()
+    {
+        foreach (var item in inventoryItems)
+        {
+            item.itemData = itemDatas.FirstOrDefault(i => i.ItemID == item.ID);
+        }
+        foreach (var item in inventoryCharacters)
+        {
+            item.characterData = characterDatas.FirstOrDefault(i => i.CharacterID == item.CharacterID);
+        }
+        foreach (var item in inventoryCards)
+        {
+            item.cardData = cardDatas.FirstOrDefault(i => i.CardID == item.ID);
+        }
+
     }
 
     private void UpdateData(SaveData saveData)
@@ -63,6 +83,10 @@ public class InventoryManager : MonoBehaviour
             compairItemIDAndCharID.Add(map.Item1, map.Item2);
         }
         Debug.Log("MapDataSuccess");
+        foreach (var item in compairItemIDAndCharID)
+        {
+            Debug.Log($"Key: {item.Key} Value: {item.Value}");
+        }
     }
 
     public bool CheckCardUpGrade(InventoryCharacter value, bool checkData = true)
@@ -92,9 +116,9 @@ public class InventoryManager : MonoBehaviour
     private void Update()
     {
         //In the future change it to load only click on the inventory and first on gameload
-        CheckCardOwned();
+        // CheckCardOwned();
     }
-    private void CheckCardOwned()
+    public void CheckCardOwned()
     {
         foreach (var item in inventoryCards)
         {
@@ -152,12 +176,14 @@ public class InventoryManager : MonoBehaviour
 [Serializable]
 public class InventoryItem
 {
+    public int ID;
     public ItemData itemData;
     public int ItemAmount;
 
     public InventoryItem(ItemData itemData)
     {
         this.itemData = itemData;
+        ID = itemData.ItemID;
         ItemAmount = 1;
     }
 }
@@ -165,11 +191,13 @@ public class InventoryItem
 [Serializable]
 public class InventoryCard
 {
+    public int ID;
     public CardData cardData;
     public int CardAmount;
     public InventoryCard(CardData cardData)
     {
         this.cardData = cardData;
+        ID = cardData.CardID;
         CardAmount = 1;
     }
 }

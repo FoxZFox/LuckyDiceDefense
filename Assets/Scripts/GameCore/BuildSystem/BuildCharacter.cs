@@ -12,13 +12,13 @@ public class BuildCharacter : MonoBehaviour
         gameManager.BuildManager.OnBuildCharacter += CreateCharacterOnCell;
     }
 
-    private void CreateCharacterOnCell(Vector3 position, CharacterData characterData)
+    private void CreateCharacterOnCell(Vector3 position, InventoryCharacter data)
     {
         var init = characterPool.GetObject();
         var character = init.GetComponent<Character>();
         character.OnSell += ReturnObjectToPool;
         character.OnSell += gameManager.DrawMap.RemoveEmptyTile;
-        character.SetUpData(characterData);
+        character.SetUpData(data);
         init.transform.position = position;
         init.SetActive(true);
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(CharacterData))]
+// [CustomEditor(typeof(CharacterData))]
 public class CharacterDataEditor : Editor
 {
     string cardContainerPath = "Assets/TableObject/Container-Card-Data.asset";
@@ -32,11 +32,11 @@ public class CharacterDataEditor : Editor
     {
         CharacterData characterData = target as CharacterData;
         base.OnInspectorGUI();
-        // selectCardData = EditorGUILayout.Popup("Card", selectCardData, cardName);
-        // if (selectCardData >= 0)
-        //     cardData.objectReferenceValue = cardDatas[selectCardData];
-        // serializedObject.ApplyModifiedProperties();
-        // EditorUtility.SetDirty(characterData);
+        selectCardData = EditorGUILayout.Popup("Card", selectCardData, cardName);
+        if (selectCardData >= 0)
+            cardData.objectReferenceValue = cardDatas[selectCardData];
+        serializedObject.ApplyModifiedProperties();
+        EditorUtility.SetDirty(characterData);
     }
 
     private void MatchCardDataAndIndex()

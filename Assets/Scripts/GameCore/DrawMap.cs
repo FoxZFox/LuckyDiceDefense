@@ -9,7 +9,7 @@ public class DrawMap : MonoBehaviour
 {
     [SerializeField] private GameObject gridParent;
     [SerializeField] private MapData data;
-    [SerializeField] private float buildSpeed = 0.2f;
+    [SerializeField] private float buildSpeed = 0.001f;
     [SerializeField] private TileBase emptyBase;
     [SerializeField] private Tilemap emptyTile;
     public Action<Tilemap> OnDrawMap;
@@ -37,7 +37,7 @@ public class DrawMap : MonoBehaviour
         }
     }
 
-    public void DrawEmptyTile(Vector3 position, CharacterData _)
+    public void DrawEmptyTile(Vector3 position, InventoryCharacter _)
     {
         var pos = emptyTile.WorldToCell(position);
         var tile = emptyTile.GetTile(pos);

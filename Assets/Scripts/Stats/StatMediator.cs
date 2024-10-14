@@ -42,6 +42,18 @@ public class StatMediator
         return false;
     }
 
+    public void ClaerData()
+    {
+        var node = modifiers.First;
+        while (node != null)
+        {
+            var modifier = node.Value;
+            node.Value.Dispose();
+            OnUpdateData?.Invoke();
+            node = node.Next;
+        }
+    }
+
     public void Update(float deltaTime)
     {
         var node = modifiers.First;

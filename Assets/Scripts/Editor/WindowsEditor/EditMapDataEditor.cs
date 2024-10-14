@@ -16,9 +16,11 @@ public class EditMapDataEditor : OdinMenuEditorWindow
     }
     protected override OdinMenuTree BuildMenuTree()
     {
-        var tree = new OdinMenuTree();
-        tree.Add("Create New Data", new CreateNewMapData());
-        tree.Add("Edit Map Data", new EditMapData());
+        var tree = new OdinMenuTree
+        {
+            { "Create New Data", new CreateNewMapData() },
+            { "Edit Map Data", new EditMapData() }
+        };
         tree.AddAllAssetsAtPath("Map Data", "Assets/TableObject", typeof(MapData), true, true);
         return tree;
     }

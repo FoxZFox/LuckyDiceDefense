@@ -12,13 +12,22 @@ public class SlowAbility : AbilityData
 
     }
 
-    public override void ActiveAbilityToOther(GameObject gameObject)
+    public override void ActiveAbilityToOther(GameObject sender, GameObject gameObject)
     {
+        if (sender.GetComponent<Character>() == null)
+        {
+            return;
+        }
+        StatModifier statModifier = new StatModifier(abilityName, ModifyStat, slowDuration, (v, r) => v + ModifyStat[r]);
         if (gameObject.TryGetComponent(out Enemy enemy))
         {
-            StatModifier statModifier = new StatModifier(abilityName, ModifyStat, slowDuration, (v, r) => v + ModifyStat[r]);
             enemy.Stats.Mediator.AddModifier(statModifier);
             enemy.UpdateData();
         }
+    }
+
+    public override void ActiveAbilityToOther(GameObject sender, List<GameObject> targets)
+    {
+        throw new System.NotImplementedException();
     }
 }

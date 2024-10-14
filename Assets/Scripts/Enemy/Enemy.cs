@@ -19,7 +19,11 @@ public class Enemy : SerializedMonoBehaviour
     [TabGroup("Stats")]
     [SerializeField] private float health = 10f;
     [TabGroup("Stats")]
+    [SerializeField] private ElementType elementType;
+    [TabGroup("Stats")]
     [SerializeField] private AbilityData ability;
+    [TabGroup("Stats")]
+    [SerializeField] private float abilityRange;
     [TabGroup("Stats")]
     [SerializeField] private float skillChange;
     [TabGroup("Stats")]
@@ -55,6 +59,10 @@ public class Enemy : SerializedMonoBehaviour
 
     void Update()
     {
+        if (GameManager.GetInstant().StageType == StageType.End)
+        {
+            return;
+        }
         Move();
         CheckFlipSprtie();
         CheckEndPath();
@@ -63,7 +71,7 @@ public class Enemy : SerializedMonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.J))
         {
-            TakeDamage(null, 1f);
+            TakeDamage(null, null, 1f);
         }
 #endif
     }
@@ -106,16 +114,18 @@ public class Enemy : SerializedMonoBehaviour
         speed = enemyData.walkSpeed;
         maxHealth = enemyData.health;
         health = maxHealth;
+        elementType = enemyData.elementType;
         ability = enemyData.abilityData;
+        abilityRange = enemyData.AbilityRange;
         GetComponent<EnemyHealth>().UpdateHealthBar();
         skillChange = enemyData.skillChange;
         Stats.UpdateData(walkSpeed: speed, health: health);
         minSpeed = speed * 0.1f;
         maxSpeed = speed * 2.5f;
     }
-    public void TakeDamage(GameObject owner, float damage)
+    public void TakeDamage(GameObject owner, ElementType element, float damage)
     {
-        InComingDamage = damage;
+        InComingDamage = CalculateDamageElement(elementType, element, damage);
         if (CheckUseSkill())
         {
             UseSkill(owner);
@@ -136,17 +146,52 @@ public class Enemy : SerializedMonoBehaviour
         }
     }
 
+    private float CalculateDamageElement(ElementType self, ElementType target, float damage)
+    {
+        float totalDamage = damage;
+        if (self.Bestelement == target)
+        {
+            totalDamage *= 0.5f;
+        }
+        else if (self.WorthElement == target)
+        {
+            totalDamage *= 1.5f;
+        }
+        return totalDamage;
+    }
+
     private void UseSkill(GameObject owner)
     {
-        switch (ability.abilityType)
+        switch (ability.targetType)
         {
-            case AbilityType.Buff:
+            case AbilityTargetType.Self:
                 ability.ActiveAbilityToSelf(gameObject);
                 break;
-            case AbilityType.Debuff:
-                ability.ActiveAbilityToOther(owner);
+            case AbilityTargetType.Target:
+                ability.ActiveAbilityToOther(gameObject, owner);
                 break;
+            case AbilityTargetType.TeamAoe:
+                ability.ActiveAbilityToOther(gameObject, GetTeamTargetInRange());
+                break;
+
         }
+    }
+
+    private List<GameObject> GetTeamTargetInRange()
+    {
+        List<GameObject> targets = new List<GameObject>();
+        var colliders = Physics2D.OverlapCircleAll(transform.position, abilityRange);
+        foreach (var item in colliders)
+        {
+            if (item.gameObject.GetComponent<Enemy>() != null)
+            {
+                if (Vector2.Distance(transform.position, item.transform.position) <= abilityRange)
+                {
+                    targets.Add(item.gameObject);
+                }
+            }
+        }
+        return targets;
     }
 
     private bool CheckUseSkill()
@@ -163,7 +208,7 @@ public class Enemy : SerializedMonoBehaviour
     {
         speed = 0;
         yield return new WaitForSeconds(0.375f);
-        speed = enemyData.walkSpeed;
+        speed = Mathf.Clamp(Stats.WalkSpeed, minSpeed, maxSpeed);
     }
 
     private void Move()

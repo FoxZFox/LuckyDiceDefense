@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New CharacterData", menuName = "CreateTableObject/CharacterData")]
@@ -26,6 +30,15 @@ public class CharacterData : ScriptableObject
     public (CardData, CharacterData) MapData()
     {
         return (cardData, this);
+    }
+
+    [Button()]
+    public void GenerateID()
+    {
+        string dataToHash = elementType.ToString() + cardData.ToString() + placeHolderSpitre.ToString() + animatorController.ToString() + Star.ToString();
+        using SHA256 hash = SHA256.Create();
+        byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(dataToHash));
+        CharacterID = BitConverter.ToInt32(bytes);
     }
 
     public float GetAttackDamageWithGrowth(int level)

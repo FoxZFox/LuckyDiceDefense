@@ -10,6 +10,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int gold = 0;
     [SerializeField] private int gem = 0;
     [SerializeField] private List<InventoryCharacter> loadOut;
+    public StageData selectStage;
     public int Gold => gold;
     public int Gem => gem;
 
@@ -88,12 +89,12 @@ public class PlayerData : MonoBehaviour
         loadOut = datas;
     }
 
-    public CharacterData GetLoadOutData(int index)
+    public InventoryCharacter GetLoadOutData(int index)
     {
         if (index + 1 > loadOut.Count)
         {
             return null;
         }
-        return loadOut[index].characterData;
+        return loadOut[index];
     }
 }

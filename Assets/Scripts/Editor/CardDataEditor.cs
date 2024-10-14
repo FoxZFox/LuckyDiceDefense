@@ -15,6 +15,10 @@ public class CardDataEditor : Editor
     {
         cardData = target as CardData;
         base.OnInspectorGUI();
+        if (GUILayout.Button("GenerateID"))
+        {
+            cardData.GenerateID();
+        }
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("EditName&ID", EditorStyles.toolbarButton))
         {
@@ -25,6 +29,7 @@ public class CardDataEditor : Editor
             deleteSide = true;
         }
         EditorGUILayout.EndHorizontal();
+
         if (!deleteSide)
         {
             DrawEditData();

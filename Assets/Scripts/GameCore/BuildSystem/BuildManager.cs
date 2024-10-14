@@ -22,8 +22,8 @@ public class BuildManager : MonoBehaviour
     private bool inBuild = false;
     private bool canBuild = false;
     public bool InBuild => inBuild;
-    public Action<Vector3, CharacterData> OnBuildCharacter;
-    [SerializeField] private CharacterData data;
+    public Action<Vector3, InventoryCharacter> OnBuildCharacter;
+    [SerializeField] private InventoryCharacter data;
     private GameManager gameManager;
 
     private void Awake()
@@ -47,11 +47,11 @@ public class BuildManager : MonoBehaviour
         cantBuildMap = tilemap;
     }
 
-    public void StartDrawBuildShadow(CharacterData characterData)
+    public void StartDrawBuildShadow(InventoryCharacter value)
     {
-        data = characterData;
+        data = value;
         inBuild = true;
-        targetSpriteRenderer.sprite = data.placeHolderSpitre;
+        targetSpriteRenderer.sprite = data.characterData.placeHolderSpitre;
         target.SetActive(true);
     }
     void Update()

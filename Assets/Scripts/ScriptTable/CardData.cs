@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using UnityEngine;
 
 public class CardData : ScriptableObject
@@ -15,6 +18,13 @@ public class CardData : ScriptableObject
     public CardDataContainer Container { get => container; }
 
 #if UNITY_EDITOR
+    public void GenerateID()
+    {
+        string dataToHash = cardImage.ToString() + cardName;
+        using SHA256 hash = SHA256.Create();
+        byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(dataToHash));
+        cardID = BitConverter.ToInt32(bytes);
+    }
     public void Initialise(string n, int i, CardDataContainer cardDataContainer)
     {
         cardName = n;

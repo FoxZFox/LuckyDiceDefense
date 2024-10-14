@@ -15,39 +15,75 @@ public class Character : MonoBehaviour
     }
     public Action<Character> OnSell;
     public Action OnAttack;
-    [BoxGroup("CharacterData")]
+    public Stats Stats { get; set; }
+
+    [BoxGroup("CharacterData"), TabGroup("Data")]
+    [SerializeField] private int level;
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private CharacterData characterData;
-    [BoxGroup("CharacterData")]
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private ElementType elementType;
-    [BoxGroup("CharacterData")]
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private float attackDamage = 0;
-    [BoxGroup("CharacterData")]
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private float attackRatio = 0;
-    [BoxGroup("CharacterData")]
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private float attackRange = 0;
-    [BoxGroup("CharacterData")]
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private float skillChange = 0;
-    [BoxGroup("CharacterData")]
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private AbilityData ability;
-    [BoxGroup("CharacterData")]
+    [BoxGroup("CharacterData"), TabGroup("Data")]
     [SerializeField] private TargetPriority priority;
-    [BoxGroup("TarGet Debug")]
+    [BoxGroup("TarGet Debug"), TabGroup("Data")]
     [SerializeField] private List<Enemy> enemys;
-    [BoxGroup("TarGet Debug")]
+    [BoxGroup("TarGet Debug"), TabGroup("Data")]
     [SerializeField] private Enemy target;
-    [BoxGroup("Component")]
+    [BoxGroup("Component"), TabGroup("Data")]
     [SerializeField] private CircleCollider2D circleCollider;
-    [BoxGroup("Component")]
+    [BoxGroup("Component"), TabGroup("Data")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [TabGroup("Setting")]
+    [SerializeField] private float minDamage;
+    [TabGroup("Setting")]
+    [SerializeField] private float maxDamage;
+    [TabGroup("Setting")]
+    [SerializeField] private float minAttackRatio;
+    [TabGroup("Setting")]
+    [SerializeField] private float maxAttackRatio;
+    [TabGroup("Setting")]
+    [SerializeField] private float minAttackRange;
+    [TabGroup("Setting")]
+    [SerializeField] private float maxAttackRange;
     private bool longRange;
     private float nextAttack = 1f;
     private CharacterAnimation characterAnimation;
+    private void Awake()
+    {
+        Stats = new Stats(new StatMediator());
+
+    }
     private void Start()
     {
         Debug.Log("Base class");
-
-        SetUpData();
     }
+    private void OnEnable()
+    {
+        Stats.Mediator.OnUpdateData += UpdateData;
+    }
+
+    private void OnDisable()
+    {
+        Stats.Mediator.OnUpdateData -= UpdateData;
+    }
+
+    public void UpdateData()
+    {
+        attackDamage = Mathf.Clamp(Stats.Attack, minDamage, maxDamage);
+        attackRatio = Mathf.Clamp(Stats.AttackRatio, minAttackRatio, maxAttackRatio);
+        attackRange = Mathf.Clamp(Stats.AttackRange, minAttackRange, maxAttackRange);
+    }
+
     public void SetUpData()
     {
         circleCollider = GetComponent<CircleCollider2D>();
@@ -61,22 +97,29 @@ public class Character : MonoBehaviour
         circleCollider.radius = attackRange;
         characterAnimation.SetUpAnimator(characterData.animatorController, characterData.AttackDuretionAnimation);
     }
-    public void SetUpData(CharacterData characterData)
+    public void SetUpData(InventoryCharacter data)
     {
         circleCollider = GetComponent<CircleCollider2D>();
         characterAnimation = GetComponentInChildren<CharacterAnimation>();
+        level = data.Level;
+        characterData = data.characterData;
         elementType = characterData.elementType;
-        attackDamage = characterData.attackDamage;
-        attackRatio = characterData.attackRatio;
+        attackDamage = characterData.GetAttackDamageWithGrowth(level);
+        attackRatio = characterData.GetAttackRaioWithGrowth(level);
         attackRange = characterData.attackRange;
         skillChange = characterData.skillChange;
         ability = characterData.ability;
         circleCollider.radius = attackRange;
         characterAnimation.SetUpAnimator(characterData.animatorController, characterData.AttackDuretionAnimation);
-        this.characterData = characterData;
+        Stats.UpdateData(attackDamage, attackRatio, attackRange);
     }
     private void Update()
     {
+        if (GameManager.GetInstant().StageType == StageType.End)
+        {
+            return;
+        }
+        Stats.Mediator.Update(Time.deltaTime);
         FindEnemy();
         Attack();
         LookAtTarget();
@@ -110,7 +153,7 @@ public class Character : MonoBehaviour
                 UseAbility();
                 return;
             }
-            target.TakeDamage(gameObject, attackDamage);
+            target.TakeDamage(gameObject, elementType, attackDamage);
         }
     }
 
@@ -179,9 +222,29 @@ public class Character : MonoBehaviour
                     ability.ActiveAbilityToSelf(gameObject);
                     break;
                 case AbilityTargetType.Target:
-                    ability.ActiveAbilityToOther(target.gameObject);
+                    ability.ActiveAbilityToOther(gameObject, target.gameObject);
+                    break;
+                case AbilityTargetType.TeamAoe:
+                    ability.ActiveAbilityToOther(gameObject, GetTeamTargetInRange());
                     break;
             }
+    }
+
+    private List<GameObject> GetTeamTargetInRange()
+    {
+        List<GameObject> targets = new List<GameObject>();
+        var colliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
+        foreach (var item in colliders)
+        {
+            if (item.gameObject.GetComponent<Character>() != null)
+            {
+                if (Vector2.Distance(transform.position, item.transform.position) <= attackRange)
+                {
+                    targets.Add(item.gameObject);
+                }
+            }
+        }
+        return targets;
     }
     [Button()]
     public void Sell()

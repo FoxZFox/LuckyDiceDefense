@@ -96,7 +96,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  CharacterID: 101
+  CharacterID: 1216929510
   Star: 4
   elementType: {fileID: -7689100252413238294, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
   CardNeed: 2

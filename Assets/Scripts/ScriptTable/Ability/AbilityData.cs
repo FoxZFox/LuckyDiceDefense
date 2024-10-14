@@ -26,7 +26,6 @@ public enum ModifyType
 }
 public abstract class AbilityData : SerializedScriptableObject
 {
-
     public AbilityType abilityType;
     public AbilityTargetType targetType;
     public ModifyType modifyType;
@@ -35,7 +34,8 @@ public abstract class AbilityData : SerializedScriptableObject
     [SerializeField] protected string abilityName;
     [SerializeField, TextArea] protected string abilityDetial;
     public abstract void ActiveAbilityToSelf(GameObject gameObject);
-    public abstract void ActiveAbilityToOther(GameObject gameObject);
+    public abstract void ActiveAbilityToOther(GameObject sender, GameObject gameObject);
+    public abstract void ActiveAbilityToOther(GameObject sender, List<GameObject> targets);
     public (string, string) GetAbilityData()
     {
         return (abilityName, abilityDetial);

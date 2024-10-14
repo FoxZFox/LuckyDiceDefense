@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class MainMenuUiController : MonoBehaviour
 {
@@ -20,13 +21,13 @@ public class MainMenuUiController : MonoBehaviour
 
     void Start()
     {
-        SetPlayerStatus();
         SceneManager.Instant.LoadSceneAsync(SceneManager.sceneName.gacha);
         MainUiObject.SetActive(true);
         shopObject.SetActive(false);
         inventoryObject.SetActive(false);
         loadOutObject.SetActive(false);
         inventoryUiController = GetComponent<InventoryUiController>();
+        SetPlayerStatus();
     }
 
     private void SetPlayerStatus()
@@ -40,9 +41,16 @@ public class MainMenuUiController : MonoBehaviour
         else
         {
             playerInfo.SetActive(false);
+            gemText.text = PlayerData.Instant.Gem.ToString();
+            goldText.text = PlayerData.Instant.Gold.ToString();
         }
         shopObject.SetActive(false);
         inventoryObject.SetActive(false);
+    }
+    public void UpdateData()
+    {
+        gemText.text = PlayerData.Instant.Gem.ToString();
+        goldText.text = PlayerData.Instant.Gold.ToString();
     }
 
     public void OnClickMainMenu()
@@ -78,6 +86,9 @@ public class MainMenuUiController : MonoBehaviour
 
     public void OnClickPlay()
     {
-        SceneManager.Instant.LoadSceneWithTransition(SceneManager.sceneName.gameplay, TransitionType.Circle);
+        if (PlayerData.Instant.selectStage != null)
+        {
+            SceneManager.Instant.LoadSceneWithTransition(SceneManager.sceneName.gameplay, TransitionType.Circle);
+        }
     }
 }

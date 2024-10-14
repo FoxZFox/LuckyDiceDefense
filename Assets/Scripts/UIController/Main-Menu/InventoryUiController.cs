@@ -36,7 +36,6 @@ public class InventoryUiController : MonoBehaviour
     [ContextMenu("SpawnCard")]
     public void LoadCharacterCard()
     {
-#if UNITY_EDITOR
         if (InventoryManager.instant.InventoryCharacters.Count < 1)
         {
             foreach (var item in cardpool)
@@ -46,7 +45,6 @@ public class InventoryUiController : MonoBehaviour
             cardInstants.Clear();
             cardpool.Clear();
         }
-#endif
         foreach (var item in InventoryManager.instant.InventoryCharacters)
         {
             var cardData = cardInstants.FirstOrDefault(i => i.CharacterID == item.CharacterID);

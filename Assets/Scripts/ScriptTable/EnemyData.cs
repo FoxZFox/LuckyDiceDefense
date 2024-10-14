@@ -12,6 +12,7 @@ public class EnemyData : ScriptableObject
     public Sprite sprite;
     public RuntimeAnimatorController animatorController;
     public AbilityData abilityData;
+    public float AbilityRange;
     [Range(1f, 100f)] public float skillChange = 100f;
     [TextArea] public string enemyDetail;
 

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638ba69594746864cb9803f4b209a035, type: 3}
+  m_Name: Map1
+  m_EditorClassIdentifier: 
+  StageName: Map1
+  StageHealthPoint: 100000
+  datas:
+  - EnemyContainer:
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    RewardContaner:
+      Gold: 10
+      Gem: 0
+  - EnemyContainer:
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    RewardContaner:
+      Gold: 0
+      Gem: 10

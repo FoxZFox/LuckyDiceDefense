@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
   cardName: Solider
-  cardID: 1
+  cardID: 1288470014
   cardImage: {fileID: -2066536159, guid: 01acfc393dec52b44b16e203bbc520ad, type: 3}
 --- !u!114 &-2688074102199046590
 MonoBehaviour:
@@ -30,8 +30,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
   cardName: Archer
-  cardID: 4
-  cardImage: {fileID: 0}
+  cardID: 1639181216
+  cardImage: {fileID: -707324799, guid: af08a5446e0fb244ba78c74301140696, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
   cardName: Warrior
-  cardID: 2
+  cardID: 468755960
   cardImage: {fileID: -66501255, guid: 130ac7b2c9261d246aab1dd5e0a4e558, type: 3}
 --- !u!114 &3475517752724883655
 MonoBehaviour:
@@ -79,5 +79,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 11400000}
   cardName: Pawn
-  cardID: 3
+  cardID: -1264074887
   cardImage: {fileID: 728167773, guid: d587072b6d40ed443bfa31734c7abb62, type: 3}

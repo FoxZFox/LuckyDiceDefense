@@ -15,7 +15,7 @@ public class SaveSystem
         string encryption = Encrypt(jsonData, key);
         try
         {
-            File.WriteAllText(Application.persistentDataPath + "/" + fileName + ".json", jsonData);
+            File.WriteAllText(Application.persistentDataPath + "/" + fileName + ".json", encryption);
             Debug.Log("Save");
         }
         catch (Exception e)
@@ -34,8 +34,8 @@ public class SaveSystem
             if (File.Exists(filePath))
             {
                 string encryptionData = File.ReadAllText(filePath);
-                // string decrypData = Decrypt(encryptionData, key);
-                return JsonUtility.FromJson<SaveData>(encryptionData);
+                string decrypData = Decrypt(encryptionData, key);
+                return JsonUtility.FromJson<SaveData>(decrypData);
             }
             else
             {

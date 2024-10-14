@@ -58,6 +58,12 @@ MonoBehaviour:
   target: {fileID: 0}
   circleCollider: {fileID: 0}
   spriteRenderer: {fileID: 6117309456794747246}
+  minDamage: 1
+  maxDamage: 1000
+  minAttackRatio: 0.5
+  maxAttackRatio: 4
+  minAttackRange: 1.5
+  maxAttackRange: 10
 --- !u!58 &8862031326011436487
 CircleCollider2D:
   m_ObjectHideFlags: 0

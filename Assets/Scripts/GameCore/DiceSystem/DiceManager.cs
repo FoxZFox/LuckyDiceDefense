@@ -125,6 +125,7 @@ public class DiceManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
         OnDiceCountEnd?.Invoke(dicesValue[diceCountObj.sprite]);
+        UpdateRollButton();
     }
 
     private IEnumerator RollDiceAnimation()

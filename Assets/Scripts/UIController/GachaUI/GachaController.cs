@@ -190,6 +190,7 @@ public class GachaController : MonoBehaviour
                 InventoryManager.instant.AddCard(InventoryManager.instant.GetCardData(card.characterData), card.Amount);
             }
         }
+        InventoryManager.instant.CheckCardOwned();
         cardSelected.Clear();
         panel.SetActive(false);
     }

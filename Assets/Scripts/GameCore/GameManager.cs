@@ -8,44 +8,36 @@ using UnityEngine.Tilemaps;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instant;
-
-    [BoxGroup("Utility")]
-    [SerializeField] public DrawMap DrawMap { get; private set; }
-    [BoxGroup("Utility")]
-    [SerializeField] public EnemyPool EnemyPool { get; private set; }
-    [BoxGroup("Utility")]
-    [SerializeField] public CharacterPool CharacterPool { get; private set; }
-    [BoxGroup("Utility")]
-    [SerializeField] public GameSpawn GameSpawn { get; private set; }
-    [BoxGroup("Utility")]
-    [SerializeField] public GameWaypoints GameWaypoints { get; private set; }
-    [BoxGroup("Utility")]
-    [SerializeField] public BuildManager BuildManager { get; private set; }
-    [BoxGroup("Utility")]
-    [SerializeField] public UIGamePlaySystem UiSystem { get; private set; }
-    [BoxGroup("Utility")]
-    [SerializeField] public DiceManager DiceManager { get; private set; }
-    [BoxGroup("Data")]
-    [ShowInInspector] public StageType StageType { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public DrawMap DrawMap { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public EnemyPool EnemyPool { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public CharacterPool CharacterPool { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public GameSpawn GameSpawn { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public GameWaypoints GameWaypoints { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public BuildManager BuildManager { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public UIGamePlaySystem UiSystem { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public DiceManager DiceManager { get; private set; }
+    [ShowInInspector, BoxGroup("Utility")] public InputManager InputManager { get; private set; }
+    [ShowInInspector, BoxGroup("Data")] public StageType StageType { get; private set; }
     [BoxGroup("Data")]
     [SerializeField] private MapData map;
-#if UNITY_EDITOR
+    [BoxGroup("Data")]
     [SerializeField] private GameObject draftile;
+    [BoxGroup("Data")]
     [SerializeField] private GameObject maptile;
-#endif
     [ShowInInspector, ReadOnly] public int DiceRollCount { get; private set; }
     [ShowInInspector, ReadOnly] public int DicePoint { get; private set; }
+    public int StageHealthPoint { get; private set; }
+    public int GoldReward { get; private set; }
+    public int GemReward { get; private set; }
     private void Awake()
     {
         if (instant == null)
         {
             LoadGamePlayData();
-#if UNITY_EDITOR
             draftile.SetActive(false);
             maptile.SetActive(true);
             UiSystem.SetUIPosition();
-            DiceRollCount += 3;
-#endif
+            StageHealthPoint = PlayerData.Instant.selectStage.StageHealthPoint;
         }
         else
         {
@@ -61,6 +53,9 @@ public class GameManager : MonoBehaviour
         DiceManager.OnDiceRollEnd += OnDiceRollComplete;
         DiceManager.OnDiceCountEnd += OnDiceCountComplete;
         BuildManager.OnBuildCharacter += OnBuildCharacterComplete;
+        UiSystem.OnWaveStart += OnWaveStart;
+        GameSpawn.OnWaveEnd += OnWaveEnd;
+        InputManager.OnPause += OnPause;
     }
 
     private void OnDisable()
@@ -71,6 +66,9 @@ public class GameManager : MonoBehaviour
         DiceManager.OnDiceRollEnd -= OnDiceRollComplete;
         DiceManager.OnDiceCountEnd -= OnDiceCountComplete;
         BuildManager.OnBuildCharacter -= OnBuildCharacterComplete;
+        UiSystem.OnWaveStart -= OnWaveStart;
+        GameSpawn.OnWaveEnd -= OnWaveEnd;
+        InputManager.OnPause -= OnPause;
     }
 
     private void OnSceneLoaded(SceneManager.sceneName name)
@@ -92,6 +90,7 @@ public class GameManager : MonoBehaviour
         CharacterPool = GetComponent<CharacterPool>();
         UiSystem = GetComponent<UIGamePlaySystem>();
         DiceManager = GetComponent<DiceManager>();
+        InputManager = GetComponent<InputManager>();
     }
 
     private void SetUp()
@@ -127,7 +126,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnDiceRollComplete(int value)
     {
-        DicePoint += value;
+        DicePoint = Mathf.Clamp(DicePoint + value, 0, 999);
     }
 
     private void OnDiceCountComplete(int value)
@@ -137,9 +136,40 @@ public class GameManager : MonoBehaviour
         StageType = StageType.Prepare;
     }
 
-    private void OnBuildCharacterComplete(Vector3 _, CharacterData data)
+    private void OnBuildCharacterComplete(Vector3 _, InventoryCharacter data)
     {
-        DicePoint -= data.costToBuild;
+        DicePoint -= data.characterData.costToBuild;
+    }
+
+    private void OnWaveStart()
+    {
+        StageType = StageType.Start;
+        GameSpawn.Spawn();
+    }
+
+    private void OnWaveEnd(int goldWard, int gemWard)
+    {
+        GoldReward += goldWard;
+        GemReward += gemWard;
+    }
+
+    private void OnPause()
+    {
+        StageType = StageType.Pause;
+    }
+    public void StagePointTakeDamage(int value)
+    {
+        StageHealthPoint -= value;
+        if (StageHealthPoint <= 0)
+        {
+            StageType = StageType.End;
+            StageHealthPoint = 0;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        instant = null;
     }
 }
 
@@ -150,5 +180,6 @@ public enum StageType
     SpeedUp,
     End,
     BuildMap,
+    Pause,
     RollDiceRemain
 }

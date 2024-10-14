@@ -96,7 +96,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  CharacterID: 102
+  CharacterID: -2068210879
   Star: 5
   elementType: {fileID: 6234558022768649565, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
   CardNeed: 5
@@ -109,5 +109,5 @@ MonoBehaviour:
   attackRange: 3
   longRange: 0
   ability: {fileID: 3950099707583567183, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
-  skillChange: 100
+  skillChange: 1
   costToBuild: 2
