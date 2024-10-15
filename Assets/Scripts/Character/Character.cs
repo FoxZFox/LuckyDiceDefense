@@ -115,14 +115,14 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
-        if (GameManager.GetInstant().StageType == StageType.End)
+        if (GameManager.GetInstant().StageType == StageType.Start)
         {
-            return;
+            Stats.Mediator.Update(Time.deltaTime);
+            FindEnemy();
+            Attack();
+            LookAtTarget();
         }
-        Stats.Mediator.Update(Time.deltaTime);
-        FindEnemy();
-        Attack();
-        LookAtTarget();
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

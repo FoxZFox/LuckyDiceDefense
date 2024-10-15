@@ -57,6 +57,11 @@ public class SaveManager : MonoBehaviour
         saveData = data;
     }
 
+    public void UpdateSave()
+    {
+        OnApplicationExit?.Invoke(saveData);
+    }
+
     private void OnApplicationQuit()
     {
         OnApplicationExit?.Invoke(saveData);

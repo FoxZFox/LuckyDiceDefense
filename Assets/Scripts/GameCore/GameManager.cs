@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerData.Instant.AddGem(GemReward);
         PlayerData.Instant.AddGold(GoldReward);
+        SaveManager.Instant.UpdateSave();
         SceneManager.Instant.LoadSceneWithTransition(SceneManager.sceneName.mainmenu, TransitionType.Circle);
     }
     public void StagePointTakeDamage(int value)
