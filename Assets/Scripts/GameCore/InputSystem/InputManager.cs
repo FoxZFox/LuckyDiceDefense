@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
         cha4Button.onClick.AddListener(() => OnCardInput(3));
         cha5Button.onClick.AddListener(() => OnCardInput(4));
         startButton.onClick.AddListener(OnStartInput);
-        pauseButon.onClick.AddListener(OnPauseInput);
+        pauseButon.onClick.AddListener(() => OnPauseInput());
     }
 
     private void OnCardInput(int index)

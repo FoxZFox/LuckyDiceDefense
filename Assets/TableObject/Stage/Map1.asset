@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Map1
   m_EditorClassIdentifier: 
   StageName: Map1
-  StageHealthPoint: 100000
+  StageHealthPoint: 1000
   datas:
   - EnemyContainer:
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}

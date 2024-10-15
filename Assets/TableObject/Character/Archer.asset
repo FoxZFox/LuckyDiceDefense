@@ -109,5 +109,5 @@ MonoBehaviour:
   attackRange: 5
   longRange: 1
   ability: {fileID: -7690728827132865521, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
-  skillChange: 100
+  skillChange: 8
   costToBuild: 1

@@ -264,6 +264,7 @@ MonoBehaviour:
   gachaTableObject: {fileID: 11400000, guid: ef65714884415d448a2e1771498d5ccc, type: 2}
   cardStar: {fileID: 4486669468843756025, guid: 8cc21558939c77e49890068896fa52a6, type: 3}
   debugCardId: 0
+  debug: 0
   cardSelected: []
 --- !u!1 &1918501226
 GameObject:
@@ -300,7 +301,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1918501228
 MonoBehaviour:
   m_ObjectHideFlags: 0

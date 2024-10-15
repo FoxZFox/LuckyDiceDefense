@@ -54,8 +54,11 @@ public class GameManager : MonoBehaviour
         DiceManager.OnDiceCountEnd += OnDiceCountComplete;
         BuildManager.OnBuildCharacter += OnBuildCharacterComplete;
         UiSystem.OnWaveStart += OnWaveStart;
+        UiSystem.OnResume += OnResume;
+        UiSystem.OnExit += OnExit;
         GameSpawn.OnWaveEnd += OnWaveEnd;
         InputManager.OnPause += OnPause;
+        GameSpawn.OnVictory += OnVictory;
     }
 
     private void OnDisable()
@@ -67,8 +70,11 @@ public class GameManager : MonoBehaviour
         DiceManager.OnDiceCountEnd -= OnDiceCountComplete;
         BuildManager.OnBuildCharacter -= OnBuildCharacterComplete;
         UiSystem.OnWaveStart -= OnWaveStart;
+        UiSystem.OnResume -= OnResume;
+        UiSystem.OnExit -= OnExit;
         GameSpawn.OnWaveEnd -= OnWaveEnd;
         InputManager.OnPause -= OnPause;
+        GameSpawn.OnVictory -= OnVictory;
     }
 
     private void OnSceneLoaded(SceneManager.sceneName name)
@@ -155,7 +161,26 @@ public class GameManager : MonoBehaviour
 
     private void OnPause()
     {
-        StageType = StageType.Pause;
+        StageType = StageType.Pasue;
+    }
+
+    private void OnResume()
+    {
+        StageType = StageType.Start;
+    }
+
+    private void OnVictory(int data1, int data2)
+    {
+        StageType = StageType.End;
+        GoldReward += data1;
+        GemReward += data2;
+    }
+
+    private void OnExit()
+    {
+        PlayerData.Instant.AddGem(GemReward);
+        PlayerData.Instant.AddGold(GoldReward);
+        SceneManager.Instant.LoadSceneWithTransition(SceneManager.sceneName.mainmenu, TransitionType.Circle);
     }
     public void StagePointTakeDamage(int value)
     {
@@ -164,7 +189,9 @@ public class GameManager : MonoBehaviour
         {
             StageType = StageType.End;
             StageHealthPoint = 0;
+            UiSystem.OnLose();
         }
+        UiSystem.UpDateHearthInfo();
     }
 
     private void OnDestroy()
@@ -180,6 +207,6 @@ public enum StageType
     SpeedUp,
     End,
     BuildMap,
-    Pause,
+    Pasue,
     RollDiceRemain
 }

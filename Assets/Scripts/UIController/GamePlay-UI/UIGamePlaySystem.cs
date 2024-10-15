@@ -36,6 +36,10 @@ public class UIGamePlaySystem : MonoBehaviour
     [TabGroup("TopPanel")]
     [SerializeField] private GameObject waveInfoContaner;
     [TabGroup("TopPanel")]
+    [SerializeField] private GameObject hearthContainer;
+    [TabGroup("TopPanel")]
+    [SerializeField] private TMP_Text hearthTxt;
+    [TabGroup("TopPanel")]
     [SerializeField] private GameObject pauseButton;
     [TabGroup("TopPanel")]
     [SerializeField] private TMP_Text remainTxt;
@@ -49,18 +53,45 @@ public class UIGamePlaySystem : MonoBehaviour
     [TabGroup("PausePanel")]
     [SerializeField] private Button exitButton;
     [TabGroup("PausePanel")]
-    [SerializeField] private GameObject ConfirmContainer;
+    [SerializeField] private GameObject confirmContainer;
     [TabGroup("PausePanel")]
     [SerializeField] private Button confirmButton;
     [TabGroup("PausePanel")]
     [SerializeField] private Button cancelButton;
+    [TabGroup("PausePanel")]
+    [SerializeField] private TMP_Text exitDetail;
+
+    [TabGroup("Victory&losePanel")]
+    [SerializeField] private GameObject victoryPanel;
+    [TabGroup("Victory&losePanel")]
+    [SerializeField] private TMP_Text victoryDetial;
+    [TabGroup("Victory&losePanel")]
+    [SerializeField] private Button continueButton;
+    [TabGroup("Victory&losePanel")]
+    [SerializeField] private GameObject losePanel;
+    [TabGroup("Victory&losePanel")]
+    [SerializeField] private TMP_Text loseDetail;
+    [TabGroup("Victory&losePanel")]
+    [SerializeField] private Button loseButton;
 
 
     public Action OnFadeInDiceCount;
 
     public Action OnWaveStart;
+    public Action OnResume;
+    public Action OnExit;
 
     private GameManager gameManager;
+
+    private void Start()
+    {
+        resumeButton.onClick.AddListener(OnResumeInput);
+        exitButton.onClick.AddListener(OnExitInput);
+        confirmButton.onClick.AddListener(OnConfirmInput);
+        cancelButton.onClick.AddListener(OnCancelInput);
+        continueButton.onClick.AddListener(OnConfirmInput);
+        loseButton.onClick.AddListener(OnConfirmInput);
+    }
 
     private void OnEnable()
     {
@@ -69,6 +100,8 @@ public class UIGamePlaySystem : MonoBehaviour
         gameManager.BuildManager.OnBuildCharacter += OnBuildCharacterComplete;
         gameManager.DiceManager.OnDiceCountEnd += OnDicerollComplete;
         gameManager.GameSpawn.OnWaveEnd += OnWaveEnd;
+        gameManager.InputManager.OnPause += OnPause;
+        gameManager.GameSpawn.OnVictory += OnVictory;
     }
 
     private void OnDisable()
@@ -77,13 +110,38 @@ public class UIGamePlaySystem : MonoBehaviour
         gameManager.BuildManager.OnBuildCharacter -= OnBuildCharacterComplete;
         gameManager.DiceManager.OnDiceCountEnd -= OnDicerollComplete;
         gameManager.GameSpawn.OnWaveEnd -= OnWaveEnd;
+        gameManager.InputManager.OnPause -= OnPause;
+        gameManager.GameSpawn.OnVictory -= OnVictory;
     }
+
+    private void OnResumeInput()
+    {
+        PlayPauseMenuOutro();
+    }
+
+    private void OnExitInput()
+    {
+        exitDetail.text = $"you will get\n{gameManager.GoldReward} Gold\n{gameManager.GemReward} Gem";
+        confirmContainer.SetActive(true);
+    }
+
+    private void OnConfirmInput()
+    {
+        OnExit?.Invoke();
+    }
+
+    private void OnCancelInput()
+    {
+        confirmContainer.SetActive(false);
+    }
+
     [ButtonGroup()]
     public async void FadeInUI()
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(dicePanel.transform.DOMoveX(11f, 0.5f).SetEase(Ease.OutBack))
-            .Join(cardPanel.transform.DOMoveY(65f, 0.5f).SetEase(Ease.OutBack));
+            .Join(cardPanel.transform.DOMoveY(65f, 0.5f).SetEase(Ease.OutBack))
+            .Join(hearthContainer.transform.DOLocalMoveY(33f, 1f).SetEase(Ease.OutBack));
         await sequence.AsyncWaitForCompletion();
         Debug.Log("Done");
     }
@@ -124,7 +182,6 @@ public class UIGamePlaySystem : MonoBehaviour
     public void FadeOutRollDiceUI()
     {
         dicePanel.transform.DOMoveX(-280f, 0.5f).SetDelay(0.5f);
-
     }
 
     public async void OnStageStart()
@@ -186,10 +243,24 @@ public class UIGamePlaySystem : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
         sequence.Append(pausePanel.transform.DOLocalMoveY(0f, 0.5f));
     }
-    private void PlayPauseMenuOutro()
+    private async void PlayPauseMenuOutro()
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(pausePanel.transform.DOLocalMoveY(500f, 0.5f));
+        await sequence.AsyncWaitForCompletion();
+        OnResume?.Invoke();
+    }
+
+
+    private void PlayVictoryMenuIntro()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(victoryPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.InOutElastic));
+    }
+    private void PlayLoseMenuIntro()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(losePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.InOutElastic));
     }
     public void UpdateEnemyRemain(int value)
     {
@@ -208,12 +279,24 @@ public class UIGamePlaySystem : MonoBehaviour
 
     private void OnPause()
     {
-
+        PlayPauseMenuIntro();
     }
 
     private void OnBuildCharacterComplete(Vector3 _, InventoryCharacter __)
     {
         UpdateDataInfo();
+    }
+
+    private void OnVictory(int _, int __)
+    {
+        victoryDetial.text = $"Reward\n{gameManager.GoldReward} Gold\n{gameManager.GemReward} Gem";
+        PlayVictoryMenuIntro();
+    }
+
+    public void OnLose()
+    {
+        loseDetail.text = $"Reward\n{gameManager.GoldReward} Gold\n{gameManager.GemReward} Gem";
+        PlayLoseMenuIntro();
     }
 
     private void UpdateDataInfo()
@@ -222,6 +305,12 @@ public class UIGamePlaySystem : MonoBehaviour
         diceRollTxt.text = $"{gameManager.DiceRollCount}";
         goldRewardTxt.text = $"{gameManager.GoldReward}";
         gemRewardTxt.text = $"{gameManager.GemReward}";
+        hearthTxt.text = gameManager.StageHealthPoint.ToString();
+    }
+
+    public void UpDateHearthInfo()
+    {
+        hearthTxt.text = gameManager.StageHealthPoint.ToString();
     }
     public void SetUIPosition()
     {

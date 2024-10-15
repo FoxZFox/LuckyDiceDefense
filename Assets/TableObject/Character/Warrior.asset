@@ -105,9 +105,9 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 4989de3e40da20c47868a288fd47ec46, type: 2}
   AttackDuretionAnimation: 0.458
   attackDamage: 10
-  attackRatio: 0.5
+  attackRatio: 3
   attackRange: 3
   longRange: 0
-  ability: {fileID: 3950099707583567183, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
+  ability: {fileID: -7690728827132865521, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
   skillChange: 1
   costToBuild: 2

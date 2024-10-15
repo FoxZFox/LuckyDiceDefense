@@ -24,7 +24,7 @@ public class GameSpawn : MonoBehaviour
     private int currentWave = 0;
     private int maxWave = 0;
 
-    public Action OnVictory;
+    public Action<int, int> OnVictory;
     public Action<int, int> OnWaveEnd;
 
     private void Start()
@@ -70,14 +70,13 @@ public class GameSpawn : MonoBehaviour
     {
         while (spawnRemain > 0)
         {
-            if (gameManager.StageType != StageType.Start)
+            if (gameManager.StageType == StageType.Start)
             {
-                continue;
+                GetEnemyFormPool();
+                spawnRemain--;
+                enemyRemain++;
+                gameManager.UiSystem.UpdateEnemyRemain(enemyRemain);
             }
-            GetEnemyFormPool();
-            spawnRemain--;
-            enemyRemain++;
-            gameManager.UiSystem.UpdateEnemyRemain(enemyRemain);
             yield return new WaitForSeconds(cooldown);
         }
         onSpawn = null;
@@ -111,17 +110,29 @@ public class GameSpawn : MonoBehaviour
 
     private void CheckEndWave()
     {
+        if (enemyRemain > 0 || spawnRemain > 0) return;
+        var reward = PlayerData.Instant.selectStage.datas[currentWave].RewardContaner;
         if (currentWave + 1 == maxWave)
         {
-            OnVictory?.Invoke();
-            return;
+            OnVictory?.Invoke(reward.Gold, reward.Gem);
         }
-        if (enemyRemain <= 0)
+        else
         {
-            var reward = PlayerData.Instant.selectStage.datas[currentWave].RewardContaner;
             OnWaveEnd?.Invoke(reward.Gold, reward.Gem);
             currentWave++;
         }
+
+        // if (currentWave + 1 == maxWave)
+        // {
+        //     OnVictory?.Invoke();
+        //     return;
+        // }
+        // if (enemyRemain <= 0)
+        // {
+        //     var reward = PlayerData.Instant.selectStage.datas[currentWave].RewardContaner;
+        //     OnWaveEnd?.Invoke(reward.Gold, reward.Gem);
+        //     currentWave++;
+        // }
     }
 
     public int GetCurrentWave()

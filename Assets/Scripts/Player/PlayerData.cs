@@ -79,6 +79,15 @@ public class PlayerData : MonoBehaviour
         gem = (gem - data) <= 0 ? 0 : gem - data;
     }
 
+    public void AddGold(int data)
+    {
+        gold += data;
+    }
+
+    public void AddGem(int data)
+    {
+        gem += data;
+    }
     public List<InventoryCharacter> GetLoadOut()
     {
         return loadOut;
@@ -94,6 +103,13 @@ public class PlayerData : MonoBehaviour
         if (index + 1 > loadOut.Count)
         {
             return null;
+        }
+        else
+        {
+            if (loadOut[index].CharacterID == 0)
+            {
+                return null;
+            }
         }
         return loadOut[index];
     }

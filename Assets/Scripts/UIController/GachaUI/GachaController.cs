@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class GachaController : MonoBehaviour
 {
@@ -22,7 +23,9 @@ public class GachaController : MonoBehaviour
     [SerializeField] private bool debugCardId;
     private List<GameObject> debugGameobjects = new List<GameObject>();
     private List<GameObject> cardpool = new List<GameObject>();
-    private float tweenDuration = 2f;
+    private float tweenDuration = 1f;
+
+    [SerializeField] private bool debug = false;
 
     bool onGacha = false;
 
@@ -65,7 +68,7 @@ public class GachaController : MonoBehaviour
         }
     }
 
-    [ContextMenu("DrawCard")]
+    [Button]
     private void DrawCard()
     {
         foreach (var item in debugGameobjects)
@@ -83,7 +86,7 @@ public class GachaController : MonoBehaviour
         panel.SetActive(true);
         StartCoroutine(DrawAnimation());
     }
-
+    [Button]
     public void SpawnGacha(GachaData gachaData, int cardSelect)
     {
         foreach (var item in debugGameobjects)
@@ -111,18 +114,17 @@ public class GachaController : MonoBehaviour
             cardpool[i].SetActive(true);
             if (i == cardpool.Count - 1)
             {
-                cardpool[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBounce).OnComplete(SetCardInteractable);
+                cardpool[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBack).OnComplete(SetCardInteractable);
             }
             else
             {
-                cardpool[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBounce);
+                cardpool[i].transform.DOScale(1f, tweenDuration).SetEase(Ease.OutBack);
             }
             yield return new WaitForSeconds(0.2f);
         }
     }
     private void SetCardInteractable()
     {
-
         foreach (var item in cardpool)
         {
             item.GetComponent<Button>().enabled = true;
@@ -183,16 +185,25 @@ public class GachaController : MonoBehaviour
 
     public void ConfirmCardSelect()
     {
-        foreach (var item in cardSelected)
+        if (!debug)
         {
-            if (item.TryGetComponent<Card>(out Card card))
+            foreach (var item in cardSelected)
             {
-                InventoryManager.instant.AddCard(InventoryManager.instant.GetCardData(card.characterData), card.Amount);
+                if (item.TryGetComponent<Card>(out Card card))
+                {
+                    InventoryManager.instant.AddCard(InventoryManager.instant.GetCardData(card.characterData), card.Amount);
+                }
             }
+            InventoryManager.instant.CheckCardOwned();
         }
-        InventoryManager.instant.CheckCardOwned();
         cardSelected.Clear();
+        foreach (var item in cardpool)
+        {
+            item.GetComponent<Button>().enabled = false;
+        }
         panel.SetActive(false);
+        confirmButton.gameObject.SetActive(false);
+        onGacha = false;
     }
 
     // #if UNITY_EDITOR

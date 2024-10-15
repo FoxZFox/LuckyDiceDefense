@@ -59,14 +59,14 @@ public class Enemy : SerializedMonoBehaviour
 
     void Update()
     {
-        if (GameManager.GetInstant().StageType == StageType.End)
+        if (GameManager.GetInstant().StageType == StageType.Start)
         {
-            return;
+            Move();
+            CheckFlipSprtie();
+            CheckEndPath();
+            Stats.Mediator.Update(Time.deltaTime);
         }
-        Move();
-        CheckFlipSprtie();
-        CheckEndPath();
-        Stats.Mediator.Update(Time.deltaTime);
+
         //Update Debug Zone
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.J))

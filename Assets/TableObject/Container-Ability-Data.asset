@@ -115,7 +115,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 4
-      Data: 2
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -130,7 +130,7 @@ MonoBehaviour:
   modifyType: 1
   Ispercen: 0
   abilityName: SuperBost
-  abilityDetial: Boost Attack Ratio 200% In 2 sec
+  abilityDetial: Boost Attack Ratio 400% In 2 sec
   duration: 2
 --- !u!114 &-7645294968593119152
 MonoBehaviour:

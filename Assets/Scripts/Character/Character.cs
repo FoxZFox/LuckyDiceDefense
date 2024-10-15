@@ -104,8 +104,8 @@ public class Character : MonoBehaviour
         level = data.Level;
         characterData = data.characterData;
         elementType = characterData.elementType;
-        attackDamage = characterData.GetAttackDamageWithGrowth(level);
-        attackRatio = characterData.GetAttackRaioWithGrowth(level);
+        attackDamage = characterData.attackDamage + characterData.GetAttackDamageWithGrowth(level);
+        attackRatio = characterData.attackRatio + characterData.GetAttackRaioWithGrowth(level);
         attackRange = characterData.attackRange;
         skillChange = characterData.skillChange;
         ability = characterData.ability;
