@@ -9,6 +9,11 @@ public class MapData : SerializedScriptableObject
     public string mapName;
     public List<TileDataContainer> tileDataContainers = new List<TileDataContainer>();
     public List<Vector3> Path = new List<Vector3>();
+
+    public Vector3[] GetPaths()
+    {
+        return Path.ToArray();
+    }
 #if UNITY_EDITOR
     public void Initialise(string n)
     {

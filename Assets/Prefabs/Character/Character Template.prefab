@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425f0dea2332b534f9fbe6cdda644983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   characterData: {fileID: 11400000, guid: 9125d7e636b41a347b4f9c0e79af339e, type: 2}
   elementType: {fileID: 0}
   attackDamage: 0
@@ -61,7 +62,7 @@ MonoBehaviour:
   minDamage: 1
   maxDamage: 1000
   minAttackRatio: 0.5
-  maxAttackRatio: 4
+  maxAttackRatio: 6
   minAttackRange: 1.5
   maxAttackRange: 10
 --- !u!58 &8862031326011436487

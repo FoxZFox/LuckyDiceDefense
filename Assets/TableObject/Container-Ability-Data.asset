@@ -186,6 +186,72 @@ MonoBehaviour:
   abilityName: IronSkin
   abilityDetial: 
   reducePercen: 80.1
+--- !u!114 &-4342370986848947557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92dab9e2ccd2d3b4981872e7e89e57dd, type: 3}
+  m_Name: TeamUp
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ModifyStat
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[StatType, Assembly-CSharp],[System.Single,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[StatType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 4
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  abilityType: 0
+  targetType: 2
+  modifyType: 1
+  Ispercen: 0
+  abilityName: TeamUp
+  abilityDetial: Boost Attack Speed To Opponent 200% for 3 Second
+  duration: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +269,7 @@ MonoBehaviour:
   - {fileID: -7645294968593119152}
   - {fileID: -8014726920306131885}
   - {fileID: -7690728827132865521}
+  - {fileID: -4342370986848947557}
   deleteAbility: {fileID: 0}
 --- !u!114 &3950099707583567183
 MonoBehaviour:

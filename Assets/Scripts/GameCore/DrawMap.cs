@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Sirenix.OdinInspector;
 using System;
+using System.Threading.Tasks;
 
 public class DrawMap : MonoBehaviour
 {
     [SerializeField] private GameObject gridParent;
     [SerializeField] private MapData data;
-    [SerializeField] private float buildSpeed = 0.001f;
+    [SerializeField] private float buildSpeed = 0;
     [SerializeField] private TileBase emptyBase;
     [SerializeField] private Tilemap emptyTile;
     public Action<Tilemap> OnDrawMap;
+    private float timer;
 
     private void Start()
     {
@@ -21,12 +23,13 @@ public class DrawMap : MonoBehaviour
     public void SetUp(MapData mapData)
     {
         data = mapData;
+        timer = buildSpeed;
     }
 
     [ButtonGroup()]
-    public void CreateTileInstant()
+    public async void CreateTileInstant()
     {
-        StartCoroutine(DrawTile());
+        await DrawTile();
     }
     [ButtonGroup()]
     public void ResetTile()
@@ -57,7 +60,34 @@ public class DrawMap : MonoBehaviour
         }
     }
 
-    private IEnumerator DrawTile()
+    // private IEnumerator DrawTile()
+    // {
+    //     foreach (var item in data.tileDataContainers)
+    //     {
+    //         TileDataContainer data = item;
+    //         var instant = new GameObject();
+    //         instant.transform.position = Vector3.zero;
+    //         instant.name = data.name;
+    //         instant.transform.parent = gridParent.transform;
+    //         var tile = instant.AddComponent<Tilemap>();
+    //         var tilerender = instant.AddComponent<TilemapRenderer>();
+    //         tile.tileAnchor = new Vector3(0.5f, 0.5f, 0);
+    //         tilerender.sortingOrder = data.sortOrder;
+    //         Debug.Log("CreateMap");
+    //         for (int i = 0; i < data.tileData.Count; i++)
+    //         {
+    //             tile.SetTile(data.positionData[i], data.tileData[i]);
+    //             if (data.name == "CantBuildArea")
+    //             {
+    //                 continue;
+    //             }
+    //             yield return null;
+    //         }
+    //         if (data.name == "CantBuildArea") emptyTile = tile;
+    //     }
+    //     OnDrawMap?.Invoke(emptyTile);
+    // }
+    private async Task DrawTile()
     {
         foreach (var item in data.tileDataContainers)
         {
@@ -71,6 +101,7 @@ public class DrawMap : MonoBehaviour
             tile.tileAnchor = new Vector3(0.5f, 0.5f, 0);
             tilerender.sortingOrder = data.sortOrder;
             Debug.Log("CreateMap");
+
             for (int i = 0; i < data.tileData.Count; i++)
             {
                 tile.SetTile(data.positionData[i], data.tileData[i]);
@@ -78,10 +109,11 @@ public class DrawMap : MonoBehaviour
                 {
                     continue;
                 }
-                yield return new WaitForSeconds(buildSpeed);
+                await Task.Delay((int)(buildSpeed * 1000));
             }
             if (data.name == "CantBuildArea") emptyTile = tile;
         }
         OnDrawMap?.Invoke(emptyTile);
     }
 }
+

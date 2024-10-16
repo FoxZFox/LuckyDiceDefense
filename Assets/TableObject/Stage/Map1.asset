@@ -60,6 +60,8 @@ MonoBehaviour:
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     RewardContaner:
       Gold: 0
       Gem: 10
+  map: {fileID: 11400000, guid: e3a55973a367f304da3bd61f557689b3, type: 2}

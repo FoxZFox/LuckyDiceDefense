@@ -117,10 +117,13 @@ public class Character : MonoBehaviour
     {
         if (GameManager.GetInstant().StageType == StageType.Start)
         {
-            Stats.Mediator.Update(Time.deltaTime);
             FindEnemy();
             Attack();
             LookAtTarget();
+        }
+        if (GameManager.GetInstant().StageType == StageType.Start || GameManager.GetInstant().StageType == StageType.Prepare)
+        {
+            Stats.Mediator.Update(Time.deltaTime);
         }
 
     }

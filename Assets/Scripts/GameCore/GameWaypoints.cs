@@ -7,6 +7,11 @@ public class GameWaypoints : MonoBehaviour
     [SerializeField] private Vector3[] wayPoints;
     public Vector3[] Waypoints => wayPoints;
 
+    public void SetUp(Vector3[] data)
+    {
+        wayPoints = data;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {

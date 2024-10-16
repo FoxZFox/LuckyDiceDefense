@@ -11,6 +11,7 @@ public class StageData : ScriptableObject
     public int StageHealthPoint;
     [TableList(ShowIndexLabels = true, AlwaysExpanded = true)]
     public List<StageContainer> datas;
+    public MapData map;
 }
 
 [Serializable]

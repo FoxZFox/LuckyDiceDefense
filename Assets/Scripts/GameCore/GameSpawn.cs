@@ -24,6 +24,8 @@ public class GameSpawn : MonoBehaviour
     private int currentWave = 0;
     private int maxWave = 0;
 
+    private int enemyIndex = 0;
+
     public Action<int, int> OnVictory;
     public Action<int, int> OnWaveEnd;
 
@@ -57,6 +59,7 @@ public class GameSpawn : MonoBehaviour
         enemyRemain = 0;
         spawnMax = PlayerData.Instant.selectStage.datas[currentWave].EnemyContainer.Count;
         spawnRemain = 0;
+        enemyIndex = 0;
     }
 
     private void Update()
@@ -75,6 +78,7 @@ public class GameSpawn : MonoBehaviour
                 GetEnemyFormPool();
                 spawnRemain--;
                 enemyRemain++;
+                enemyIndex++;
                 gameManager.UiSystem.UpdateEnemyRemain(enemyRemain);
             }
             yield return new WaitForSeconds(cooldown);
@@ -89,9 +93,7 @@ public class GameSpawn : MonoBehaviour
         enemy.OnDie += ReturnObjectToPool;
         enemy.OnEndPath += ReturnObjectToPool;
         enemy.OnEndPath += OnEndPath;
-#if UNITY_EDITOR
-        enemy.SetupData(testData, gameWaypoints.Waypoints);
-#endif
+        enemy.SetupData(PlayerData.Instant.selectStage.datas[currentWave].EnemyContainer[enemyIndex], gameWaypoints.Waypoints);
         init.transform.position = spawnLocation;
         enemyList.Add(init);
         init.SetActive(true);

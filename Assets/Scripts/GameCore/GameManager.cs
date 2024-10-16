@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
             maptile.SetActive(true);
             UiSystem.SetUIPosition();
             StageHealthPoint = PlayerData.Instant.selectStage.StageHealthPoint;
+            map = PlayerData.Instant.selectStage.map;
         }
         else
         {
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour
 
     private void SetUp()
     {
+        GameWaypoints.SetUp(map.GetPaths());
         GameSpawn.SetUp(EnemyPool, GameWaypoints);
         EnemyPool.SetUp();
         CharacterPool.SetUp();
