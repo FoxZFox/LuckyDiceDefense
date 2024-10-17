@@ -10,6 +10,7 @@ public class CharacterCard : MonoBehaviour
     [SerializeField] private InventoryCharacter characterData;
     [SerializeField] private TMP_Text levelTxt;
     [SerializeField] private Image placeHolder;
+    [SerializeField] private Image elementImage;
     private int characterCardID = 0;
     public int CharacterCardID => characterCardID;
 
@@ -51,6 +52,7 @@ public class CharacterCard : MonoBehaviour
         characterData = _data;
         characterCardID = characterData.CharacterID;
         placeHolder.sprite = characterData.characterData.placeHolderSpitre;
+        elementImage.sprite = characterData.characterData.elementType.ElementImage;
         MatchStar();
         UpdateLevelTxt();
     }

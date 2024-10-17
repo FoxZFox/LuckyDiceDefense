@@ -16,6 +16,7 @@ MonoBehaviour:
   bestElement: {fileID: 6234558022768649565}
   worthElement: {fileID: -5817326994359866339}
   elementName: Fire
+  elementImage: {fileID: 21300000, guid: f8d5d7393048c15449ae02255a8bacfa, type: 3}
 --- !u!114 &-5817326994359866339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
   bestElement: {fileID: -7689100252413238294}
   worthElement: {fileID: 6234558022768649565}
   elementName: Water
+  elementImage: {fileID: 21300000, guid: ef246a582266dff44a53ed516f69afbb, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +66,4 @@ MonoBehaviour:
   bestElement: {fileID: -5817326994359866339}
   worthElement: {fileID: -7689100252413238294}
   elementName: Wind
+  elementImage: {fileID: 21300000, guid: 422bf808377d8f24ab97d67dd95e918f, type: 3}

@@ -59,7 +59,9 @@ public class UIGamePlaySystem : MonoBehaviour
     [TabGroup("PausePanel")]
     [SerializeField] private Button cancelButton;
     [TabGroup("PausePanel")]
-    [SerializeField] private TMP_Text exitDetail;
+    [SerializeField] private TMP_Text goldExitDetail;
+    [TabGroup("PausePanel")]
+    [SerializeField] private TMP_Text gemExitDetail;
 
     [TabGroup("Victory&losePanel")]
     [SerializeField] private GameObject victoryPanel;
@@ -121,7 +123,8 @@ public class UIGamePlaySystem : MonoBehaviour
 
     private void OnExitInput()
     {
-        exitDetail.text = $"you will get\n{gameManager.GoldReward} Gold\n{gameManager.GemReward} Gem";
+        goldExitDetail.text = $"{gameManager.GoldReward} Gold";
+        gemExitDetail.text = $"{gameManager.GemReward} Gem";
         confirmContainer.SetActive(true);
     }
 
@@ -140,7 +143,7 @@ public class UIGamePlaySystem : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(dicePanel.transform.DOMoveX(11f, 0.5f).SetEase(Ease.OutBack))
-            .Join(cardPanel.transform.DOMoveY(65f, 0.5f).SetEase(Ease.OutBack))
+            .Join(cardPanel.transform.DOMoveY(80f, 0.5f).SetEase(Ease.OutBack))
             .Join(hearthContainer.transform.DOLocalMoveY(33f, 1f).SetEase(Ease.OutBack));
         await sequence.AsyncWaitForCompletion();
         Debug.Log("Done");
@@ -151,7 +154,7 @@ public class UIGamePlaySystem : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(dicePanel.transform.DOMoveX(-280f, 0.5f).SetEase(Ease.OutBack))
-            .Join(cardPanel.transform.DOMoveY(-120f, 0.5f).SetEase(Ease.OutBack));
+            .Join(cardPanel.transform.DOMoveY(-137f, 0.5f).SetEase(Ease.OutBack));
         await sequence.AsyncWaitForCompletion();
         Debug.Log("Done");
     }
@@ -315,7 +318,7 @@ public class UIGamePlaySystem : MonoBehaviour
     public void SetUIPosition()
     {
         dicePanel.transform.position = new Vector3(-280f, 8f);
-        cardPanel.transform.position = new Vector3(640, -120f);
+        cardPanel.transform.position = new Vector3(640, -137f);
     }
 
 

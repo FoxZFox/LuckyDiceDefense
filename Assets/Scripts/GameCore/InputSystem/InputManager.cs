@@ -7,15 +7,7 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour
 {
     [BoxGroup("Button UI")]
-    [SerializeField] private Button cha1Button;
-    [BoxGroup("Button UI")]
-    [SerializeField] private Button cha2Button;
-    [BoxGroup("Button UI")]
-    [SerializeField] private Button cha3Button;
-    [BoxGroup("Button UI")]
-    [SerializeField] private Button cha4Button;
-    [BoxGroup("Button UI")]
-    [SerializeField] private Button cha5Button;
+    [SerializeField] private List<Button> chaButtons;
     [BoxGroup("Button UI")]
     [SerializeField] private Button startButton;
     [BoxGroup("Button UI")]
@@ -28,27 +20,33 @@ public class InputManager : MonoBehaviour
     {
         gameManager = GameManager.GetInstant();
         buildManager = GetComponent<BuildManager>();
-        cha1Button.onClick.AddListener(() => OnCardInput(0));
-        cha2Button.onClick.AddListener(() => OnCardInput(1));
-        cha3Button.onClick.AddListener(() => OnCardInput(2));
-        cha4Button.onClick.AddListener(() => OnCardInput(3));
-        cha5Button.onClick.AddListener(() => OnCardInput(4));
+        for (int i = 0; i < 5; i++)
+        {
+            int index = i;
+            chaButtons[index].onClick.AddListener(() => OnCardInput(index));
+            chaButtons[index].GetComponent<CardSlot>().SetupData(index);
+        }
         startButton.onClick.AddListener(OnStartInput);
         pauseButon.onClick.AddListener(() => OnPauseInput());
     }
 
     private void OnCardInput(int index)
     {
+        Debug.Log("Click!");
         if (GameManager.GetInstant().StageType != StageType.Prepare) return;
+        Debug.Log("Prepare!");
         InventoryCharacter data = PlayerData.Instant.GetLoadOutData(index);
+        Debug.Log("GetLoadOutData!");
         if (data == null)
         {
             return;
         }
+        Debug.Log("data!");
         if (data.characterData.costToBuild > GameManager.GetInstant().DicePoint)
         {
             return;
         }
+        Debug.Log("DicePoint!");
         buildManager.StartDrawBuildShadow(data);
         if (buildManager.InBuild)
         {
@@ -69,19 +67,19 @@ public class InputManager : MonoBehaviour
 
     private void DisableButton()
     {
-        cha1Button.interactable = false;
-        cha2Button.interactable = false;
-        cha3Button.interactable = false;
-        cha4Button.interactable = false;
-        cha5Button.interactable = false;
+        for (int i = 0; i < 5; i++)
+        {
+            if (chaButtons[i].gameObject.activeInHierarchy)
+                chaButtons[i].interactable = false;
+        }
     }
 
     public void ActiveButton()
     {
-        cha1Button.interactable = true;
-        cha2Button.interactable = true;
-        cha3Button.interactable = true;
-        cha4Button.interactable = true;
-        cha5Button.interactable = true;
+        for (int i = 0; i < 5; i++)
+        {
+            if (chaButtons[i].gameObject.activeInHierarchy)
+                chaButtons[i].interactable = true;
+        }
     }
 }
