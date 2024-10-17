@@ -1706,7 +1706,7 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 6abec3ef8cd41c54f94e6a5c3837ef4f, type: 3}
     Mixer: {fileID: -8735317050855435314, guid: 720541c78027a3a4ca853b97b532b15c, type: 2}
   - SoundType: 7
-    Clip: {fileID: 8300000, guid: d82b7b57f26acd649833ea4b5bbc64f2, type: 3}
+    Clip: {fileID: 8300000, guid: 18ef8bc75d0062644a3a5528467ccd35, type: 3}
     Mixer: {fileID: -8735317050855435314, guid: 720541c78027a3a4ca853b97b532b15c, type: 2}
   audioPool: {fileID: 1188007883}
 --- !u!1 &1188007882
