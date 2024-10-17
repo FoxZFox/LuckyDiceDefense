@@ -93,14 +93,16 @@ public class InventoryManager : SerializedMonoBehaviour
     {
         var data = inventoryCharacters.FirstOrDefault(i => i == value);
         var cardData = inventoryCards.FirstOrDefault(i => i.cardData == data.characterData.cardData);
+        var cost = (data.Level - 1) * 50;
         int cardneed = data.Level * data.characterData.CardNeed;
         if (checkData)
         {
-            if (cardData.CardAmount >= cardneed) return true;
+            if (cardData.CardAmount >= cardneed && PlayerData.Instant.Gold >= cost) return true;
         }
         else
         {
             cardData.CardAmount -= cardneed;
+            PlayerData.Instant.SetGold(cost);
             data.Level += 1;
             return true;
         }

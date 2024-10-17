@@ -19,6 +19,8 @@ public class InventoryUiController : MonoBehaviour
     [SerializeField] private TMP_Text skillDetail;
     [SerializeField] private TMP_Text buildCost;
     [SerializeField] private Button upGradeButton;
+    [SerializeField] private Slider cardSlider;
+    [SerializeField] private TMP_Text cardSliderText;
     [Header("Controller")]
     [SerializeField] private Transform contestParent;
     [SerializeField] private GameObject cardPrefab;
@@ -100,20 +102,25 @@ public class InventoryUiController : MonoBehaviour
         var map = data.characterData.ability.GetAbilityData();
         var characterData = data.characterData;
         placeHolder.sprite = characterData.placeHolderSpitre;
-        characterName.text = $"Name: {characterData.name}";
+        characterName.text = $"{characterData.name}";
         elemnetType.text = $"Element: {characterData.elementType.name}";
-        atkText.text = $"Atk: {characterData.attackDamage + characterData.GetAttackDamageWithGrowth(data.Level)}";
-        atkRatrioText.text = $"AtkRatio: {characterData.attackRatio + characterData.GetAttackRaioWithGrowth(data.Level)}";
-        atkRangeText.text = $"AtkRge: {characterData.attackRange}";
-        skillName.text = $"Skill: {map.Item1}";
-        skillChangeText.text = $"SkillChg: {characterData.skillChange}%";
-        skillDetail.text = $"Detail: {map.Item2}";
-        buildCost.text = $"Cost: {characterData.costToBuild}";
+        atkText.text = $"{characterData.attackDamage + characterData.GetAttackDamageWithGrowth(data.Level)}";
+        atkRatrioText.text = $"{characterData.attackRatio + characterData.GetAttackRaioWithGrowth(data.Level)}";
+        atkRangeText.text = $"{characterData.attackRange}";
+        skillName.text = $"{map.Item1}";
+        skillChangeText.text = $"{characterData.skillChange}%";
+        skillDetail.text = $"{map.Item2}";
+        buildCost.text = $"{characterData.costToBuild}";
+
         upGradeButton.interactable = InventoryManager.instant.CheckCardUpGrade(data);
         upGradeButton.onClick.RemoveAllListeners();
         upGradeButton.onClick.AddListener(() => UpGradeCharacter(owner, data));
         var cardAmount = InventoryManager.instant.GetCardAmount(data);
-        upGradeButton.GetComponentInChildren<TMP_Text>().text = $"{cardAmount}/{characterData.CardNeed * data.Level}";
+        var cardNeded = data.Level * data.characterData.CardNeed;
+        cardSlider.maxValue = cardNeded;
+        cardSlider.value = cardAmount;
+        cardSliderText.text = $"{cardAmount}/{cardNeded}";
+        upGradeButton.GetComponentInChildren<TMP_Text>().text = $"{(data.Level - 1) * 50}";
     }
     private void UpGradeCharacter(CharacterCard owner, InventoryCharacter data)
     {
