@@ -1,2 +1,2 @@
 #Luckie Dice Defend
-Idle game for Graduation Project
+-Idle game for Graduation Project
