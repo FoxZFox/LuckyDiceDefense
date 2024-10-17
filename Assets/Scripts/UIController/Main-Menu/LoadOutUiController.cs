@@ -126,6 +126,7 @@ public class LoadOutUiController : MonoBehaviour
 
     private void SelectCardToLoadOut(CharacterCard owner, int index, GameObject gameObject)
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         for (int i = 0; i < 5; i++)
         {
             int tempIndex = i;
@@ -146,6 +147,7 @@ public class LoadOutUiController : MonoBehaviour
 
     private void UnSelectCard(CharacterCard owner, int oldindex, GameObject gameObject, int index)
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         loadOutCards[index] = null;
         loadOutPoll[index] = null;
         gameObject.transform.SetParent(content.transform);

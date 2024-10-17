@@ -31,6 +31,7 @@ public class CharacterCard : MonoBehaviour
     }
     public void OnCardClick()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         InventoryUiController ic = FindFirstObjectByType<InventoryUiController>();
         ic.SetActivePanel(true);
         ic.SetCharacterDetailText(this, characterData);

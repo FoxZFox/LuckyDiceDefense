@@ -127,6 +127,7 @@ public class InventoryUiController : MonoBehaviour
         InventoryManager.instant.CheckCardUpGrade(data, false);
         SetCharacterDetailText(owner, data);
         owner.UpdateLevelTxt();
+        SoundManager.Instant.PlayAudioOneShot(SoundType.UpgradeButton, transform);
     }
 
     private enum DataSortType

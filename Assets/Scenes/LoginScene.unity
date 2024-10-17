@@ -1711,6 +1711,9 @@ MonoBehaviour:
   - SoundType: 9
     Clip: {fileID: 8300000, guid: cfa7c49a1d8f92847a125b12f4dd8ec5, type: 3}
     Mixer: {fileID: -8735317050855435314, guid: 720541c78027a3a4ca853b97b532b15c, type: 2}
+  - SoundType: 10
+    Clip: {fileID: 8300000, guid: 9234aba8a8cb264449b72a2ea520bc0d, type: 3}
+    Mixer: {fileID: -8735317050855435314, guid: 720541c78027a3a4ca853b97b532b15c, type: 2}
   audioPool: {fileID: 1188007883}
 --- !u!1 &1188007882
 GameObject:
