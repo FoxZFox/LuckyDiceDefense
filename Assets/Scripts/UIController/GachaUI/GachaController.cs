@@ -13,6 +13,7 @@ public class GachaController : MonoBehaviour
     [SerializeField] private GameObject cardSpawnParent;
     [SerializeField] private TMP_Text cardRemainText;
     [SerializeField] private Button confirmButton;
+    [SerializeField] private Button secondConfirmButton;
     [SerializeField] private Vector3[] cardSpawnPoints;
     [SerializeField] private GameObject panel;
     [SerializeField] private int cardSpawnCount = 8;
@@ -159,8 +160,8 @@ public class GachaController : MonoBehaviour
         cardRemainText.text = $"Card Remain {cardCanSelect}";
     }
 
-    [SerializeField] private List<GameObject> cardSelected = new List<GameObject>();
-    public bool PickupCard(GameObject cardObject, int cardStar, bool selected = false)
+    [SerializeField] private List<Card> cardSelected = new List<Card>();
+    public bool PickupCard(Card cardObject, int cardStar, bool selected = false)
     {
         if (selected)
         {
@@ -189,20 +190,49 @@ public class GachaController : MonoBehaviour
         {
             foreach (var item in cardSelected)
             {
-                if (item.TryGetComponent<Card>(out Card card))
-                {
-                    InventoryManager.instant.AddCard(InventoryManager.instant.GetCardData(card.characterData), card.Amount);
-                }
+                InventoryManager.instant.AddCard(InventoryManager.instant.GetCardData(item.characterData), item.Amount);
+                item.DisableCardOutline();
             }
             InventoryManager.instant.CheckCardOwned();
         }
-        cardSelected.Clear();
         foreach (var item in cardpool)
         {
             item.GetComponent<Button>().enabled = false;
         }
-        panel.SetActive(false);
+        PlayConfirmCardSelectAnimation();
         confirmButton.gameObject.SetActive(false);
+        // cardSelected.Clear();
+        // panel.SetActive(false);
+        // onGacha = false;
+    }
+
+    private async void PlayConfirmCardSelectAnimation()
+    {
+        Sequence sequence = DOTween.Sequence();
+        foreach (var item in cardSelected)
+        {
+            sequence.Join(item.BackCard.transform.DORotate(new Vector3(0, 90f, 0), 1f));
+        }
+        await sequence.AsyncWaitForCompletion();
+        Sequence frontCardSequence = DOTween.Sequence();
+        foreach (var item in cardSelected)
+        {
+            frontCardSequence.Join(item.FrontCard.transform.DORotate(Vector3.zero, 1f));
+        }
+        await frontCardSequence.AsyncWaitForCompletion();
+        secondConfirmButton.gameObject.SetActive(true);
+    }
+
+    public void SecondConfirm()
+    {
+        panel.SetActive(false);
+        foreach (var item in cardSelected)
+        {
+            item.FrontCard.transform.DORotate(new Vector3(0, -90f, 0), 0);
+            item.BackCard.transform.DORotate(Vector3.zero, 0);
+        }
+        cardSelected.Clear();
+        secondConfirmButton.gameObject.SetActive(false);
         onGacha = false;
     }
 

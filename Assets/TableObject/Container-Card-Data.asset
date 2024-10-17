@@ -64,7 +64,7 @@ MonoBehaviour:
   container: {fileID: 11400000}
   cardName: Warrior
   cardID: 468755960
-  cardImage: {fileID: -66501255, guid: 130ac7b2c9261d246aab1dd5e0a4e558, type: 3}
+  cardImage: {fileID: 147114686, guid: 463ee6bd7b16988428a44e0c49bf89c7, type: 3}
 --- !u!114 &3475517752724883655
 MonoBehaviour:
   m_ObjectHideFlags: 0

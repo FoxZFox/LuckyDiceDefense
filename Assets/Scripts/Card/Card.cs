@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +13,17 @@ public class Card : MonoBehaviour
     public int CardID => cardID;
     public int CardStar => cardStar;
     [SerializeField] private GameObject cardOutline;
+    [SerializeField] private Image cardPlaceHolder;
+    [SerializeField] private TMP_Text cardText;
     private bool selected = false;
     public bool Selected => selected;
     public CharacterData characterData { get; private set; }
 
     private int amount = 0;
     public int Amount => amount;
+
+    public GameObject FrontCard;
+    public GameObject BackCard;
 
     void Start()
     {
@@ -30,9 +37,14 @@ public class Card : MonoBehaviour
         button.enabled = false;
     }
 
+    public void DisableCardOutline()
+    {
+        cardOutline.SetActive(false);
+    }
+
     private void PickCard()
     {
-        bool selecseucces = GachaController.instant.PickupCard(gameObject, cardStar, selected);
+        bool selecseucces = GachaController.instant.PickupCard(this, cardStar, selected);
         if (selecseucces)
         {
             cardOutline.SetActive(true);
@@ -52,6 +64,8 @@ public class Card : MonoBehaviour
         characterData = data;
         amount = a;
         cardOutline.SetActive(false);
+        cardPlaceHolder.sprite = data.placeHolderSpitre;
+        cardText.text = $"x {amount}";
     }
 
     private void OnEnable()
