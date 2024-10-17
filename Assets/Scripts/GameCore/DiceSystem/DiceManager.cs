@@ -96,6 +96,7 @@ public class DiceManager : MonoBehaviour
         d1index = Random.Range(0, 6);
         d2index = Random.Range(0, 6);
         Debug.Log($"Lock Dice1 : {d1index} Dice2: {d2index}");
+        SoundManager.Instant.PlayAudioOneShot(SoundType.RollDice, transform);
         StartCoroutine(RollDiceAnimation());
     }
 
@@ -117,6 +118,7 @@ public class DiceManager : MonoBehaviour
 
     private IEnumerator RollDiceCountAnimation()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ThrowDice, transform);
         while (isRollDice)
         {
             int diceIndex = Random.Range(0, 6);

@@ -21,5 +21,6 @@ public enum SoundType
     BackGroundMusic,
     CardSelect,
     CardPop,
-    RollDice
+    RollDice,
+    ThrowDice
 }

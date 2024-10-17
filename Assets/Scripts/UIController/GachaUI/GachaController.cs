@@ -112,6 +112,7 @@ public class GachaController : MonoBehaviour
     {
         for (int i = 0; i < cardpool.Count; i++)
         {
+            SoundManager.Instant.PlayAudioOneShot(SoundType.CardPop, cardpool[i].transform);
             cardpool[i].SetActive(true);
             if (i == cardpool.Count - 1)
             {
@@ -201,6 +202,7 @@ public class GachaController : MonoBehaviour
         }
         PlayConfirmCardSelectAnimation();
         confirmButton.gameObject.SetActive(false);
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         // cardSelected.Clear();
         // panel.SetActive(false);
         // onGacha = false;
@@ -208,16 +210,17 @@ public class GachaController : MonoBehaviour
 
     private async void PlayConfirmCardSelectAnimation()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.CardSelect, transform);
         Sequence sequence = DOTween.Sequence();
         foreach (var item in cardSelected)
         {
-            sequence.Join(item.BackCard.transform.DORotate(new Vector3(0, 90f, 0), 1f));
+            sequence.Join(item.BackCard.transform.DORotate(new Vector3(0, 90f, 0), 0.5f));
         }
         await sequence.AsyncWaitForCompletion();
         Sequence frontCardSequence = DOTween.Sequence();
         foreach (var item in cardSelected)
         {
-            frontCardSequence.Join(item.FrontCard.transform.DORotate(Vector3.zero, 1f));
+            frontCardSequence.Join(item.FrontCard.transform.DORotate(Vector3.zero, 0.5f));
         }
         await frontCardSequence.AsyncWaitForCompletion();
         secondConfirmButton.gameObject.SetActive(true);
@@ -234,6 +237,7 @@ public class GachaController : MonoBehaviour
         cardSelected.Clear();
         secondConfirmButton.gameObject.SetActive(false);
         onGacha = false;
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
     }
 
     // #if UNITY_EDITOR

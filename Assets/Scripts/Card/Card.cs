@@ -44,6 +44,7 @@ public class Card : MonoBehaviour
 
     private void PickCard()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         bool selecseucces = GachaController.instant.PickupCard(this, cardStar, selected);
         if (selecseucces)
         {

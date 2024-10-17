@@ -52,6 +52,7 @@ public class BuyItemManager : MonoBehaviour
         {
             return;
         }
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         PlayerData.Instant.SetGem(price);
         FindFirstObjectByType<MainMenuUiController>().UpdateData();
         GachaController.instant.SpawnGacha(gachaData, buy1card ? 1 : 3);
