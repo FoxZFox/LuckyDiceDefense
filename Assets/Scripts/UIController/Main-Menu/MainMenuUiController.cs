@@ -28,7 +28,7 @@ public class MainMenuUiController : MonoBehaviour
         loadOutObject.SetActive(false);
         inventoryUiController = GetComponent<InventoryUiController>();
         SetPlayerStatus();
-        // SoundManager.Instant.PlayBackGroundMusic(SoundType.BackGroundMusic, transform);
+        SoundManager.Instant.PlayBackGroundMusic(SoundType.BackGroundMusic, transform);
     }
 
     private void SetPlayerStatus()
