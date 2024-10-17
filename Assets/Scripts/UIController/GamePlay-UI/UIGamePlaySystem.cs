@@ -118,11 +118,13 @@ public class UIGamePlaySystem : MonoBehaviour
 
     private void OnResumeInput()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         PlayPauseMenuOutro();
     }
 
     private void OnExitInput()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         goldExitDetail.text = $"{gameManager.GoldReward} Gold";
         gemExitDetail.text = $"{gameManager.GemReward} Gem";
         confirmContainer.SetActive(true);
@@ -130,11 +132,13 @@ public class UIGamePlaySystem : MonoBehaviour
 
     private void OnConfirmInput()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         OnExit?.Invoke();
     }
 
     private void OnCancelInput()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         confirmContainer.SetActive(false);
     }
 

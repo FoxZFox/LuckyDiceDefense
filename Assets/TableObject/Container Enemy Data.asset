@@ -15,11 +15,34 @@ MonoBehaviour:
   container: {fileID: 11400000}
   enemyName: Orc
   walkSpeed: 4
-  health: 200
-  elementType: {fileID: -5817326994359866339, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
+  health: 250
+  elementType: {fileID: 6234558022768649565, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
   sprite: {fileID: 1562966130, guid: a420e428a4c727b44941e6905b52c87c, type: 3}
   animatorController: {fileID: 9100000, guid: a5d0398fa019ddc44a69d55b42bbea83, type: 2}
   abilityData: {fileID: -8014726920306131885, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
+  AbilityRange: 0
+  skillChange: 1
+  enemyDetail: 
+--- !u!114 &-6821656663929408793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281b4950958ad254dacd54b4b8710e22, type: 3}
+  m_Name: TourceGoblin
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  enemyName: TourceGoblin
+  walkSpeed: 2.2
+  health: 800
+  elementType: {fileID: -7689100252413238294, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
+  sprite: {fileID: 977438233, guid: 5f30955ba485f0e4a9446d87d358a20e, type: 3}
+  animatorController: {fileID: 9100000, guid: 0c81b18e6d2e05d46960cf9b20b8829e, type: 2}
+  abilityData: {fileID: 0}
   AbilityRange: 0
   skillChange: 1
   enemyDetail: 
@@ -37,3 +60,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDatas:
   - {fileID: -8699914703357221387}
+  - {fileID: -6821656663929408793}
+  - {fileID: 892979823487344679}
+  - {fileID: 747247839498172083}
+--- !u!114 &747247839498172083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281b4950958ad254dacd54b4b8710e22, type: 3}
+  m_Name: MiniMage
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  enemyName: MiniMage
+  walkSpeed: 2
+  health: 100
+  elementType: {fileID: -5817326994359866339, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
+  sprite: {fileID: -2001216504, guid: 2ff75339c0209cc488f282b6356af10c, type: 3}
+  animatorController: {fileID: 9100000, guid: 7263bf9d4aae43644b0e44a23e76e848, type: 2}
+  abilityData: {fileID: 0}
+  AbilityRange: 0
+  skillChange: 1
+  enemyDetail: 
+--- !u!114 &892979823487344679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281b4950958ad254dacd54b4b8710e22, type: 3}
+  m_Name: HourseMan
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  enemyName: HourseMan
+  walkSpeed: 6
+  health: 500
+  elementType: {fileID: 6234558022768649565, guid: 7a5a374e0e3038c48af4dd70a6b1fc67, type: 2}
+  sprite: {fileID: 1430389844, guid: ce743cfc53edddd4aa2e37b0b4e6b9e1, type: 3}
+  animatorController: {fileID: 9100000, guid: 46d7deefdbbb0d14f99d17f9fea49c9e, type: 2}
+  abilityData: {fileID: -8014726920306131885, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
+  AbilityRange: 0
+  skillChange: 10
+  enemyDetail: 

@@ -65,7 +65,7 @@ public class SceneManager : MonoBehaviour
 
         var scene = us.SceneManager.LoadSceneAsync(sceneDic[name]);
         scene.allowSceneActivation = false;
-
+        SoundManager.Instant.PauseBackGroundMusic();
         yield return transition.AnimationTransitionIn();
 
         do
@@ -76,6 +76,7 @@ public class SceneManager : MonoBehaviour
         scene.allowSceneActivation = true;
         yield return transition.AnimationTransitionOut();
         OnSceneLoaded?.Invoke(name);
+        SoundManager.Instant.ResumeBackGroundMusic();
     }
 }
 

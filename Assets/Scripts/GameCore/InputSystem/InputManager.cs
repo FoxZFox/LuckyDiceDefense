@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
 
     private void OnCardInput(int index)
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         Debug.Log("Click!");
         if (GameManager.GetInstant().StageType != StageType.Prepare) return;
         Debug.Log("Prepare!");
@@ -56,12 +57,14 @@ public class InputManager : MonoBehaviour
 
     private void OnStartInput()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         gameManager.UiSystem.OnStageStart();
     }
 
 
     private void OnPauseInput()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         OnPause?.Invoke();
     }
 

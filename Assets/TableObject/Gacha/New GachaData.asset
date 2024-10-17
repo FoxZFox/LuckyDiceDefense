@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1ea53bfda97d4438d1c3a89508bb06, type: 3}
   m_Name: New GachaData
   m_EditorClassIdentifier: 
-  fiveStarCard: {fileID: 11400000, guid: 5ecfb1ad637d8284fbd47289aff847d5, type: 2}
+  fiveStarCard: {fileID: 11400000, guid: bdcd6ce6179354b40a6fc801dc19f85a, type: 2}
   fourStarCard:
   - {fileID: 11400000, guid: 9125d7e636b41a347b4f9c0e79af339e, type: 2}
   belowFourStar:

@@ -24,5 +24,6 @@ public enum SoundType
     RollDice,
     ThrowDice,
     MapScorll,
-    UpgradeButton
+    UpgradeButton,
+    EnemyHit
 }

@@ -17,23 +17,159 @@ MonoBehaviour:
   StageHealthPoint: 1000
   datas:
   - EnemyContainer:
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     RewardContaner:
-      Gold: 10
+      Gold: 15
       Gem: 0
+  - EnemyContainer:
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    RewardContaner:
+      Gold: 15
+      Gem: 0
+  - EnemyContainer:
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 892979823487344679, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    RewardContaner:
+      Gold: 50
+      Gem: 5
+  - EnemyContainer:
+    - {fileID: 892979823487344679, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 892979823487344679, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    RewardContaner:
+      Gold: 20
+      Gem: 0
+  - EnemyContainer:
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 892979823487344679, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -6821656663929408793, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 747247839498172083, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    RewardContaner:
+      Gold: 20
+      Gem: 5
   - EnemyContainer:
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 892979823487344679, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 892979823487344679, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
@@ -43,26 +179,9 @@ MonoBehaviour:
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
-    - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
+    - {fileID: 892979823487344679, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     - {fileID: -8699914703357221387, guid: f943adc220f3b374bb07b653ba0d76d4, type: 2}
     RewardContaner:
-      Gold: 0
-      Gem: 10
+      Gold: 100
+      Gem: 5
   map: {fileID: 11400000, guid: e3a55973a367f304da3bd61f557689b3, type: 2}

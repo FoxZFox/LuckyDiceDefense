@@ -71,4 +71,20 @@ public class SoundManager : MonoBehaviour
             isPlayBGMusic = false;
         }
     }
+
+    public void PauseBackGroundMusic()
+    {
+        if (isPlayBGMusic)
+        {
+            bgMusicSource.Pause();
+        }
+    }
+
+    public void ResumeBackGroundMusic()
+    {
+        if (isPlayBGMusic)
+        {
+            bgMusicSource.UnPause();
+        }
+    }
 }

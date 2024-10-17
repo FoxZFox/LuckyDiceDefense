@@ -106,8 +106,8 @@ MonoBehaviour:
   AttackDuretionAnimation: 0.458
   attackDamage: 10
   attackRatio: 3
-  attackRange: 3
+  attackRange: 2.5
   longRange: 0
   ability: {fileID: -7690728827132865521, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}
-  skillChange: 1
+  skillChange: 10
   costToBuild: 2

@@ -252,6 +252,84 @@ MonoBehaviour:
   abilityName: TeamUp
   abilityDetial: Boost Attack Speed To Opponent 200% for 3 Second
   duration: 3
+--- !u!114 &-2954834028838142675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82d1be9719bcd541ba211bffdf591f6, type: 3}
+  m_Name: Chage-Over
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ModifyStat
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[StatType, Assembly-CSharp],[System.Single,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[StatType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 4
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  abilityType: 0
+  targetType: 3
+  modifyType: 0
+  Ispercen: 0
+  abilityName: Chage-Over
+  abilityDetial: After he chage over he will get 3 Attak Speed And Damage for 2 Second
+  duration: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +348,7 @@ MonoBehaviour:
   - {fileID: -8014726920306131885}
   - {fileID: -7690728827132865521}
   - {fileID: -4342370986848947557}
+  - {fileID: -2954834028838142675}
   deleteAbility: {fileID: 0}
 --- !u!114 &3950099707583567183
 MonoBehaviour:

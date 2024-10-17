@@ -126,7 +126,7 @@ public class Enemy : SerializedMonoBehaviour
     public void TakeDamage(GameObject owner, ElementType element, float damage)
     {
         InComingDamage = CalculateDamageElement(elementType, element, damage);
-        if (CheckUseSkill())
+        if (CheckUseSkill() && ability != null)
         {
             UseSkill(owner);
         }
@@ -140,6 +140,7 @@ public class Enemy : SerializedMonoBehaviour
         {
             if (enemyAnimation.currentState != enemyAnimation.hurtState)
             {
+                SoundManager.Instant.PlayAudioOneShot(SoundType.EnemyHit, transform);
                 StartCoroutine(ChangeSpeed());
             }
             OnHit?.Invoke();
