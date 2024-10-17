@@ -11,6 +11,11 @@ public abstract class ObjectPool : MonoBehaviour
 
     public abstract void SetUp();
 
+    protected virtual void AfterInitialisepool()
+    {
+
+    }
+
     protected void InitialisePool()
     {
         pool = new Queue<GameObject>();
@@ -18,6 +23,7 @@ public abstract class ObjectPool : MonoBehaviour
         {
             CreateObjectToPool();
         }
+        AfterInitialisepool();
     }
 
     private void CreateObjectToPool()

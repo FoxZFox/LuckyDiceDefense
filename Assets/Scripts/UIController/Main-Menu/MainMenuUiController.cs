@@ -28,6 +28,7 @@ public class MainMenuUiController : MonoBehaviour
         loadOutObject.SetActive(false);
         inventoryUiController = GetComponent<InventoryUiController>();
         SetPlayerStatus();
+        // SoundManager.Instant.PlayBackGroundMusic(SoundType.BackGroundMusic, transform);
     }
 
     private void SetPlayerStatus()
@@ -59,6 +60,8 @@ public class MainMenuUiController : MonoBehaviour
         shopObject.SetActive(false);
         inventoryObject.SetActive(false);
         loadOutObject.SetActive(false);
+        UpdateData();
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
     }
     public void OnClickShop()
     {
@@ -66,6 +69,7 @@ public class MainMenuUiController : MonoBehaviour
         shopObject.SetActive(true);
         inventoryObject.SetActive(false);
         loadOutObject.SetActive(false);
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
     }
     public void OnClickInventory()
     {
@@ -74,6 +78,7 @@ public class MainMenuUiController : MonoBehaviour
         shopObject.SetActive(false);
         inventoryObject.SetActive(true);
         loadOutObject.SetActive(false);
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
     }
 
     public void OnClickLoadOutButton()
@@ -82,10 +87,12 @@ public class MainMenuUiController : MonoBehaviour
         shopObject.SetActive(false);
         inventoryObject.SetActive(false);
         loadOutObject.SetActive(true);
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
     }
 
     public void OnClickPlay()
     {
+        SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
         if (PlayerData.Instant.selectStage != null)
         {
             SceneManager.Instant.LoadSceneWithTransition(SceneManager.sceneName.gameplay, TransitionType.Circle);

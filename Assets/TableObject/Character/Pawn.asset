@@ -105,7 +105,7 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 2755d18c27b1dea418ef07b75ace5968, type: 2}
   AttackDuretionAnimation: 0.458
   attackDamage: 5
-  attackRatio: 0.3
+  attackRatio: 0.5
   attackRange: 2
   longRange: 0
   ability: {fileID: 3950099707583567183, guid: 8f022f0f61a0eb647bd82885ceb89d4e, type: 2}

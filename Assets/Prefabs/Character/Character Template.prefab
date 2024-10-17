@@ -62,7 +62,7 @@ MonoBehaviour:
   minDamage: 1
   maxDamage: 1000
   minAttackRatio: 0.5
-  maxAttackRatio: 6
+  maxAttackRatio: 10
   minAttackRange: 1.5
   maxAttackRange: 10
 --- !u!58 &8862031326011436487
