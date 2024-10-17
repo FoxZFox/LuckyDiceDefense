@@ -41,7 +41,7 @@ public class SaveSystem
             {
                 Debug.Log("New Game");
                 var data = new SaveData();
-                data.GemData = 100;
+                data.GemData = 250;
                 return data;
             }
         }
