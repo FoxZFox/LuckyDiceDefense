@@ -11,6 +11,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int gem = 0;
     [SerializeField] private List<InventoryCharacter> loadOut;
     public StageData selectStage;
+    public StageSelected StageSelected;
     public int Gold => gold;
     public int Gem => gem;
 
@@ -48,6 +49,7 @@ public class PlayerData : MonoBehaviour
     {
         gold = saveData.GoldData;
         gem = saveData.GemData;
+        StageSelected = saveData.StageSelected;
         CompareLoadOutData(saveData.LoadOutData);
     }
 
@@ -56,6 +58,11 @@ public class PlayerData : MonoBehaviour
         saveData.GoldData = gold;
         saveData.GemData = gem;
         saveData.LoadOutData = loadOut;
+        if (selectStage != null)
+        {
+            StageSelected.ID = selectStage.ID;
+        }
+        saveData.StageSelected = StageSelected;
     }
 
     private void CompareLoadOutData(List<InventoryCharacter> data)
@@ -91,6 +98,19 @@ public class PlayerData : MonoBehaviour
     public List<InventoryCharacter> GetLoadOut()
     {
         return loadOut;
+    }
+
+    public bool CheckLoadOutEmpty()
+    {
+        foreach (var item in loadOut)
+        {
+            if (item != null)
+            {
+                if (item.CharacterID != 0)
+                    return false;
+            }
+        }
+        return true;
     }
 
     public void UpdateLoadOut(List<InventoryCharacter> datas)

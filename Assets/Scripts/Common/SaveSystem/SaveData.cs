@@ -12,6 +12,7 @@ public class SaveData
     public int GoldData;
     public int GemData;
     public List<InventoryCharacter> LoadOutData;
+    public StageSelected StageSelected;
 
     public SaveData()
     {
@@ -21,5 +22,12 @@ public class SaveData
         GoldData = 0;
         GemData = 0;
         LoadOutData = new List<InventoryCharacter>();
+        StageSelected = new StageSelected();
     }
+}
+
+[Serializable]
+public class StageSelected
+{
+    public int ID;
 }

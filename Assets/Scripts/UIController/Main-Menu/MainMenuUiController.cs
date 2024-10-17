@@ -12,6 +12,7 @@ public class MainMenuUiController : MonoBehaviour
     [SerializeField] private GameObject shopObject;
     [SerializeField] private GameObject inventoryObject;
     [SerializeField] private GameObject loadOutObject;
+    [SerializeField] private MapSelectUi mapSelectUi;
 
     [Header("Text")]
     [SerializeField] private TMP_Text gemText;
@@ -92,8 +93,9 @@ public class MainMenuUiController : MonoBehaviour
 
     public void OnClickPlay()
     {
+        PlayerData.Instant.selectStage = mapSelectUi.GetStageData();
         SoundManager.Instant.PlayAudioOneShot(SoundType.ButtonClick, transform);
-        if (PlayerData.Instant.selectStage != null)
+        if (PlayerData.Instant.selectStage != null && !PlayerData.Instant.CheckLoadOutEmpty())
         {
             SceneManager.Instant.LoadSceneWithTransition(SceneManager.sceneName.gameplay, TransitionType.Circle);
         }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638ba69594746864cb9803f4b209a035, type: 3}
   m_Name: Map1
   m_EditorClassIdentifier: 
+  ID: 1673749792
   StageName: Map1
   StageHealthPoint: 1000
   datas:

@@ -22,5 +22,7 @@ public enum SoundType
     CardSelect,
     CardPop,
     RollDice,
-    ThrowDice
+    ThrowDice,
+    MapScorll,
+    UpgradeButton
 }
